@@ -11,23 +11,34 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include "entity.hpp"
 
-class Character
+enum{up,right, bottom, left};
+
+class Character : public Entity
 {
 // private attributes
 private:
     int life;
+    int posX, posY; //his position on the map
 
 //public methods
 public:
     Character(); //constructor
+    Character(int posx, int posy); //constructor with his position x,y
     ~Character(); //destructor
+
+    /******* movement function *******
+     * a function to move the character into a direction send by parameter (called 'mv')
+     * We look if the movement is correct before so we are certain in this function that the mvment is correct */
+    void deplacement(int mv);
 };
 
 #endif // CHARACTER_H
 
 /* *********** FOOTER ************
-** Version : 1.00
-** Last update : 08 June 2016
-** Changes : Creation and begining of implement attributes and method
+** Version : 1.01
+** Last update : 10 June 2016
+** Changes : -Creation and begining of implement attributes and method
+**           -Set type method
 ** ******************************/

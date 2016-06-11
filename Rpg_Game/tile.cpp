@@ -12,7 +12,7 @@
 
 Tile::Tile(int x_debut, int y_debut)
 {
-    charac = new Character();
+    entity = new Null_entity();
     tile = new QRect(x_debut, y_debut, sizeTile, sizeTile);
 }
 
@@ -24,5 +24,21 @@ Tile::~Tile()
 const QRect* Tile::get_Tile()
 {
     return tile;
+}
+
+void Tile::setEntity(int ent)
+{
+    entity->setType(ent);
+}
+
+int Tile::getEntity()
+{
+    return entity->getType();
+}
+
+void Tile::mvment(int mv)
+{
+    if(entity->getType() == charac)
+        entity->
 }
 

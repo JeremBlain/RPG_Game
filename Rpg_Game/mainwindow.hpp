@@ -16,6 +16,7 @@
 #include <QHBoxLayout>
 #include <QMenuBar>
 #include <QPainter>
+#include <QKeyEvent>
 #include "map.hpp"
 
 namespace Ui {
@@ -31,11 +32,13 @@ private:
         QHBoxLayout *game_window;
         QMenuBar *menuBar;
         Map *map;
+        void keyPressEvent(QKeyEvent *event);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void paintEvent(QPaintEvent *);
+
 
 
 };

@@ -21,6 +21,7 @@ Map::Map()
             map[kx][ky] = new Tile(kx*sizeTile, ky*sizeTile);
         }
     }
+        map[10][10]->setEntity(charac); //set a character at the position 10,10
 }
 
 Map::~Map()
@@ -31,4 +32,9 @@ Map::~Map()
 const QRect* Map::getTile(int kx, int ky)
 {
     return map[kx][ky]->get_Tile();
+}
+
+int Map::getEntityType(int kx, int ky)
+{
+    return map[kx][ky]->getEntity();
 }

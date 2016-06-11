@@ -10,6 +10,7 @@
 
 
 #include "mainwindow.hpp"
+#include <iostream>
 
 //Constructor Main Window
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //** Taille fenetre **
     this->setFixedSize(1000, 666);
 
-    bouton = new QPushButton("?");
+    //bouton = new QPushButton("?");
 
     //creation of the menu bar
     menuBar = new QMenuBar(this);
@@ -30,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //creation du layout
     game_window = new QHBoxLayout();
-    game_window->addWidget(bouton);
+    //game_window->addWidget(bouton);
     this->setLayout(game_window);
 
 
@@ -60,11 +61,33 @@ void MainWindow::paintEvent(QPaintEvent*)
         for(ky=0; ky<NbTile-1; ++ky)
         {
             QPoint topL( map->getTile(kx, ky)->topLeft() );
-            QPoint bottomR( map->getTile(kx+1,ky+1)->bottomRight() );
+            QPoint bottomR( map->getTile(kx,ky)->bottomRight() );
             QRect rect(topL, bottomR);
             painter.drawRect(rect);
+
+            if(map->getEntityType(kx,ky) == charac)
+            {
+                brush.setColor(Qt::blue);
+                painter.setBrush(brush);
+                painter.drawEllipse(rect);
+                brush.setColor(Qt::red);
+                painter.setBrush(brush);
+            }
         }
     }
 
 }
+
+// Key press event
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key())    {
+    case 'z':
+        break;
+    default:
+        break;
+    }
+}
+
+
 

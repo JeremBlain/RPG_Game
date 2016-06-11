@@ -10,7 +10,12 @@
 
 #include "character.hpp"
 
-Character::Character() : life(100)
+Character::Character() : life(100), posX(0), posY(0)
+{
+    type = charac;
+}
+
+Character::Character(int posx, int posy) : life(100), posX(posx), posY(posy)
 {
 
 }
@@ -20,5 +25,19 @@ Character::~Character()
     delete this;
 }
 
+void Character::deplacement(int mv) //enum is {up, right, bottom, left}
+{
+    if(mv == up)
+        posY--;
+
+    if(mv == right)
+        posX++;
+
+    if(mv == bottom)
+        posY++;
+
+    if(mv == left)
+        posX--;
+}
 
 

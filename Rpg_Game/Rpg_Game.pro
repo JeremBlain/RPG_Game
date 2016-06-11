@@ -16,11 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     map.cpp \
     character.cpp \
-    tile.cpp
+    tile.cpp \
+    entity.cpp \
+    null_entity.cpp
 
 HEADERS  += mainwindow.hpp \
     map.hpp \
     character.hpp \
-    tile.hpp
+    tile.hpp \
+    entity.hpp \
+    null_entity.hpp
 
 FORMS    += mainwindow.ui

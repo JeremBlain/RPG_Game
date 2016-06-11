@@ -17,7 +17,7 @@
  */
 #include "tile.hpp"
 
-#define NbTile 50
+#define NbTile 30
 
 class Map
 {
@@ -30,16 +30,22 @@ public:
     Map(); //constructor
     ~Map(); //destructor
 
-    //operator
+    /****** Get Tile ******
+    * call the function of Tile to Get the rectangle of the tile */
     const QRect* getTile(int kx, int ky);
+
+    /****** Get Entity ******
+    * call the function of Entity to set the type like character or house */
+    int getEntityType(int kx, int ky);
 };
 
 #endif // MAP_HPP
 
 
 /* *********** FOOTER ************
-** Version : 1.00
+** Version : 1.01
 ** Last update : 08 June 2016
-** Changes : Creation of the file and the map
+** Changes : -Creation of the file and the map
+**           -methods to get the type of entity
 ** ******************************/
 
