@@ -18,6 +18,7 @@
 #include <QPainter>
 #include <QKeyEvent>
 #include "map.hpp"
+#include "gamewindow.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -28,19 +29,14 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 private:
-        QPushButton *bouton;
-        QHBoxLayout *game_window;
+        QHBoxLayout *gameLayout;
+        GameWindow *gameWindow;
         QMenuBar *menuBar;
-        Map *map;
-        void keyPressEvent(QKeyEvent *event);
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    void paintEvent(QPaintEvent *);
-
-
-
+        explicit MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
+        void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // MAINWINDOW_HPP
@@ -48,5 +44,5 @@ public:
 /* *********** FOOTER ************
 ** Version : 1.00
 ** Last update : 08 June 2016
-** Changes : Creation of the first layout : a menubar and a empty layout which gonna contain the map int the future
+** Changes : Creation of the first layout : a menubar and a game layout which contains the map
 ** ******************************/

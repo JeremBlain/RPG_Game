@@ -19,75 +19,48 @@ MainWindow::MainWindow(QWidget *parent) :
     //** Taille fenetre **
     this->setFixedSize(1000, 666);
 
-    //bouton = new QPushButton("?");
-
     //creation of the menu bar
     menuBar = new QMenuBar(this);
     menuBar->addAction("bouton");
 
-    //creation of the map
-    map = new Map();
-
-
     //creation du layout
-    game_window = new QHBoxLayout();
-    //game_window->addWidget(bouton);
-    this->setLayout(game_window);
+    gameLayout = new QHBoxLayout();
 
+    gameWindow = new GameWindow();
+    gameLayout->addWidget(gameWindow);
 
+    this->setLayout(gameLayout);
 }
 
 //Destructor
 MainWindow::~MainWindow()
-{
+{}
 
-}
-
-void MainWindow::paintEvent(QPaintEvent*)
-{
-    QPainter painter(this);
-
-    painter.setRenderHint(QPainter::Antialiasing, true);
-
-    QBrush brush = painter.brush();
-    brush.setColor(Qt::red);
-    brush.setStyle(Qt::SolidPattern);
-    painter.setBrush(brush);
-
-    int kx=0;
-    for(kx=0; kx<NbTile-1; ++kx)
-    {
-        int ky=0;
-        for(ky=0; ky<NbTile-1; ++ky)
-        {
-            QPoint topL( map->getTile(kx, ky)->topLeft() );
-            QPoint bottomR( map->getTile(kx,ky)->bottomRight() );
-            QRect rect(topL, bottomR);
-            painter.drawRect(rect);
-
-            if(map->getEntityType(kx,ky) == charac)
-            {
-                brush.setColor(Qt::blue);
-                painter.setBrush(brush);
-                painter.drawEllipse(rect);
-                brush.setColor(Qt::red);
-                painter.setBrush(brush);
-            }
-        }
-    }
-
-}
 
 // Key press event
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    //move the main character
     switch(event->key())    {
-    case 'z':
+    case 'Z':
+        gameWindow->move(up);
         break;
+
+    case 'Q':
+        gameWindow->move(left);
+        break;
+
+    case 'S':
+        gameWindow->move(bottom);
+        break;
+
+    case 'D':
+        gameWindow->move(right);
+        break;
+
     default:
         break;
     }
 }
-
 
 

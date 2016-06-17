@@ -24,6 +24,7 @@ class Map
     // private attributes
 private:
     Tile* map[NbTile][NbTile];
+    Character* main_character;
 
     //public methods
 public:
@@ -32,20 +33,45 @@ public:
 
     /****** Get Tile ******
     * call the function of Tile to Get the rectangle of the tile */
-    const QRect* getTile(int kx, int ky);
+    const QRect* getRectTile(int kx, int ky);
+
+    /****** Get Tile ******
+    * call the function of Tile to Get the rectangle of the tile by coord */
+    Tile* getTile(int kx, int ky);
+
+    /****** Get Tile ******
+    * call the function of Tile to Get the rectangle of the tile by vector */
+    Tile* getTile(vec2 pos);
 
     /****** Get Entity ******
     * call the function of Entity to set the type like character or house */
     int getEntityType(int kx, int ky);
+
+    /****** Set Position ******
+    * call the function of Tile to set the position in the map */
+    void setEntityPosition(int posx, int posy);
+
+    /****** Get Position ******
+    * call the function of Tile to get the position in the map */
+    vec2 getEntityPosition(int posx, int posy);
+
+    /****** Get main character position ******
+    * get the position of the main character */
+    vec2 getMainCharacPosition();
+
+    /******* to move the character */
+    void moveCharacter(int posx, int posy, int mv);
 };
 
 #endif // MAP_HPP
 
 
 /* *********** FOOTER ************
-** Version : 1.01
-** Last update : 08 June 2016
+** Version : 1.03
+** Last update : 15 June 2016
 ** Changes : -Creation of the file and the map
 **           -methods to get the type of entity
+**           -add method for moving the character
+**           -add method for set the position of the entity
 ** ******************************/
 

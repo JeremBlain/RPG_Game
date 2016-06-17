@@ -11,9 +11,13 @@
 #ifndef TILE_H
 #define TILE_H
 
+#include <typeinfo>
+#include <iostream>
+#include <QRect>
+
 #include "character.hpp"
 #include "null_entity.hpp"
-#include <QRect>
+
 
 #define sizeTile 32
 
@@ -26,20 +30,39 @@ private:
 
     // public methods
 public:
-    Tile(int x_debut, int y_debut); //constructor
+    Tile(int kx, int ky, int type_entity); //constructor
     ~Tile(); //destructor
 
     /******* Get Tile *******
      * Get the rectangle of the Tile */
-    const QRect* get_Tile();
+    const QRect* getRectTile();
+
+    /******* Set Tile *******
+     * Get the rectangle of the Tile */
+    void setRectTile(int kx, int ky);
 
     /******* Set Entity *******
      * call the function of Entity to set the type like character or house */
-    void setEntity(int ent);
+    void setTypeEntity(int ent);
+
+    /******* Set Entity *******
+     * call the function of Entity to set the entity */
+    void setEntity(Entity *ent);
 
     /******* Get Entity *******
      * call the function of Entity to get the type like character or house */
-    int getEntity();
+    int getTypeEntity() const;
+
+    /******* Set Position*******
+     * call the function of Entity to set the position in the map */
+    void setPosition(int posx, int posy);
+
+    /******* Get Position*******
+     * call the function of Entity to get the position in the map */
+    vec2 getPosition();
+
+
+
 
     /******* to move the character */
     void mvment(int mv);
@@ -48,8 +71,10 @@ public:
 #endif // TILE_H
 
 /* *********** FOOTER ************
-** Version : 1.01
-** Last update : 08 June 2016
+** Version : 1.03
+** Last update : 15 June 2016
 ** Changes : -Creation and begining of implement attributes and method
 **           -method to set&get the type of the entity
+**           -add a parameter in the constructor
+**           -add method for set the position of the entity
 ** ******************************/

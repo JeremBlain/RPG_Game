@@ -19,30 +19,46 @@
 
 enum{null_entity, charac};
 
+#include "vec2.hpp"
+
 class Entity
 {
     //private attributes
 protected:
     int type; //type = enum
+    vec2 pos; //his position on the map
 
     //public methods
 public:
     Entity();
+    Entity(int posx, int posy); //constructor with the position on the map
     virtual ~Entity();
 
     /******* Set TYPE *******
      * Set the type of the entity to a certain value, like character or house */
     void setType(int ent);
+
     /******* Get TYPE *******
      * Get the type of the entity, return the value of the enum */
     int getType();
+
+    /******* Set Position *******
+     * Set the position in the map of the entity */
+    void setPosition(int posx, int posy);
+
+    /******* Get Position *******
+     * Get the position in the map of the entity */
+    vec2 getPosition();
+
+
 };
 
 #endif // ENTITY_H
 
 /* *********** FOOTER ************
-** Version : 1.01
-** Last update : 10 June 2016
+** Version : 1.02
+** Last update : 15 June 2016
 ** Changes : -Creation and begining of implement attributes and method
 **           -set&get entity method
+**           -add set position method
 ** ******************************/

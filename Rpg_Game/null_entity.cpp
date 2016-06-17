@@ -11,13 +11,12 @@
 
 #include "null_entity.hpp"
 
-Null_entity::Null_entity()
-{
+Null_entity::Null_entity() : Entity()
+{}
 
-}
+Null_entity::Null_entity(int posx, int posy) :  Entity(posx, posy)
+{}
 
 Null_entity::~Null_entity()
-{
-
-}
+{}
 

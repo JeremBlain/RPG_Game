@@ -10,14 +10,19 @@
 
 #include "character.hpp"
 
-Character::Character() : life(100), posX(0), posY(0)
+Character::Character() : Entity(), name("")
 {
     type = charac;
 }
 
-Character::Character(int posx, int posy) : life(100), posX(posx), posY(posy)
+Character::Character(int posx, int posy) : Entity(posx, posy), name("")
 {
+    type = charac;
+}
 
+Character::Character(int posx, int posy, QString newName): Entity(posx, posy), name(newName)
+{
+    type = charac;
 }
 
 Character::~Character()
@@ -27,17 +32,7 @@ Character::~Character()
 
 void Character::deplacement(int mv) //enum is {up, right, bottom, left}
 {
-    if(mv == up)
-        posY--;
-
-    if(mv == right)
-        posX++;
-
-    if(mv == bottom)
-        posY++;
-
-    if(mv == left)
-        posX--;
+    pos.movement(mv);
 }
 
 

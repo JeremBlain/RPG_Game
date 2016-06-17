@@ -18,6 +18,7 @@ class Null_entity : public Entity
 {
 public:
     Null_entity();
+    Null_entity(int posx, int posy); //constructor with the position on the map
     ~Null_entity();
 };
 
@@ -25,7 +26,8 @@ public:
 
 
 /* *********** FOOTER ************
-** Version : 1.00
-** Last update : 10 June 2016
-** Changes : Creation and begining of implement attributes and method
+** Version : 1.01
+** Last update : 14 June 2016
+** Changes : -Creation and begining of implement attributes and method
+**           -add the constructor with parameter
 ** ******************************/

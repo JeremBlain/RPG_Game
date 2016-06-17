@@ -164,6 +164,7 @@ Makefile: ../Rpg_Game/Rpg_Game.pro ../../../Software/Qt/5.4/mingw491_32/mkspecs/
 		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/resolve_config.prf \
 		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/exclusive_builds_post.prf \
 		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/default_post.prf \
+		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/c++11.prf \
 		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/win32/rtti.prf \
 		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/precompile_header.prf \
 		../../../Software/Qt/5.4/mingw491_32/mkspecs/features/warn_on.prf \
@@ -289,6 +290,7 @@ Makefile: ../Rpg_Game/Rpg_Game.pro ../../../Software/Qt/5.4/mingw491_32/mkspecs/
 ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\resolve_config.prf:
 ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\exclusive_builds_post.prf:
 ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\default_post.prf:
+..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\c++11.prf:
 ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\win32\rtti.prf:
 ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\precompile_header.prf:
 ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\warn_on.prf:

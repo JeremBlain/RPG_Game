@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\gamewindow.o
+./debug\map.o
+./debug\character.o
+./debug\tile.o
+./debug\entity.o
+./debug\null_entity.o
+./debug\vec2.o
+./debug\mainwindow.o
+./debug\moc_gamewindow.o
+./debug\moc_mainwindow.o
+);

@@ -10,10 +10,14 @@
 
 #include "tile.hpp"
 
-Tile::Tile(int x_debut, int y_debut)
+Tile::Tile(int kx, int ky, int type_entity)
 {
-    entity = new Null_entity();
-    tile = new QRect(x_debut, y_debut, sizeTile, sizeTile);
+    if(type_entity == null_entity)
+         entity = new Null_entity(kx, ky);
+    if(type_entity == charac)
+         entity = new Character(kx, ky);
+
+    tile = new QRect(kx*sizeTile, ky*sizeTile, sizeTile, sizeTile);
 }
 
 Tile::~Tile()
@@ -21,24 +25,50 @@ Tile::~Tile()
     delete this;
 }
 
-const QRect* Tile::get_Tile()
+const QRect* Tile::getRectTile()
 {
     return tile;
 }
 
-void Tile::setEntity(int ent)
+void Tile::setRectTile(int kx, int ky)
+{
+    tile->setRect(kx*sizeTile, ky*sizeTile, sizeTile, sizeTile);
+}
+
+void Tile::setTypeEntity(int ent)
 {
     entity->setType(ent);
 }
 
-int Tile::getEntity()
+void Tile::setEntity(Entity *ent)
+{
+    entity = ent;
+}
+
+int Tile::getTypeEntity() const
 {
     return entity->getType();
 }
 
+void Tile::setPosition(int posx, int posy)
+{
+    entity->setPosition(posx, posy);
+}
+
+vec2 Tile::getPosition()
+{
+    return entity->getPosition();
+}
+
 void Tile::mvment(int mv)
 {
-    if(entity->getType() == charac)
-        entity->
+        try{
+            Character* character = dynamic_cast<Character*>(entity);
+            character->deplacement(mv);
+        }
+        catch(const std::bad_cast &)
+        {
+            std::cout<<"not a character, cannot be moved"<<std::endl;
+        }
 }
 

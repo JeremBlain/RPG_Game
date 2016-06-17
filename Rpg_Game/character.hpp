@@ -12,20 +12,19 @@
 #define CHARACTER_H
 
 #include "entity.hpp"
-
-enum{up,right, bottom, left};
+#include <QString>
 
 class Character : public Entity
 {
 // private attributes
 private:
-    int life;
-    int posX, posY; //his position on the map
+    QString name;
 
 //public methods
 public:
     Character(); //constructor
-    Character(int posx, int posy); //constructor with his position x,y
+    Character(int posx, int posy); //constructor with the position on the map
+    Character(int posx, int posy, QString newName); //constructor with the position on the map + the name of the character
     ~Character(); //destructor
 
     /******* movement function *******

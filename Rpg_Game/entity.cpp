@@ -10,15 +10,14 @@
 
 #include "entity.hpp"
 
-Entity::Entity() : type(0)
-{
+Entity::Entity() : type(0), pos()
+{}
 
-}
+Entity::Entity(int posx, int posy) : type(0), pos(posx, posy)
+{}
 
 Entity::~Entity()
-{
-
-}
+{}
 
 void Entity::setType(int ent)
 {
@@ -28,4 +27,14 @@ void Entity::setType(int ent)
 int Entity::getType()
 {
     return type;
+}
+
+void Entity::setPosition(int posx, int posy)
+{
+    pos.setPosition(posx, posy);
+}
+
+vec2 Entity::getPosition()
+{
+    return pos.getPosition();
 }

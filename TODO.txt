@@ -1,0 +1,43 @@
+
+#What to do in the future
+#this txt is a memo to me for remembering all the stuff I think (because I think a lot of things, then forgot it...)
+#this text will be writed in french cause of the difficulty of the things I think... probably...
+
+
+
+
+Combat : faire une variable qui permette dans le painEvent de pouvoir savoir quand est ce qu'on est dans la map et quand on fait un combat. (ensuite peutêtre dissocier les deux affichages dans deux fonctions)
+
+Map : faire déplacer la map et non le character.
+
+Fenetre : placer le perso au centre (peut importe la taille de l'imlage, que l'on peut redimensionner) 
+			Il faut donc récup' la taille de la fenetre.
+			mieux gérer l'espace dans la fenetre (là y a un marging autour du layout et le Menu est caché en partie part le layout
+			
+Deplacement : essayer de faire une transition continue dans les déplacements,n aussi bien du personnage que de la map.
+
+Stat : comment calculer les stats ? Faire une table ? ou faire des calculs avec des equations ?
+
+Data :
+Comment stocker les data (peut importe le type) ? dans un fichier txt ? à voir sur internet.
+Dans la suite des data, je considère pour le moment faire par fichier .txt
+
+Data map : Comment stocker la map ?
+pourquoi pas "coordx coordy type" ? Prob c'est que pour les batiments, comment gérer le fait que les bat seront diff ? mettre plusieurs nom de bat diff ?
+
+Data Charac :
+"name 
+coordx coordy
+monster1 nv name (?stat)
+monster2 nv name (?stat)
+..."
+
+Data stat
+"monster
+stat1 XX
+stat2 XX
+..."
+
+Data Batiment
+"name_batiment name_interior"
+
