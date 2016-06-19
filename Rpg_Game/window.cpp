@@ -9,58 +9,47 @@
 ** *****************************/
 
 
-#include "mainwindow.hpp"
+#include "window.hpp"
 #include <iostream>
 
 //Constructor Main Window
-MainWindow::MainWindow(QWidget *parent) :
-    QWidget(parent)
+Window::Window(QWidget *parent) :
+    QMainWindow(parent)
 {
-    //** Taille fenetre **
-    this->setFixedSize(1000, 666);
-
-    //creation of the menu bar
-    menuBar = new QMenuBar(this);
-    menuBar->addAction("bouton");
-
-    //creation du layout
-    gameLayout = new QHBoxLayout();
-
     gameWindow = new GameWindow();
-    gameLayout->addWidget(gameWindow);
-
-    this->setLayout(gameLayout);
+    ui = new Ui::MainWindow;
+    ui->setupUi(this);
+    ui->layoutGame->addWidget(gameWindow);
 }
 
 //Destructor
-MainWindow::~MainWindow()
+Window::~Window()
 {}
 
 
 // Key press event
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void Window::keyPressEvent(QKeyEvent *event)
 {
     //move the main character
     switch(event->key())    {
     case 'Z':
-        gameWindow->move(up);
+        gameWindow->movement(up);
         break;
 
     case 'Q':
-        gameWindow->move(left);
+        gameWindow->movement(left);
         break;
 
     case 'S':
-        gameWindow->move(bottom);
+        gameWindow->movement(bottom);
         break;
 
     case 'D':
-        gameWindow->move(right);
+        gameWindow->movement(right);
         break;
 
     default:
         break;
     }
 }
-
 

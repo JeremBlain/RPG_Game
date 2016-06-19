@@ -8,41 +8,41 @@
 ** See below for what's the file version and what change.
 ** *****************************/
 
-#ifndef MAINWINDOW_HPP
-#define MAINWINDOW_HPP
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 
-#include <QWidget>
-#include <QPushButton>
-#include <QHBoxLayout>
-#include <QMenuBar>
-#include <QPainter>
+#include <QMainWindow>
 #include <QKeyEvent>
 #include "map.hpp"
 #include "gamewindow.hpp"
+#include "ui_mainwindow.h"
+
 
 namespace Ui {
 class MainWindow;
 }
+class GameWindow;
 
-class MainWindow : public QWidget
+class Window : public QMainWindow
 {
     Q_OBJECT
 
 private:
-        QHBoxLayout *gameLayout;
+        Ui::MainWindow *ui;
         GameWindow *gameWindow;
-        QMenuBar *menuBar;
+
+        void keyPressEvent(QKeyEvent *event);
 
 public:
-        explicit MainWindow(QWidget *parent = nullptr);
-        ~MainWindow();
-        void keyPressEvent(QKeyEvent *event);
+        Window(QWidget *parent = nullptr);
+        ~Window();
 };
 
-#endif // MAINWINDOW_HPP
+#endif // NWINDOW_HPP
 
 /* *********** FOOTER ************
-** Version : 1.00
-** Last update : 08 June 2016
-** Changes : Creation of the first layout : a menubar and a game layout which contains the map
+** Version : 1.01
+** Last update : 17 June 2016
+** Changes : -Major change (name class from MainWindow to Window)
+**           -decide to use ui
 ** ******************************/

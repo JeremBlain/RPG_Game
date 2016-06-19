@@ -50,7 +50,13 @@ In fact the problem was a pointer problem.... Anyway, I managed to move the char
 
 
 
+17 June 2016
+Decided to use Qt Designer instead of doing the layout manually. Just because there are strip around my game and these bother me.
+Now, with Designer, it's cleaner.
 
+
+18 June 2016
+In fact.... the tile was not necesary and very useless... So delete the file, and change map's Tile attribute to an Entity attribute. Have to change some methods too.
 
 
 

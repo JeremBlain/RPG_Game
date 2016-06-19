@@ -12,10 +12,14 @@
 #include "null_entity.hpp"
 
 Null_entity::Null_entity() : Entity()
-{}
+{
+    type = null_entity;
+}
 
 Null_entity::Null_entity(int posx, int posy) :  Entity(posx, posy)
-{}
+{
+    type = null_entity;
+}
 
 Null_entity::~Null_entity()
 {}

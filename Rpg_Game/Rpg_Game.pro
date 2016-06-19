@@ -18,19 +18,19 @@ SOURCES += main.cpp\
         gamewindow.cpp \
     map.cpp \
     character.cpp \
-    tile.cpp \
     entity.cpp \
     null_entity.cpp \
     vec2.cpp \
-    mainwindow.cpp
+    window.cpp \
+    file_wr.cpp
 
 HEADERS  += gamewindow.hpp \
     map.hpp \
     character.hpp \
-    tile.hpp \
     entity.hpp \
     null_entity.hpp \
     vec2.hpp \
-    mainwindow.hpp
+    window.hpp \
+    file_wr.hpp
 
 FORMS    += mainwindow.ui

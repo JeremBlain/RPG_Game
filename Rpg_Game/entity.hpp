@@ -49,8 +49,6 @@ public:
     /******* Get Position *******
      * Get the position in the map of the entity */
     vec2 getPosition();
-
-
 };
 
 #endif // ENTITY_H

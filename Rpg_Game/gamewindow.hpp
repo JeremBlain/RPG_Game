@@ -23,6 +23,8 @@ namespace Ui {
 class GameWindow;
 }
 
+#define sizeTile 42
+
 class GameWindow : public QWidget
 {
     Q_OBJECT
@@ -35,7 +37,7 @@ public:
     ~GameWindow();
 
     /******* to move the mzin character */
-    void move(int mv);
+    void movement(int mv);
 
     /******* to check if the move si valid */
     bool validMove(int posx, int posy, int mv);

@@ -3,11 +3,11 @@ INPUT(
 ./release\gamewindow.o
 ./release\map.o
 ./release\character.o
-./release\tile.o
 ./release\entity.o
 ./release\null_entity.o
 ./release\vec2.o
-./release\mainwindow.o
+./release\window.o
+./release\file_wr.o
 ./release\moc_gamewindow.o
-./release\moc_mainwindow.o
+./release\moc_window.o
 );

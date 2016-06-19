@@ -15,15 +15,17 @@
  * characters walk on this tile and only in it.
  * We implement the map with a class.
  */
-#include "tile.hpp"
+#include "character.hpp"
+#include "null_entity.hpp"
+#include "file_wr.hpp"
 
-#define NbTile 30
+#define NbTile 50
 
 class Map
 {
     // private attributes
 private:
-    Tile* map[NbTile][NbTile];
+    Entity* map[NbTile][NbTile];
     Character* main_character;
 
     //public methods
@@ -31,17 +33,15 @@ public:
     Map(); //constructor
     ~Map(); //destructor
 
-    /****** Get Tile ******
-    * call the function of Tile to Get the rectangle of the tile */
-    const QRect* getRectTile(int kx, int ky);
+    /****** Get Entity ******
+    * call the function of Tile to Get the rectangle of the tile by coord
+    * Not very usefull, only for encapsulation*/
+    Entity* getEntity(int kx, int ky);
 
-    /****** Get Tile ******
-    * call the function of Tile to Get the rectangle of the tile by coord */
-    Tile* getTile(int kx, int ky);
-
-    /****** Get Tile ******
-    * call the function of Tile to Get the rectangle of the tile by vector */
-    Tile* getTile(vec2 pos);
+    /****** Get Entity******
+    * call the function of Tile to Get the rectangle of the tile by vector
+    * Not very usefull, only for encapsulation*/
+    Entity* getEntity(vec2 pos);
 
     /****** Get Entity ******
     * call the function of Entity to set the type like character or house */

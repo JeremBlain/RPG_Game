@@ -15,9 +15,9 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,28 +26,47 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout;
+    QVBoxLayout *layoutGame;
     QMenuBar *menuBar;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
+    QMenu *menuBouton;
+    QMenu *menuBouton2;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(526, 386);
+        MainWindow->setWindowModality(Qt::WindowModal);
+        MainWindow->resize(1302, 819);
+        MainWindow->setMinimumSize(QSize(1260, 819));
+        MainWindow->setMaximumSize(QSize(1302, 819));
+        MainWindow->setCursor(QCursor(Qt::CrossCursor));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setEnabled(true);
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        layoutGame = new QVBoxLayout();
+        layoutGame->setSpacing(6);
+        layoutGame->setObjectName(QStringLiteral("layoutGame"));
+
+        verticalLayout->addLayout(layoutGame);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 526, 21));
+        menuBar->setGeometry(QRect(0, 0, 1302, 21));
+        menuBouton = new QMenu(menuBar);
+        menuBouton->setObjectName(QStringLiteral("menuBouton"));
+        menuBouton2 = new QMenu(menuBar);
+        menuBouton2->setObjectName(QStringLiteral("menuBouton2"));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        MainWindow->setStatusBar(statusBar);
+
+        menuBar->addAction(menuBouton->menuAction());
+        menuBar->addAction(menuBouton2->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -56,7 +75,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Game", 0));
+        menuBouton->setTitle(QApplication::translate("MainWindow", "Bouton", 0));
+        menuBouton2->setTitle(QApplication::translate("MainWindow", "Bouton2", 0));
     } // retranslateUi
 
 };

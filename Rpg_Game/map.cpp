@@ -12,7 +12,27 @@
 
 Map::Map()
 {
-    main_character = new Character(10,10);
+    QFile mapDataFile("../data/mapdata.txt");
+    if (!mapDataFile.exists() )
+    {
+        if ( create_file(mapFile) )
+        {
+            if( mapDataFile.open(QIODevice::ReadOnly | QIODevice::Text) )
+            {
+                std::cout<<"the file is open"<<std::endl;
+                mapDataFile.close();
+            }
+            else
+            {
+                std::cout<<"the file is NOT open"<<std::endl;
+            }
+
+        }
+    }
+
+
+
+    main_character = new Character(20, 20);
 
     int kx=0;
     for(kx=0; kx<NbTile; ++kx)
@@ -20,13 +40,12 @@ Map::Map()
         int ky=0;
         for(ky=0; ky<NbTile; ++ky)
         {
-            if(kx == 10 && ky == 10) //The main character is placed on the position 10,10
+            if(kx == 20 && ky == 20) //The main character is placed on the position 10,10
             {
-                map[kx][ky] = new Tile(kx, ky, charac);
-                map[kx][ky]->setEntity(main_character);
+                map[kx][ky] = main_character;
             }
             else
-                map[kx][ky] = new Tile(kx, ky, null_entity);
+                map[kx][ky] = new Null_entity(kx, ky);
         }
     }
 }
@@ -36,17 +55,12 @@ Map::~Map()
     delete this;
 }
 
-const QRect* Map::getRectTile(int kx, int ky)
-{
-    return map[kx][ky]->getRectTile();
-}
-
-Tile *Map::getTile(int kx, int ky)
+Entity *Map::getEntity(int kx, int ky)
 {
     return map[kx][ky];
 }
 
-Tile *Map::getTile(vec2 pos)
+Entity *Map::getEntity(vec2 pos)
 {
     int kx = pos.getx();
     int ky = pos.gety();
@@ -55,7 +69,7 @@ Tile *Map::getTile(vec2 pos)
 
 int Map::getEntityType(int kx, int ky)
 {
-    return map[kx][ky]->getTypeEntity();
+    return map[kx][ky]->getType();
 }
 
 void Map::setEntityPosition(int posx, int posy)
@@ -75,44 +89,41 @@ vec2 Map::getMainCharacPosition()
 
 void Map::moveCharacter(int posx, int posy, int mv)
 {
-    Tile* current_tile = getTile(posx, posy);
-    if(current_tile->getTypeEntity() == charac)
+    Entity* current_tile = getEntity(posx, posy);
+    if(current_tile->getType() == charac)
     {
-        Tile* tmp_tile = nullptr;
+        Character* character = dynamic_cast<Character*>(current_tile);
+
+        Entity* tmp_tile = nullptr;
         if(mv == up)
         {
-            tmp_tile = getTile(posx, posy-1);
-            current_tile->mvment(up);
+            tmp_tile = getEntity(posx, posy-1);
+            character->deplacement(up);
             map[posx][posy-1] = current_tile;
-            map[posx][posy-1]->setRectTile(posx, posy-1);
         }
 
         if(mv == right)
         {
-            tmp_tile = getTile(posx+1, posy);
-            current_tile->mvment(right);
+            tmp_tile = getEntity(posx+1, posy);
+            character->deplacement(right);
             map[posx+1][posy] = current_tile;
-            map[posx+1][posy]->setRectTile(posx+1, posy);
         }
 
         if(mv == bottom)
         {
-            tmp_tile = getTile(posx, posy+1);
-            current_tile->mvment(bottom);
+            tmp_tile = getEntity(posx, posy+1);
+            character->deplacement(bottom);
             map[posx][posy+1] = current_tile;
-            map[posx][posy+1]->setRectTile(posx, posy+1);
         }
 
         if(mv == left)
         {
-            tmp_tile = getTile(posx-1, posy);
-            current_tile->mvment(left);
+            tmp_tile = getEntity(posx-1, posy);
+            character->deplacement(left);
             map[posx-1][posy] = current_tile;
-            map[posx-1][posy]->setRectTile(posx-1, posy);
         }
         map[posx][posy] = tmp_tile;
         map[posx][posy]->setPosition(posx, posy);
-        map[posx][posy]->setRectTile(posx, posy);
     }
 
 }

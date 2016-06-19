@@ -10,7 +10,7 @@
 
 #include "entity.hpp"
 
-Entity::Entity() : type(0), pos()
+Entity::Entity() : type(0), pos(0, 0)
 {}
 
 Entity::Entity(int posx, int posy) : type(0), pos(posx, posy)

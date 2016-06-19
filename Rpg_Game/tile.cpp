@@ -25,15 +25,6 @@ Tile::~Tile()
     delete this;
 }
 
-const QRect* Tile::getRectTile()
-{
-    return tile;
-}
-
-void Tile::setRectTile(int kx, int ky)
-{
-    tile->setRect(kx*sizeTile, ky*sizeTile, sizeTile, sizeTile);
-}
 
 void Tile::setTypeEntity(int ent)
 {

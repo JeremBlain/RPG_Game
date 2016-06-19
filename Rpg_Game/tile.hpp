@@ -19,7 +19,7 @@
 #include "null_entity.hpp"
 
 
-#define sizeTile 32
+#define sizeTile 42
 
 class Tile
 {
@@ -29,43 +29,7 @@ private:
     QRect *tile;
 
     // public methods
-public:
-    Tile(int kx, int ky, int type_entity); //constructor
-    ~Tile(); //destructor
 
-    /******* Get Tile *******
-     * Get the rectangle of the Tile */
-    const QRect* getRectTile();
-
-    /******* Set Tile *******
-     * Get the rectangle of the Tile */
-    void setRectTile(int kx, int ky);
-
-    /******* Set Entity *******
-     * call the function of Entity to set the type like character or house */
-    void setTypeEntity(int ent);
-
-    /******* Set Entity *******
-     * call the function of Entity to set the entity */
-    void setEntity(Entity *ent);
-
-    /******* Get Entity *******
-     * call the function of Entity to get the type like character or house */
-    int getTypeEntity() const;
-
-    /******* Set Position*******
-     * call the function of Entity to set the position in the map */
-    void setPosition(int posx, int posy);
-
-    /******* Get Position*******
-     * call the function of Entity to get the position in the map */
-    vec2 getPosition();
-
-
-
-
-    /******* to move the character */
-    void mvment(int mv);
 };
 
 #endif // TILE_H
