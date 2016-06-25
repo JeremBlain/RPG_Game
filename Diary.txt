@@ -56,7 +56,19 @@ Now, with Designer, it's cleaner.
 
 
 18 June 2016
-In fact.... the tile was not necesary and very useless... So delete the file, and change map's Tile attribute to an Entity attribute. Have to change some methods too.
+In fact.... the tile was not necessary and very useless... So delete the file, and change map's Tile attribute to an Entity attribute. Have to change some methods too.
+
+21 June 2016
+HAPPY BIRTHDAY !
+
+Add a read file methods for map data. Now the map is load by this file.
+But I don't know why, when I go to the bottom, the game not crash, while I'm out of the map (I can go on the 51 square, max = 49...) 
+but when I go on the left and be out of the map, the game crash... Why it crashes for the left and don't for the bottom ?!
+
+24 June 2016
+Now The main Character can talk with other character ! A dialog box show up when you're talking.
+you can't move when you are talking, and the other character turn your side.
+Now, I have to think how I store the dialog.
 
 
 

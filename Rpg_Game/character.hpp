@@ -12,32 +12,41 @@
 #define CHARACTER_H
 
 #include "entity.hpp"
-#include <QString>
 
 class Character : public Entity
 {
 // private attributes
 private:
     QString name;
+    int orientation;
 
 //public methods
 public:
     Character(); //constructor
-    Character(int posx, int posy); //constructor with the position on the map
-    Character(int posx, int posy, QString newName); //constructor with the position on the map + the name of the character
+    Character(int posx, int posy, int id); //constructor with the position on the map
+    Character(int posx, int posy, QString newName, int id); //constructor with the position on the map + the name of the character
     ~Character(); //destructor
 
-    /******* movement function *******
-     * a function to move the character into a direction send by parameter (called 'mv')
+    /******* movement method *******
+     * a method to move the character into a direction send by parameter (called 'mv')
      * We look if the movement is correct before so we are certain in this function that the mvment is correct */
     void deplacement(int mv);
+
+    /******* Get orientation *******
+     * get the orientation of the character */
+    int getOrientation();
+
+    /******* set orientation *******
+     * set the orientation of the character */
+    void setOrientation(int orien);
 };
 
 #endif // CHARACTER_H
 
 /* *********** FOOTER ************
-** Version : 1.01
-** Last update : 10 June 2016
+** Version : 1.02
+** Last update : 24 June 2016
 ** Changes : -Creation and begining of implement attributes and method
 **           -Set type method
+**           -add orientation
 ** ******************************/

@@ -12,40 +12,43 @@
 
 Map::Map()
 {
-    QFile mapDataFile("../data/mapdata.txt");
-    if (!mapDataFile.exists() )
-    {
-        if ( create_file(mapFile) )
-        {
-            if( mapDataFile.open(QIODevice::ReadOnly | QIODevice::Text) )
-            {
-                std::cout<<"the file is open"<<std::endl;
-                mapDataFile.close();
-            }
-            else
-            {
-                std::cout<<"the file is NOT open"<<std::endl;
-            }
+    files_exist();
 
-        }
-    }
+    QMap<vec2, vec2> entity_idMap = get_entities_mapFile();
 
-
-
-    main_character = new Character(20, 20);
-
+    vec2 pos;
     int kx=0;
     for(kx=0; kx<NbTile; ++kx)
     {
         int ky=0;
         for(ky=0; ky<NbTile; ++ky)
         {
-            if(kx == 20 && ky == 20) //The main character is placed on the position 10,10
+            pos.setPosition(kx, ky);
+
+            if(entity_idMap.contains(pos))
             {
-                map[kx][ky] = main_character;
+                vec2 ent_id = entity_idMap.value(pos);
+                int ent = ent_id.getx(), id = ent_id.gety();
+                if(ent == main_charac)
+                {
+                    QString name = get_name_mainCharacter();
+                    main_character = new Character(pos.getx(), pos.gety(), name, id);
+                    main_character->setType(main_charac);
+                    map[kx][ky] = main_character;
+                }
+
+                if(ent == charac)
+                {
+                    QString name = get_name_character(ent_id.gety());
+                    map[kx][ky] = new Character(pos.getx(), pos.gety(), name, id);
+                }
+
+                if(ent == building)
+                    map[kx][ky] = new Building(pos.getx(), pos.gety(), id);
             }
+
             else
-                map[kx][ky] = new Null_entity(kx, ky);
+                map[kx][ky] = new Ground(kx, ky);
         }
     }
 }
@@ -87,10 +90,44 @@ vec2 Map::getMainCharacPosition()
     return main_character->getPosition();
 }
 
+void Map::setMainCharacOrientation(int orien)
+{
+    main_character->setOrientation(orien);
+}
+
+int Map::getMainCharacOrientation()
+{
+    return main_character->getOrientation();
+}
+
+void Map::setCharacOrientation(int posx, int posy, int orien)
+{
+    Entity* current_tile = getEntity(posx, posy);
+    if(current_tile->getType() == charac || current_tile->getType() == main_charac)
+    {
+        Character* character = dynamic_cast<Character*>(current_tile);
+
+        character->setOrientation(orien);
+    }
+}
+
+int Map::getCharacOrientation(int posx, int posy)
+{
+    Entity* current_tile = getEntity(posx, posy);
+    if(current_tile->getType() == charac || current_tile->getType() == main_charac)
+    {
+        Character* character = dynamic_cast<Character*>(current_tile);
+
+        return character->getOrientation();
+    }
+
+    return 0;
+}
+
 void Map::moveCharacter(int posx, int posy, int mv)
 {
     Entity* current_tile = getEntity(posx, posy);
-    if(current_tile->getType() == charac)
+    if(current_tile->getType() == main_charac)
     {
         Character* character = dynamic_cast<Character*>(current_tile);
 
@@ -127,3 +164,12 @@ void Map::moveCharacter(int posx, int posy, int mv)
     }
 
 }
+
+bool Map::isType(int posx, int posy, int ent)
+{
+   if (map[posx][posy]->getType() == ent)
+       return true;
+
+   return false;
+}
+

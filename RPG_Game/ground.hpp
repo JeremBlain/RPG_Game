@@ -9,20 +9,20 @@
 ** *****************************/
 
 
-#ifndef NULL_ENTITY_H
-#define NULL_ENTITY_H
+#ifndef GROUND_H
+#define GROUND_H
 
 #include "entity.hpp"
 
-class Null_entity : public Entity
+class Ground : public Entity
 {
 public:
-    Null_entity();
-    Null_entity(int posx, int posy); //constructor with the position on the map
-    ~Null_entity();
+    Ground();
+    Ground(int posx, int posy); //constructor with the position on the map
+    ~Ground();
 };
 
-#endif // NULL_ENTITY_H
+#endif
 
 
 /* *********** FOOTER ************

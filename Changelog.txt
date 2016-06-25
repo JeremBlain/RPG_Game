@@ -6,3 +6,7 @@ V0.0 : First pre alpha release of demo....
 -first character (main character) created with blue circle in the position (10,10) of the map.
 -some useless buttons added in a menu bar (for some tests, but let them, they don't bother me....)
 -character can move, but only in the map. can't be out.
+-add others characters (in green)
+-can't move on other entity (building and character)
+-add orientation for character (symbolised by a line)
+-talk to other character. The character turn to the main character. Can'tt move when talking.

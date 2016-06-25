@@ -40,6 +40,8 @@ public:
     void movement(int mv);
 };
 
+bool operator<(vec2 v1, vec2 v2);
+
 #endif // VEC2_H
 
 /* *********** FOOTER ************

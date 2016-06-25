@@ -17,8 +17,9 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-enum{null_entity, charac};
+enum{ground, charac, main_charac, building};
 
+#include <QString>
 #include "vec2.hpp"
 
 class Entity
@@ -26,12 +27,13 @@ class Entity
     //private attributes
 protected:
     int type; //type = enum
+    int ID; //an unique Id for each entity
     vec2 pos; //his position on the map
 
     //public methods
 public:
     Entity();
-    Entity(int posx, int posy); //constructor with the position on the map
+    Entity(int posx, int posy, int id); //constructor with the position on the map
     virtual ~Entity();
 
     /******* Set TYPE *******
@@ -50,6 +52,10 @@ public:
      * Get the position in the map of the entity */
     vec2 getPosition();
 };
+
+/******* Convert QString to Entity Enum *******
+ * Get the position in the map of the entity */
+int convert_strToEnt(QString ent);
 
 #endif // ENTITY_H
 

@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\gamewindow.o
+./release\map.o
+./release\character.o
+./release\entity.o
+./release\ground.o
+./release\vec2.o
+./release\window.o
+./release\file_wr.o
+./release\building.o
+./release\moc_gamewindow.o
+./release\moc_window.o
+);

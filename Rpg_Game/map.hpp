@@ -16,10 +16,11 @@
  * We implement the map with a class.
  */
 #include "character.hpp"
-#include "null_entity.hpp"
+#include "ground.hpp"
+#include "building.hpp"
 #include "file_wr.hpp"
 
-#define NbTile 50
+#define NbTile 64
 
 class Map
 {
@@ -59,8 +60,28 @@ public:
     * get the position of the main character */
     vec2 getMainCharacPosition();
 
+    /****** Set main character orientation ******
+    * Set the orientation of the main character */
+    void setMainCharacOrientation(int orien);
+
+    /****** Get main character orientation ******
+    * get the orientation of the main character */
+    int getMainCharacOrientation();
+
+    /****** Set character orientation ******
+    * get the orientation of the character */
+    void setCharacOrientation(int posx, int posy, int orien);
+
+    /****** Get character orientation ******
+    * get the orientation of the character */
+    int getCharacOrientation(int posx, int posy);
+
     /******* to move the character */
     void moveCharacter(int posx, int posy, int mv);
+
+    /******* is the Type of Entity is same as parameter ? ******
+    * return true if the type of entity is same as ent, or false if not */
+    bool isType(int posx, int posy, int ent);
 };
 
 #endif // MAP_HPP

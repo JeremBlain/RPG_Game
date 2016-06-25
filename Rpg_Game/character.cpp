@@ -10,17 +10,17 @@
 
 #include "character.hpp"
 
-Character::Character() : Entity(), name("")
+Character::Character() : Entity(), name(""), orientation(bottom)
 {
     type = charac;
 }
 
-Character::Character(int posx, int posy) : Entity(posx, posy), name("")
+Character::Character(int posx, int posy, int id) : Entity(posx, posy, id), name(""), orientation(bottom)
 {
     type = charac;
 }
 
-Character::Character(int posx, int posy, QString newName): Entity(posx, posy), name(newName)
+Character::Character(int posx, int posy, QString newName, int id): Entity(posx, posy, id), name(newName), orientation(bottom)
 {
     type = charac;
 }
@@ -33,6 +33,16 @@ Character::~Character()
 void Character::deplacement(int mv) //enum is {up, right, bottom, left}
 {
     pos.movement(mv);
+}
+
+int Character::getOrientation()
+{
+    return orientation;
+}
+
+void Character::setOrientation(int orien)
+{
+    orientation = orien;
 }
 
 

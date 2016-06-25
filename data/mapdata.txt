@@ -1,0 +1,10 @@
+25 25 main_character 1
+5 30 Character 2
+10 15 Character 3
+12 22 Building 4
+15 18 Building 5
+21 19 character 6
+35 12 Building 7
+47 47 Building 8
+50 4 Character 9
+

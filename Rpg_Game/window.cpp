@@ -24,7 +24,9 @@ Window::Window(QWidget *parent) :
 
 //Destructor
 Window::~Window()
-{}
+{
+    delete ui;
+}
 
 
 // Key press event
@@ -46,6 +48,19 @@ void Window::keyPressEvent(QKeyEvent *event)
 
     case 'D':
         gameWindow->movement(right);
+        break;
+
+    case 'A':
+        gameWindow->Talk();
+        break;
+
+    case 'E':
+        gameWindow->setTalk(false);
+        gameWindow->openMenu(false);
+        break;
+
+    case Qt::Key_Return:
+        gameWindow->openMenu(true);
         break;
 
     default:

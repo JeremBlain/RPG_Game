@@ -55,3 +55,11 @@ void vec2::movement(int mv)
         x--;
 }
 
+/* ** Not in the class vec2 ** */
+bool operator <(vec2 v1, vec2 v2)
+{
+    if(v1.getx() != v2.getx())
+        return v1.getx() < v2.getx();
+
+    return v1.gety()<v2.gety();
+}
