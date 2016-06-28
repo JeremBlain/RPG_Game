@@ -13,7 +13,7 @@
 
 void files_exist()
 {
-    QFile tabFile[3];
+    QFile tabFile[4];
 
     //creation of the map file if it don't exist
     tabFile[0].setFileName("../data/mapdata.txt");
@@ -32,6 +32,12 @@ void files_exist()
     if (!tabFile[2].exists("../data/character_data.txt") )
     {
         create_characterFile(tabFile+2);
+    }
+
+    tabFile[3].setFileName("../data/dialog_data.txt");
+    if (!tabFile[3].exists("../data/dialog_data.txt") )
+    {
+        create_dialogFile(tabFile+3);
     }
 }
 
@@ -72,6 +78,19 @@ bool create_characterFile(QFile *file)
     }
 
     std::cout<<"/!\\ Character Data File not created /!\\"<<std::endl;
+    return false;
+}
+
+bool create_dialogFile(QFile *file)
+{
+    if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        std::cout<<"Dialog File created"<<std::endl;
+        file->close();
+        return true;
+    }
+
+    std::cout<<"/!\\ Dialog Data File not created /!\\"<<std::endl;
     return false;
 }
 
@@ -139,7 +158,7 @@ QString get_name_character(int id)
             if(id == idFile)
             {
                 QString name; //get the entity and coord line by line
-                name = line.section(' ', 1, 1);
+                name = line.section(' ', 1, 1).simplified();
                 characterFile.close();
                 return name;
             }
@@ -152,5 +171,45 @@ QString get_name_character(int id)
     return "";
 }
 
+/* a dialog line in the file is :
+ * # id "text" */
+QString get_dialog_charac(int id)
+{
+    QFile dialogFile("../data/dialog_data.txt");
+
+    if(dialogFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QString line = "", text=""; int idFile;
+
+        while(!dialogFile.atEnd())
+        {
+            line = dialogFile.readLine();
+
+            if(line.left(1) == "#") //the first char of a dialog must be #
+            {
+                idFile = line.section(' ', 1, 1).toInt();
+                if(id == idFile)
+                {
+                    text.insert(0, line.section(' ', 2));
+                    line = dialogFile.readLine();
+                    while(line.left(1) != "#" && !dialogFile.atEnd()) //line.left(1) give the first char of the line
+                    {
+                        text.append(line);
+                        line = dialogFile.readLine();
+                    }//end of text of character
+                    if(line.left(1) != "#") //if text is last one, not enter the while for append the last line
+                         text.append(line); //so have to add an another append (but not if there is another text = not end of file)
+
+                    return text;
+                }
+            }
+        }
+    }
+    else
+    {
+        std::cout<<"the file is NOT open"<<std::endl;
+    }
+    return "";
+}
 
 

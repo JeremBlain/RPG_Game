@@ -34,6 +34,7 @@ private:
         Map *map;
         bool talk; //if the main character speak
         bool menu; //if the main character open the menu
+        int 
 
         //UI
         QTextBrowser* dialogBox;

@@ -75,14 +75,14 @@ int Map::getEntityType(int kx, int ky)
     return map[kx][ky]->getType();
 }
 
-void Map::setEntityPosition(int posx, int posy)
+void Map::setEntityPosition(int kx, int ky)
 {
-    map[posx][posy]->setPosition(posx, posy);
+    map[kx][ky]->setPosition(kx, ky);
 }
 
-vec2 Map::getEntityPosition(int posx, int posy)
+vec2 Map::getEntityPosition(int kx, int ky)
 {
-    return map[posx][posy]->getPosition();
+    return map[kx][ky]->getPosition();
 }
 
 vec2 Map::getMainCharacPosition()
@@ -124,6 +124,24 @@ int Map::getCharacOrientation(int posx, int posy)
     return 0;
 }
 
+QString Map::getCharacName(int kx, int ky)
+{
+    Entity* current_tile = getEntity(kx, ky);
+    if(current_tile->getType() == charac || current_tile->getType() == main_charac)
+    {
+        Character* character = dynamic_cast<Character*>(current_tile);
+
+        return character->getName();
+    }
+
+    return "";
+}
+
+int Map::getEntityID(int kx, int ky)
+{
+    return map[kx][ky]->getId();
+}
+
 void Map::moveCharacter(int posx, int posy, int mv)
 {
     Entity* current_tile = getEntity(posx, posy);
@@ -159,11 +177,12 @@ void Map::moveCharacter(int posx, int posy, int mv)
             character->deplacement(left);
             map[posx-1][posy] = current_tile;
         }
+
         map[posx][posy] = tmp_tile;
         map[posx][posy]->setPosition(posx, posy);
     }
-
 }
+
 
 bool Map::isType(int posx, int posy, int ent)
 {

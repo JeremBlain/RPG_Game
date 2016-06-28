@@ -1,5 +1,5 @@
 25 25 main_character 1
-5 30 Character 2
+18 30 Character 2
 10 15 Character 3
 12 22 Building 4
 15 18 Building 5

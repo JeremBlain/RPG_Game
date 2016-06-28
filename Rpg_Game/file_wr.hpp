@@ -20,7 +20,7 @@
 #include "entity.hpp"
 
 
-enum typeFile{mapFile, mainCharacterFile, characterFile};
+enum typeFile{map_file, main_character_file, character_file, dialog_file};
 
 /******* Files Exist ? *******
  * check if files exists. if not, create the file with function below*/
@@ -38,6 +38,10 @@ bool create_mainCharacterFile(QFile* file);
  * create a file for main character data*/
 bool create_characterFile(QFile* file);
 
+/******* Create Dialog FILE *******
+ * create a file for main character data*/
+bool create_dialogFile(QFile* file);
+
 /******* Get Entity in map file*******
  * get the type of entity + ID (in a vec2) in the position (kx,ky) if possible
  * if there is no entity set in the position (kx,ky) the function return by default 0, ie null_entity
@@ -51,6 +55,10 @@ QString get_name_mainCharacter();
 /******* Get the name of the main character *******
  * get the name of MC on the main character file*/
 QString get_name_character(int id);
+
+/******* Get the text of character *******
+ * get the text of a character when you talk to him*/
+QString get_dialog_charac(int id);
 
 
 #endif // FILE_WR_HPP

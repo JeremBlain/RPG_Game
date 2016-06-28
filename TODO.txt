@@ -6,6 +6,8 @@
 
 
 
+pas de dialog + menu en même temps !!!!
+
 Combat : faire une variable qui permette dans le painEvent de pouvoir savoir quand est ce qu'on est dans la map et quand on fait un combat. (ensuite peutêtre dissocier les deux affichages dans deux fonctions)
 
 Map : faire déplacer la map et non le character.

@@ -39,6 +39,11 @@ vec2 Entity::getPosition()
     return pos.getPosition();
 }
 
+int Entity::getId()
+{
+    return ID;
+}
+
 
 //Outside the Entity Class
 int convert_strToEnt(QString ent)

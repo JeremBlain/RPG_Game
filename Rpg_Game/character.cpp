@@ -45,4 +45,9 @@ void Character::setOrientation(int orien)
     orientation = orien;
 }
 
+QString Character::getName()
+{
+    return name;
+}
+
 

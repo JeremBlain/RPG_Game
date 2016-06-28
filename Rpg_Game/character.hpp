@@ -39,6 +39,10 @@ public:
     /******* set orientation *******
      * set the orientation of the character */
     void setOrientation(int orien);
+
+    /******* Get name *******
+     * get the name of the character */
+    QString getName();
 };
 
 #endif // CHARACTER_H

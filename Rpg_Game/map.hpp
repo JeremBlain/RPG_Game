@@ -50,31 +50,39 @@ public:
 
     /****** Set Position ******
     * call the function of Tile to set the position in the map */
-    void setEntityPosition(int posx, int posy);
+    void setEntityPosition(int kx, int ky);
 
     /****** Get Position ******
     * call the function of Tile to get the position in the map */
-    vec2 getEntityPosition(int posx, int posy);
+    vec2 getEntityPosition(int kx, int ky);
 
     /****** Get main character position ******
     * get the position of the main character */
     vec2 getMainCharacPosition();
 
-    /****** Set main character orientation ******
+    /****** Set main character's orientation ******
     * Set the orientation of the main character */
     void setMainCharacOrientation(int orien);
 
-    /****** Get main character orientation ******
+    /****** Get main character's orientation ******
     * get the orientation of the main character */
     int getMainCharacOrientation();
 
-    /****** Set character orientation ******
+    /****** Set character's orientation ******
     * get the orientation of the character */
     void setCharacOrientation(int posx, int posy, int orien);
 
-    /****** Get character orientation ******
+    /****** Get character's orientation ******
     * get the orientation of the character */
     int getCharacOrientation(int posx, int posy);
+
+    /****** Get character's name ******
+    * get the orientation of the character */
+    QString getCharacName(int kx, int ky);
+
+    /****** Get character's ID ******
+    * get the id of the character */
+    int getEntityID(int kx, int ky);
 
     /******* to move the character */
     void moveCharacter(int posx, int posy, int mv);

@@ -21,6 +21,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
     dialogBox = new QTextBrowser(this);
     dialogBox->setGeometry(0, 0, 1, 1);
+    dialogBox->setFont(QFont("Aria", 16));
 
     menuBox = new QTextBrowser(this);
     menuBox->setFont(QFont("Aria", 22, QFont::Bold));
@@ -85,6 +86,8 @@ bool GameWindow::validMove(int posx, int posy, int mv)
 
 void GameWindow::Talk()
 {
+    if(menu == true) return; //if the menu is open, can't talk
+
     int orien = map->getMainCharacOrientation();
     vec2 pos = map->getMainCharacPosition();
 
@@ -94,6 +97,7 @@ void GameWindow::Talk()
         {
                 setTalk(true);
                 map->setCharacOrientation(pos.getx(), pos.gety()-1, bottom);
+                this->drawDialog(pos.getx(), pos.gety()-1);
         }
     }
 
@@ -103,6 +107,7 @@ void GameWindow::Talk()
         {
                 setTalk(true);
                 map->setCharacOrientation(pos.getx()+1, pos.gety(), left);
+                this->drawDialog(pos.getx()+1, pos.gety());
         }
     }
 
@@ -112,6 +117,7 @@ void GameWindow::Talk()
         {
                 setTalk(true);
                 map->setCharacOrientation(pos.getx(), pos.gety()+1, up);
+                this->drawDialog(pos.getx(), pos.gety()+1);
         }
     }
 
@@ -121,9 +127,21 @@ void GameWindow::Talk()
         {
                 setTalk(true);
                 map->setCharacOrientation(pos.getx()-1, pos.gety(), right);
+                this->drawDialog(pos.getx()-1, pos.gety());
         }
     }
     repaint();
+}
+
+void GameWindow::drawDialog(int posx, int posy)
+{
+    int id = map->getEntityID(posx, posy);
+    QString name = map->getCharacName(posx, posy);
+
+    QString text = get_dialog_charac(id);
+    text.prepend(" : </b>").prepend(name).prepend("<b>");
+
+    dialogBox->setText(text);
 }
 
 void GameWindow::setTalk(bool t)
@@ -134,6 +152,8 @@ void GameWindow::setTalk(bool t)
 
 void GameWindow::openMenu(bool m)
 {
+    if(talk == true) return; //can't open menu if talking
+
     menu = m;
     repaint();
 }

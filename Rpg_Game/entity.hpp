@@ -51,6 +51,10 @@ public:
     /******* Get Position *******
      * Get the position in the map of the entity */
     vec2 getPosition();
+
+    /******* Get ID *******
+     * Get the id of the entity */
+    int getId();
 };
 
 /******* Convert QString to Entity Enum *******
@@ -60,9 +64,10 @@ int convert_strToEnt(QString ent);
 #endif // ENTITY_H
 
 /* *********** FOOTER ************
-** Version : 1.02
-** Last update : 15 June 2016
+** Version : 1.03
+** Last update : 24 June 2016
 ** Changes : -Creation and begining of implement attributes and method
 **           -set&get entity method
 **           -add set position method
+**           -add ID identification, for switch between files
 ** ******************************/
