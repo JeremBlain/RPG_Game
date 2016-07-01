@@ -14,19 +14,26 @@
 
 //Constructor Main Window
 GameWindow::GameWindow(QWidget *parent) :
-    QWidget(parent), talk(false), menu(false)
+    QWidget(parent), talk(false), menu(false), arrowMenu(0)
 {
     //creation of the map
     map = new Map();
 
+    //creation of the box which show the dialog between the main charac and other
     dialogBox = new QTextBrowser(this);
     dialogBox->setGeometry(0, 0, 1, 1);
     dialogBox->setFont(QFont("Aria", 16));
 
+    //creation of the box which show the menu
     menuBox = new QTextBrowser(this);
-    menuBox->setFont(QFont("Aria", 22, QFont::Bold));
+    menuBox->setFont(QFont("Aria", 21));
     menuBox->setGeometry(0, 0, 1, 1);
-    menuBox->setText("\tTest\n\tStats");
+    QString textMenu = map->getMainCharacName();
+    textMenu.append(" :\n     Test\n     Stats");
+
+    textMenu = this->placeArrowInMenu(textMenu);
+
+    menuBox->setText(textMenu);
 }
 
 //Destructor
@@ -46,7 +53,6 @@ void GameWindow::movement(int mv)
     if(validMove(posx, posy, mv))
     {
         map->moveCharacter(posx, posy, mv);
-
     }
     map->setMainCharacOrientation(mv);
     repaint();
@@ -57,7 +63,7 @@ bool GameWindow::validMove(int posx, int posy, int mv)
     if(map->getMainCharacOrientation() != mv)
         return false;
 
-    if(mv == left)
+    if(mv == mv_left)
     {
         if(posx < 16 || !(map->isType(posx-1, posy, ground)) )
             return false;
@@ -69,7 +75,7 @@ bool GameWindow::validMove(int posx, int posy, int mv)
             return false;
     }
 
-    if(mv == right)
+    if(mv == mv_right)
     {
         if(posx >= NbTile-16 || !(map->isType(posx+1, posy, ground)) )
             return false;
@@ -101,12 +107,12 @@ void GameWindow::Talk()
         }
     }
 
-    if(orien == right)
+    if(orien == mv_right)
     {
         if(map->isType(pos.getx()+1, pos.gety(), charac))
         {
                 setTalk(true);
-                map->setCharacOrientation(pos.getx()+1, pos.gety(), left);
+                map->setCharacOrientation(pos.getx()+1, pos.gety(), mv_left);
                 this->drawDialog(pos.getx()+1, pos.gety());
         }
     }
@@ -121,12 +127,12 @@ void GameWindow::Talk()
         }
     }
 
-    if(orien == left)
+    if(orien == mv_left)
     {
         if(map->isType(pos.getx()-1, pos.gety(), charac))
         {
                 setTalk(true);
-                map->setCharacOrientation(pos.getx()-1, pos.gety(), right);
+                map->setCharacOrientation(pos.getx()-1, pos.gety(), mv_right);
                 this->drawDialog(pos.getx()-1, pos.gety());
         }
     }
@@ -158,6 +164,64 @@ void GameWindow::openMenu(bool m)
     repaint();
 }
 
+QString GameWindow::placeArrowInMenu(QString text)
+{
+    int nbrReturn = text.count('\n');
+    std::vector<QString> tabText;
+    tabText.resize(nbrReturn);
+
+    int i = 0;
+    for(i=0; i < nbrReturn; i++)
+    {
+        tabText[i] = text.section('\n', i+1, i+1);
+        tabText[i].replace(2, 1, ' ');
+    }
+
+    tabText[arrowMenu].replace(2, 1, '>');
+
+    text = map->getMainCharacName() + " :\n";
+    for(i=0; i < nbrReturn; i++)
+    {
+        //don't want \n at the end, for the last line
+        if(i != nbrReturn-1)
+            text.append(tabText[i] + '\n');
+        else
+            text.append(tabText[i]);
+    }
+
+    return text;
+}
+
+bool GameWindow::validMoveArrow(int mv)
+{
+    if(mv == up && arrowMenu > 0) return true;
+
+    if(mv == bottom && arrowMenu < 1) return true;
+
+    return false;
+}
+
+void GameWindow::moveArrow(int mv)
+{
+    if( validMoveArrow(mv))
+    {
+        if(mv == up) setArrowMenu(getArrowMenu()-1);
+
+        if(mv == bottom) setArrowMenu(getArrowMenu()+1);
+    }
+}
+
+int GameWindow::getArrowMenu()
+{
+    return arrowMenu;
+}
+
+void GameWindow::setArrowMenu(int arrow)
+{
+    arrowMenu = arrow;
+    repaint();
+}
+
 void GameWindow::drawOrientation(int x, int y, vec2 pos, QPainter& painter)
 {
     int orien = map->getCharacOrientation(pos.getx(), pos.gety());
@@ -169,7 +233,7 @@ void GameWindow::drawOrientation(int x, int y, vec2 pos, QPainter& painter)
         painter.drawLine(line1, line2);
     }
 
-    if(orien == left)
+    if(orien == mv_left)
     {
         QPoint line1(x+sizeTile/2, y+sizeTile/2);
         QPoint line2(x, y+sizeTile/2);
@@ -183,7 +247,7 @@ void GameWindow::drawOrientation(int x, int y, vec2 pos, QPainter& painter)
         painter.drawLine(line1, line2);
     }
 
-    if(orien == right)
+    if(orien == mv_right)
     {
         QPoint line1(x+sizeTile/2, y+sizeTile/2);
         QPoint line2(x+sizeTile, y+sizeTile/2);
@@ -255,7 +319,12 @@ void GameWindow::paintEvent(QPaintEvent*)
     if(menu == false)
         menuBox->setGeometry(0, 0, 1, 1);
     else
-        menuBox->setGeometry(1000, 0, 300, 666);
+    {
+        menuBox->setGeometry(1061, 0, 240, 666);
+        QString textMenu = menuBox->toPlainText();
+        textMenu = this->placeArrowInMenu(textMenu);
+        menuBox->setText(textMenu);
+    }
 
 }
 

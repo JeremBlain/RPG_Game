@@ -16,6 +16,7 @@
 
 #include <QFile>
 #include <QMap>
+#include <QTextStream>
 #include <iostream>
 #include "entity.hpp"
 
@@ -26,9 +27,13 @@ enum typeFile{map_file, main_character_file, character_file, dialog_file};
  * check if files exists. if not, create the file with function below*/
 void files_exist();
 
-/******* Create Map FILE *******
- * create a file for map data*/
-bool create_mapFile(QFile* file);
+/******* Create Map Entity FILE *******
+ * create a file for entity in the map data*/
+bool create_mapEntityFile(QFile* file);
+
+/******* Create Map Ground FILE *******
+ * create a file for ground in the map data*/
+bool create_mapGroundFile(QFile* file);
 
 /******* Create Main Character FILE *******
  * create a file for main character data*/
@@ -60,6 +65,8 @@ QString get_name_character(int id);
  * get the text of a character when you talk to him*/
 QString get_dialog_charac(int id);
 
+/*Just lazy to create the map, made the program do itself :) */
+void create_map_ground();
 
 #endif // FILE_WR_HPP
 

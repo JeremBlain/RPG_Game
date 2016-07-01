@@ -1,7 +1,7 @@
 /* *********** HEADER ************
 ** Auteur : Jérémy Blain
 ** Ecole : CPE Lyon
-** Date début : 08 June 2016
+** Date début : 30 June 2016
 **
 ** Source File for tile
 ** For more informations about the project, see the Readme.md file
@@ -10,35 +10,25 @@
 
 #include "tile.hpp"
 
-Tile::Tile(int kx, int ky, int type_entity)
+Tile::Tile(Entity *ent)
 {
-    if(type_entity == null_entity)
-         entity = new Null_entity(kx, ky);
-    if(type_entity == charac)
-         entity = new Character(kx, ky);
-
-    tile = new QRect(kx*sizeTile, ky*sizeTile, sizeTile, sizeTile);
+    entity = ent;
+    ground = new Ground(dirt);
 }
 
-Tile::~Tile()
+int Tile::getEntityType()
 {
-    delete this;
+        return entity->getType();
 }
 
-
-void Tile::setTypeEntity(int ent)
-{
-    entity->setType(ent);
-}
-
-void Tile::setEntity(Entity *ent)
+void Tile::setEntity(Entity* ent)
 {
     entity = ent;
 }
 
-int Tile::getTypeEntity() const
+Entity* Tile::getEntity()
 {
-    return entity->getType();
+    return entity;
 }
 
 void Tile::setPosition(int posx, int posy)
@@ -51,15 +41,7 @@ vec2 Tile::getPosition()
     return entity->getPosition();
 }
 
-void Tile::mvment(int mv)
+int Tile::getEntityId()
 {
-        try{
-            Character* character = dynamic_cast<Character*>(entity);
-            character->deplacement(mv);
-        }
-        catch(const std::bad_cast &)
-        {
-            std::cout<<"not a character, cannot be moved"<<std::endl;
-        }
+    return entity->getId();
 }
-

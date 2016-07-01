@@ -11,3 +11,4 @@ V0.0 : First pre alpha release of demo....
 -add orientation for character (symbolised by a line)
 -talk to other character. The character turn to the main character. Can'tt move when talking.
 -Dialog added !
+-can navigate on the menu 

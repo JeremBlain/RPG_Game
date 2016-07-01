@@ -39,7 +39,7 @@ void Window::keyPressEvent(QKeyEvent *event)
         break;
 
     case 'Q':
-        gameWindow->movement(left);
+        gameWindow->movement(mv_left);
         break;
 
     case 'S':
@@ -47,7 +47,7 @@ void Window::keyPressEvent(QKeyEvent *event)
         break;
 
     case 'D':
-        gameWindow->movement(right);
+        gameWindow->movement(mv_right);
         break;
 
     case 'A':
@@ -61,6 +61,18 @@ void Window::keyPressEvent(QKeyEvent *event)
 
     case Qt::Key_Return:
         gameWindow->openMenu(true);
+        break;
+
+    case 'P':
+        gameWindow->moveArrow(up);
+        break;
+
+    case 'M':
+        gameWindow->moveArrow(bottom);
+        break;
+
+    case 'L':
+        create_map_ground();
         break;
 
     default:

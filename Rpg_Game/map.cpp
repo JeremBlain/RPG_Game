@@ -17,10 +17,9 @@ Map::Map()
     QMap<vec2, vec2> entity_idMap = get_entities_mapFile();
 
     vec2 pos;
-    int kx=0;
+    int kx=0, ky=0;
     for(kx=0; kx<NbTile; ++kx)
     {
-        int ky=0;
         for(ky=0; ky<NbTile; ++ky)
         {
             pos.setPosition(kx, ky);
@@ -34,21 +33,22 @@ Map::Map()
                     QString name = get_name_mainCharacter();
                     main_character = new Character(pos.getx(), pos.gety(), name, id);
                     main_character->setType(main_charac);
-                    map[kx][ky] = main_character;
+                    map[kx][ky] = new Tile(main_character);
                 }
 
                 if(ent == charac)
                 {
                     QString name = get_name_character(ent_id.gety());
-                    map[kx][ky] = new Character(pos.getx(), pos.gety(), name, id);
+                    Character* character = new Character(pos.getx(), pos.gety(), name, id);
+                    map[kx][ky] = new Tile(character);
                 }
 
                 if(ent == building)
-                    map[kx][ky] = new Building(pos.getx(), pos.gety(), id);
+                    map[kx][ky] = new Tile(new Building(pos.getx(), pos.gety(), id));
             }
 
             else
-                map[kx][ky] = new Ground(kx, ky);
+                map[kx][ky] = new Tile(nullptr);
         }
     }
 }
@@ -58,21 +58,24 @@ Map::~Map()
     delete this;
 }
 
-Entity *Map::getEntity(int kx, int ky)
+Entity* Map::getTileEntity(int kx, int ky)
 {
-    return map[kx][ky];
+    return map[kx][ky]->getEntity();
 }
 
-Entity *Map::getEntity(vec2 pos)
+Entity* Map::getTileEntity(vec2 pos)
 {
     int kx = pos.getx();
     int ky = pos.gety();
-    return map[kx][ky];
+    return map[kx][ky]->getEntity();
 }
 
 int Map::getEntityType(int kx, int ky)
 {
-    return map[kx][ky]->getType();
+    if(map[kx][ky]->getEntity() != nullptr)
+        return map[kx][ky]->getEntityType();
+
+    return 0;
 }
 
 void Map::setEntityPosition(int kx, int ky)
@@ -100,9 +103,14 @@ int Map::getMainCharacOrientation()
     return main_character->getOrientation();
 }
 
+QString Map::getMainCharacName()
+{
+    return main_character->getName();
+}
+
 void Map::setCharacOrientation(int posx, int posy, int orien)
 {
-    Entity* current_tile = getEntity(posx, posy);
+    Entity* current_tile = getTileEntity(posx, posy);
     if(current_tile->getType() == charac || current_tile->getType() == main_charac)
     {
         Character* character = dynamic_cast<Character*>(current_tile);
@@ -113,7 +121,7 @@ void Map::setCharacOrientation(int posx, int posy, int orien)
 
 int Map::getCharacOrientation(int posx, int posy)
 {
-    Entity* current_tile = getEntity(posx, posy);
+    Entity* current_tile = getTileEntity(posx, posy);
     if(current_tile->getType() == charac || current_tile->getType() == main_charac)
     {
         Character* character = dynamic_cast<Character*>(current_tile);
@@ -126,7 +134,7 @@ int Map::getCharacOrientation(int posx, int posy)
 
 QString Map::getCharacName(int kx, int ky)
 {
-    Entity* current_tile = getEntity(kx, ky);
+    Entity* current_tile = getTileEntity(kx, ky);
     if(current_tile->getType() == charac || current_tile->getType() == main_charac)
     {
         Character* character = dynamic_cast<Character*>(current_tile);
@@ -139,56 +147,54 @@ QString Map::getCharacName(int kx, int ky)
 
 int Map::getEntityID(int kx, int ky)
 {
-    return map[kx][ky]->getId();
+    return map[kx][ky]->getEntityId();
 }
 
 void Map::moveCharacter(int posx, int posy, int mv)
 {
-    Entity* current_tile = getEntity(posx, posy);
+    Entity* current_tile = getTileEntity(posx, posy);
     if(current_tile->getType() == main_charac)
     {
         Character* character = dynamic_cast<Character*>(current_tile);
 
-        Entity* tmp_tile = nullptr;
         if(mv == up)
         {
-            tmp_tile = getEntity(posx, posy-1);
             character->deplacement(up);
-            map[posx][posy-1] = current_tile;
+            map[posx][posy-1]->setEntity(current_tile);
         }
 
-        if(mv == right)
+        if(mv == mv_right)
         {
-            tmp_tile = getEntity(posx+1, posy);
-            character->deplacement(right);
-            map[posx+1][posy] = current_tile;
+            character->deplacement(mv_right);
+            map[posx+1][posy]->setEntity(current_tile);
         }
 
         if(mv == bottom)
         {
-            tmp_tile = getEntity(posx, posy+1);
             character->deplacement(bottom);
-            map[posx][posy+1] = current_tile;
+            map[posx][posy+1]->setEntity(current_tile);
         }
 
-        if(mv == left)
+        if(mv == mv_left)
         {
-            tmp_tile = getEntity(posx-1, posy);
-            character->deplacement(left);
-            map[posx-1][posy] = current_tile;
+            character->deplacement(mv_left);
+            map[posx-1][posy]->setEntity(current_tile);
         }
 
-        map[posx][posy] = tmp_tile;
-        map[posx][posy]->setPosition(posx, posy);
+        map[posx][posy]->setEntity(nullptr);
     }
 }
 
 
 bool Map::isType(int posx, int posy, int ent)
 {
-   if (map[posx][posy]->getType() == ent)
-       return true;
+    //if Entity is null, there is no entity and the mv is valid
+    if(map[posx][posy]->getEntity() == nullptr)
+            return true;
 
-   return false;
+    if(map[posx][posy]->getEntityType() == ent)
+        return true;
+
+    return false;
 }
 

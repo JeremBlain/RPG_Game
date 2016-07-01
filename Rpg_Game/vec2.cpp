@@ -45,13 +45,13 @@ void vec2::movement(int mv)
     if(mv == up)
         y--;
 
-    if(mv == right)
+    if(mv == mv_right)
         x++;
 
     if(mv == bottom)
         y++;
 
-    if(mv == left)
+    if(mv == mv_left)
         x--;
 }
 

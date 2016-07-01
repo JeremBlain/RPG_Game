@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     vec2.cpp \
     window.cpp \
     file_wr.cpp \
-    building.cpp
+    building.cpp \
+    tile.cpp
 
 HEADERS  += gamewindow.hpp \
     map.hpp \
@@ -33,6 +34,7 @@ HEADERS  += gamewindow.hpp \
     vec2.hpp \
     window.hpp \
     file_wr.hpp \
-    building.hpp
+    building.hpp \
+    tile.hpp
 
 FORMS    += mainwindow.ui

@@ -9,6 +9,7 @@ INPUT(
 ./debug\window.o
 ./debug\file_wr.o
 ./debug\building.o
+./debug\tile.o
 ./debug\moc_gamewindow.o
 ./debug\moc_window.o
 );

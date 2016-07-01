@@ -13,13 +13,13 @@
 
 void files_exist()
 {
-    QFile tabFile[4];
+    QFile tabFile[5];
 
     //creation of the map file if it don't exist
-    tabFile[0].setFileName("../data/mapdata.txt");
-    if (!tabFile[0].exists("../data/mapdata.txt") )
+    tabFile[0].setFileName("../data/map_entity_data.txt");
+    if (!tabFile[0].exists("../data/map_entity_data.txt") )
     {
-        create_mapFile(tabFile);
+        create_mapEntityFile(tabFile);
     }
 
     tabFile[1].setFileName("../data/main_character_data.txt");
@@ -39,19 +39,38 @@ void files_exist()
     {
         create_dialogFile(tabFile+3);
     }
+
+    tabFile[4].setFileName("../data/map_ground_data.txt");
+    if (!tabFile[4].exists("../data/map_ground_data.txt") )
+    {
+        create_dialogFile(tabFile+4);
+    }
 }
 
 
-bool create_mapFile(QFile* file)
+bool create_mapEntityFile(QFile* file)
 {
     if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
     {
-        std::cout<<"Map Data File created"<<std::endl;
+        std::cout<<"Map Entity Data File created"<<std::endl;
         file->close();
         return true;
     }
 
-    std::cout<<"/!\\ Map Data File not created /!\\"<<std::endl;
+    std::cout<<"/!\\ Map Entity Data File not created /!\\"<<std::endl;
+    return false;
+}
+
+bool create_mapGroundFile(QFile *file)
+{
+    if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        std::cout<<"Map Ground Data File created"<<std::endl;
+        file->close();
+        return true;
+    }
+
+    std::cout<<"/!\\ Map Ground Data File not created /!\\"<<std::endl;
     return false;
 }
 
@@ -97,7 +116,7 @@ bool create_dialogFile(QFile *file)
 QMap<vec2, vec2> get_entities_mapFile()
 {
     QMap<vec2, vec2> entity_idMap;
-    QFile mapDataFile("../data/mapdata.txt");
+    QFile mapDataFile("../data/map_entity_data.txt");
 
     if( mapDataFile.open(QIODevice::ReadOnly | QIODevice::Text) )
     {
@@ -210,6 +229,26 @@ QString get_dialog_charac(int id)
         std::cout<<"the file is NOT open"<<std::endl;
     }
     return "";
+}
+
+
+void create_map_ground()
+{
+    QFile ground_map("../data/map_ground_data.txt");
+
+    if(ground_map.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&ground_map);
+
+        int x =0, y=0;
+        for(x=0; x<64; x++)
+        {
+            for(y=0; y<64; y++)
+            {
+                out<<x<<' '<<y<<" Dirt\n";
+            }
+        }
+    }
 }
 
 

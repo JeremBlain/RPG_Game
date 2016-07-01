@@ -12,7 +12,7 @@
 #ifndef VEC2_H
 #define VEC2_H
 
-enum{up,right, bottom, left};
+enum{up, mv_right, bottom, mv_left};
 
 class vec2
 {

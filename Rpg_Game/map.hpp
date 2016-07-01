@@ -19,6 +19,7 @@
 #include "ground.hpp"
 #include "building.hpp"
 #include "file_wr.hpp"
+#include "tile.hpp"
 
 #define NbTile 64
 
@@ -26,7 +27,7 @@ class Map
 {
     // private attributes
 private:
-    Entity* map[NbTile][NbTile];
+    Tile* map[NbTile][NbTile];
     Character* main_character;
 
     //public methods
@@ -37,12 +38,12 @@ public:
     /****** Get Entity ******
     * call the function of Tile to Get the rectangle of the tile by coord
     * Not very usefull, only for encapsulation*/
-    Entity* getEntity(int kx, int ky);
+    Entity* getTileEntity(int kx, int ky);
 
     /****** Get Entity******
     * call the function of Tile to Get the rectangle of the tile by vector
     * Not very usefull, only for encapsulation*/
-    Entity* getEntity(vec2 pos);
+    Entity *getTileEntity(vec2 pos);
 
     /****** Get Entity ******
     * call the function of Entity to set the type like character or house */
@@ -67,6 +68,10 @@ public:
     /****** Get main character's orientation ******
     * get the orientation of the main character */
     int getMainCharacOrientation();
+
+    /****** Get main character's name ******
+    * get the name of the main character */
+    QString getMainCharacName();
 
     /****** Set character's orientation ******
     * get the orientation of the character */

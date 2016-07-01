@@ -18,6 +18,7 @@
 #include <QPainter>
 #include <QKeyEvent>
 #include <QLabel>
+#include <vector>
 #include "map.hpp"
 
 namespace Ui {
@@ -34,6 +35,7 @@ private:
         Map *map;
         bool talk; //if the main character speak
         bool menu; //if the main character open the menu
+        int arrowMenu;
 
         //UI
         QTextBrowser* dialogBox;
@@ -64,6 +66,21 @@ public:
 
     /******* Set the menu attribute to m if the main character open menu*/
     void openMenu(bool m);
+
+    /******* place an arrow for selection before the words */
+    QString placeArrowInMenu(QString text);
+
+    /******* check if the move of the arrow is valid */
+    bool validMoveArrow(int mv);
+
+    /******* Move the arrow in the menu up or down if possible */
+    void moveArrow(int mv);
+
+    /******* Get the position of the arrow in the menu*/
+    int getArrowMenu();
+
+    /******* Set the position of the arrow in the menu*/
+    void setArrowMenu(int arrow);
 
     /******* Draw Orientation of Character
      * this method draw a line which symbolise the orientation of a character*/
