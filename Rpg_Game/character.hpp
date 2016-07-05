@@ -12,6 +12,7 @@
 #define CHARACTER_H
 
 #include "entity.hpp"
+#include "dragon.hpp"
 
 class Character : public Entity
 {
@@ -19,12 +20,13 @@ class Character : public Entity
 private:
     QString name;
     int orientation;
+    Dragon dragonTab[5];
 
 //public methods
 public:
     Character(); //constructor
     Character(int posx, int posy, int id); //constructor with the position on the map
-    Character(int posx, int posy, QString newName, int id); //constructor with the position on the map + the name of the character
+    Character(int posx, int posy, QString newName, int id, Dragon* dragonData); //constructor with the position on the map + the name of the character
     ~Character(); //destructor
 
     /******* movement method *******
@@ -43,6 +45,22 @@ public:
     /******* Get name *******
      * get the name of the character */
     QString getName();
+
+    /******* Get name of dragon *******
+     * get the name of the dragon, n is the number of the dragon in the table*/
+    QString getDragonName(int n);
+
+    /******* Get surname of dragon *******
+     * get the surname of the dragon, n is the number of the dragon in the table*/
+    QString getDragonSurname(int n);
+
+    /******* Get type of dragon *******
+     * get the type of the dragon, n is the number of the dragon in the table*/
+    int getDragonType(int n);
+
+    /******* Get level of dragon *******
+     * get the level of the dragon, n is the number of the dragon in the table*/
+    int getDragonLevel(int n);
 };
 
 #endif // CHARACTER_H

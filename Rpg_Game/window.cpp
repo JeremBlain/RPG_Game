@@ -56,11 +56,17 @@ void Window::keyPressEvent(QKeyEvent *event)
 
     case 'E':
         gameWindow->setTalk(false);
-        gameWindow->openMenu(false);
+        gameWindow->setMenuBox(false);
+        gameWindow->setDragonBox(false);
+        gameWindow->setCombatUI(false);
         break;
 
     case Qt::Key_Return:
-        gameWindow->openMenu(true);
+        gameWindow->setMenuBox(true);
+        break;
+
+    case 'B':
+        gameWindow->openRubrikMenu();
         break;
 
     case 'P':
@@ -73,6 +79,10 @@ void Window::keyPressEvent(QKeyEvent *event)
 
     case 'L':
         create_map_ground();
+        break;
+
+    case 'C':
+        gameWindow->setCombatUI(true);
         break;
 
     default:

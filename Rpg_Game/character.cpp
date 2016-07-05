@@ -20,9 +20,21 @@ Character::Character(int posx, int posy, int id) : Entity(posx, posy, id), name(
     type = charac;
 }
 
-Character::Character(int posx, int posy, QString newName, int id): Entity(posx, posy, id), name(newName), orientation(bottom)
+Character::Character(int posx, int posy, QString newName, int id, Dragon *dragonData)
+    : Entity(posx, posy, id), name(newName), orientation(bottom)
 {
     type = charac;
+
+    int i=0;
+
+    if(dragonData == nullptr)
+        return;
+
+    while(QString::compare( dragonData[i].getName(), "") != 0)
+    {
+        dragonTab[i] = dragonData[i];
+        i++;
+    }
 }
 
 Character::~Character()
@@ -48,6 +60,26 @@ void Character::setOrientation(int orien)
 QString Character::getName()
 {
     return name;
+}
+
+QString Character::getDragonName(int n)
+{
+    return dragonTab[n].getName();
+}
+
+QString Character::getDragonSurname(int n)
+{
+    return dragonTab[n].getSurname();
+}
+
+int Character::getDragonType(int n)
+{
+    return dragonTab[n].getDragonType();
+}
+
+int Character::getDragonLevel(int n)
+{
+    return dragonTab[n].getLevel();
 }
 
 

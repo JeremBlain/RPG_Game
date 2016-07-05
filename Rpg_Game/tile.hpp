@@ -31,11 +31,15 @@ private:
 
     // public methods
 public:
-    Tile(Entity* ent);
+    Tile(Entity* ent, Ground* gr);
 
     /******* Get Entity TYPE *******
      * Get the type of the entity, return the value of the enum */
     int getEntityType();
+
+    /******* Get Ground TYPE *******
+     * Get the type of the ground, return the value of the enum */
+    int getGroundType();
 
     /****** Set Entity******
     * call the function of Tile to set the entity of the  */

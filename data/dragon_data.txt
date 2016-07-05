@@ -1,0 +1,7 @@
+Drake fire 30 20 27 23
+Wasser eau 21 24 26 29
+Wind air 26 24 25 25
+Gaia terre 26 30 23 21
+Kadra magie 21 23 30 26
+Hivy metal 26 25 30 19
+Raikyou electrik 23 20 27 30

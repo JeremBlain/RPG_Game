@@ -14,7 +14,7 @@
 
 //Constructor Main Window
 GameWindow::GameWindow(QWidget *parent) :
-    QWidget(parent), talk(false), menu(false), arrowMenu(0)
+    QWidget(parent), talk(false), menu(false), combat(false), dragon(false), arrowMenu(0)
 {
     //creation of the map
     map = new Map();
@@ -29,11 +29,27 @@ GameWindow::GameWindow(QWidget *parent) :
     menuBox->setFont(QFont("Aria", 21));
     menuBox->setGeometry(0, 0, 1, 1);
     QString textMenu = map->getMainCharacName();
-    textMenu.append(" :\n     Test\n     Stats");
+    textMenu.append(" :\n     Dragon\n     Stats"); //if add rubrik, don't forget to increase the number of
 
     textMenu = this->placeArrowInMenu(textMenu);
 
     menuBox->setText(textMenu);
+
+    //creation of the box which show the main character's dragons
+    dragonBox = new QTextBrowser(this);
+    dragonBox->setGeometry(0, 0, 1, 1);
+    dragonBox->setFont(QFont("Aria", 16));
+
+    //creation of the box which show the main character's dragons attacks
+    dragonAttackBox = new QTextBrowser(this);
+    dragonAttackBox->setGeometry(0, 0, 1, 1);
+    dragonAttackBox->setFont(QFont("Aria", 16));
+
+    //creation of the box which show the ennemy dragons info
+    ennemyDragonBox = new QTextBrowser(this);
+    ennemyDragonBox->setGeometry(0, 0, 1, 1);
+    ennemyDragonBox->setFont(QFont("Aria", 16));
+
 }
 
 //Destructor
@@ -156,11 +172,23 @@ void GameWindow::setTalk(bool t)
     repaint();
 }
 
-void GameWindow::openMenu(bool m)
+void GameWindow::setMenuBox(bool m)
 {
     if(talk == true) return; //can't open menu if talking
 
     menu = m;
+    repaint();
+}
+
+void GameWindow::setDragonBox(bool db)
+{
+    dragon = db;
+    repaint();
+}
+
+void GameWindow::setCombatUI(bool c)
+{
+    combat = c;
     repaint();
 }
 
@@ -222,6 +250,36 @@ void GameWindow::setArrowMenu(int arrow)
     repaint();
 }
 
+void GameWindow::openRubrikMenu()
+{
+    if(menu == 1)
+    {
+        if(arrowMenu == 0)
+            setDragonBox(true);
+
+        menu = 0;
+    }
+}
+
+QString GameWindow::textDragonMC()
+{
+    QString text="";
+
+    int i=0;
+
+    while(i < 5 && map->getMainCharacterDragonName(i) != "")
+    {
+        QString dragonSurname = map->getMainCharacterDragonSurname(i);
+        int dragonLvl = map->getMainCharacterDragonLevel(i);
+        QString STR_Lvl=""; STR_Lvl.setNum(dragonLvl);
+
+        text.append(dragonSurname + ' ' + STR_Lvl + '\n');
+        i++;
+    }
+
+    return text;
+}
+
 void GameWindow::drawOrientation(int x, int y, vec2 pos, QPainter& painter)
 {
     int orien = map->getCharacOrientation(pos.getx(), pos.gety());
@@ -255,6 +313,28 @@ void GameWindow::drawOrientation(int x, int y, vec2 pos, QPainter& painter)
     }
 }
 
+void GameWindow::drawGround(int x, int y, int posTileX, int posTileY, QPainter &painter)
+{
+    int gr = map->getGroundType(posTileX, posTileY);
+
+    if(gr == dirt)
+        painter.setBrush(QColor(222, 67, 67));
+
+    if(gr == grass)
+        painter.setBrush(QColor(10, 50, 222));
+
+    if(gr == path)
+        painter.setBrush(QColor(22, 22, 22));
+
+    if(gr == water)
+        painter.setBrush(QColor(10, 50, 111));
+
+    if(gr == sea)
+        painter.setBrush(QColor(10, 50, 222));
+
+    painter.drawRect(x, y, x+sizeTile, y+sizeTile);
+}
+
 void GameWindow::paintEvent(QPaintEvent*)
 {
     //Painter/Brush style
@@ -264,68 +344,96 @@ void GameWindow::paintEvent(QPaintEvent*)
     brush.setStyle(Qt::SolidPattern);
     painter.setBrush(brush);
 
-    vec2 pos = map->getMainCharacPosition();
+    if(combat == false)
+    {
+        vec2 pos = map->getMainCharacPosition();
 
-    QPoint topL;
-    QPoint bottomR;
-    QRect rect;
-    int posTileX = 0, posTileY = 0;
+        QPoint topL;
+        QPoint bottomR;
+        QRect rect;
+        int posTileX = 0, posTileY = 0;
 
-    int y=0, x=0, posx=pos.getx(), posy=pos.gety();
-    for(y = 0; y <= 19; ++y) //19 is the number of Tile you can get with the actual window's size
-    {    
-        posTileY = posy+y-9;
-        for(x = 0; x <= 30; ++x) //30 is the number of Tile you can get with the actual window's size
+        int y=0, x=0, posx=pos.getx(), posy=pos.gety();
+        for(y = 0; y <= 19; ++y) //19 is the number of Tile you can get with the actual window's size
         {
-            posTileX = posx+x-15;
-            painter.setBrush(QColor(posTileX*3, 0, posTileY*3)); //set the color in a red color gradient
-            rect.setCoords(x*sizeTile, y*sizeTile, x*sizeTile+sizeTile, y*sizeTile+sizeTile);
-            painter.drawRect(rect);
+            posTileY = posy+y-9;
+            for(x = 0; x <= 30; ++x) //30 is the number of Tile you can get with the actual window's size
+            {
+                posTileX = posx+x-15;
+                //drawGround(x*sizeTile, y*sizeTile, posTileX, posTileY, painter);
+                painter.setBrush(QColor(3*posTileX, 0, 3*posTileY));
 
-            if(map->getEntityType(posTileX, posTileY) == charac)
-            {
-                painter.setBrush(QColor(0, 222, 0)); //set the color in a red color gradient
-                painter.drawEllipse(rect);
-                this->drawOrientation(x*sizeTile, y*sizeTile, vec2(posTileX,posTileY), painter);
-            }
-            if(map->getEntityType(posTileX, posTileY) == building)
-            {
-                painter.setBrush(QColor(222, 222, 0)); //set the color in a red color gradient
-                painter.drawEllipse(rect);
+                rect.setCoords(x*sizeTile, y*sizeTile, x*sizeTile+sizeTile, y*sizeTile+sizeTile);
+                painter.drawRect(rect);
+
+                if(map->getEntityType(posTileX, posTileY) == charac) //if there is a character on the tile
+                {
+                    painter.setBrush(QColor(0, 222, 0)); // set green color for other character
+                    painter.drawEllipse(rect);
+                    this->drawOrientation(x*sizeTile, y*sizeTile, vec2(posTileX,posTileY), painter);
+                }
+                if(map->getEntityType(posTileX, posTileY) == building) //if there is a building on the tile
+                {
+                    painter.setBrush(QColor(222, 222, 0)); //set the color yellow for building
+                    painter.drawEllipse(rect);
+                }
             }
         }
+
+        //calculate the rect of the main character
+        x = (this->geometry().width()-sizeTile)/2; // divide by 2 to be in the middle of the window
+        y = (this->geometry().height()-sizeTile)/2;
+
+        topL.setX(x); topL.setY(y);
+        bottomR = topL+QPoint(sizeTile, sizeTile);
+        rect.setTopLeft(topL);
+        rect.setBottomRight(bottomR);
+
+        //set the brush in blue for the character
+        painter.setBrush(QColor(0,0,255));
+        painter.drawEllipse(rect);
+
+        //draw the orientation line for the main character
+        this->drawOrientation(x, y, pos, painter);
+
+        //the widget for the dialog
+        if(talk == false)
+            dialogBox->setGeometry(0, 0, 1, 1);
+        else
+            dialogBox->setGeometry(0, 555, 1300, 121);
+
+        //the widget for the menu
+        if(menu == false)
+            menuBox->setGeometry(0, 0, 1, 1);
+        else
+        {
+            menuBox->setGeometry(1061, 0, 240, 666);
+            QString textMenu = menuBox->toPlainText();
+            textMenu = this->placeArrowInMenu(textMenu);
+            menuBox->setText(textMenu);
+        }
+
+        //the widget for the dragon menu
+        if(dragon == false)
+            dragonBox->setGeometry(0, 0, 1, 1);
+        else
+        {
+            dragonBox->setGeometry(0, 555, 1300, 121);
+            QString textMenu = textDragonMC();
+            dragonBox->setText(textMenu);
+        }
+
+        dragonAttackBox->setGeometry(0, 0, 1, 1);
+
+        ennemyDragonBox->setGeometry(0, 0, 1, 1);
     }
 
-    //calculate the rect of the main character
-    x = (this->geometry().width()-sizeTile)/2; // divide by 2 to be in the middle of the window
-    y = (this->geometry().height()-sizeTile)/2;
-
-    topL.setX(x); topL.setY(y);
-    bottomR = topL+QPoint(sizeTile, sizeTile);
-    rect.setTopLeft(topL);
-    rect.setBottomRight(bottomR);
-
-    //set the brush in blue for the character
-    painter.setBrush(QColor(0,0,255));
-    painter.drawEllipse(rect);
-
-    this->drawOrientation(x, y, pos, painter);
-
-    if(talk == false)
-        dialogBox->setGeometry(0, 0, 1, 1);
-    else
-        dialogBox->setGeometry(0, 555, 1300, 121);
-
-    if(menu == false)
-        menuBox->setGeometry(0, 0, 1, 1);
     else
     {
-        menuBox->setGeometry(1061, 0, 240, 666);
-        QString textMenu = menuBox->toPlainText();
-        textMenu = this->placeArrowInMenu(textMenu);
-        menuBox->setText(textMenu);
-    }
+        dragonAttackBox->setGeometry(300, 555, 1000, 128);
 
+        ennemyDragonBox->setGeometry(0, 0, 1000, 128);
+    }
 }
 
 

@@ -45,9 +45,13 @@ public:
     * Not very usefull, only for encapsulation*/
     Entity *getTileEntity(vec2 pos);
 
-    /****** Get Entity ******
-    * call the function of Entity to set the type like character or house */
+    /****** Get Entity type ******
+    * call the function of Entity to get the type like character or house */
     int getEntityType(int kx, int ky);
+
+    /****** Get Ground type ******
+    * call the function of Ground to get the type like dirt or sea */
+    int getGroundType(int kx, int ky);
 
     /****** Set Position ******
     * call the function of Tile to set the position in the map */
@@ -72,6 +76,22 @@ public:
     /****** Get main character's name ******
     * get the name of the main character */
     QString getMainCharacName();
+
+    /******* Get name of dragon *******
+     * get the name of the dragon, n is the number of the dragon in the table*/
+    QString getMainCharacterDragonName(int n);
+
+    /******* Get surname of dragon *******
+     * get the surname of the dragon, n is the number of the dragon in the table*/
+    QString getMainCharacterDragonSurname(int n);
+
+    /******* Get type of dragon *******
+     * get the type of the dragon, n is the number of the dragon in the table*/
+    int getMainCharacterDragonType(int n);
+
+    /******* Get level of dragon *******
+     * get the level of the dragon, n is the number of the dragon in the table*/
+    int getMainCharacterDragonLevel(int n);
 
     /****** Set character's orientation ******
     * get the orientation of the character */
@@ -101,11 +121,12 @@ public:
 
 
 /* *********** FOOTER ************
-** Version : 1.03
-** Last update : 15 June 2016
+** Version : 1.04
+** Last update : 1 July 2016
 ** Changes : -Creation of the file and the map
 **           -methods to get the type of entity
 **           -add method for moving the character
 **           -add method for set the position of the entity
+**           -map change from Entity to Tile (which contains Entity and ground infos)
 ** ******************************/
 

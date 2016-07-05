@@ -10,15 +10,20 @@
 
 #include "tile.hpp"
 
-Tile::Tile(Entity *ent)
+Tile::Tile(Entity *ent, Ground *gr)
 {
     entity = ent;
-    ground = new Ground(dirt);
+    ground = gr;
 }
 
 int Tile::getEntityType()
 {
-        return entity->getType();
+    return entity->getType();
+}
+
+int Tile::getGroundType()
+{
+    return ground->getType();
 }
 
 void Tile::setEntity(Entity* ent)

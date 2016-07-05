@@ -10,6 +10,7 @@ INPUT(
 ./release\file_wr.o
 ./release\building.o
 ./release\tile.o
+./release\dragon.o
 ./release\moc_gamewindow.o
 ./release\moc_window.o
 );

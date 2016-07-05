@@ -33,13 +33,23 @@ class GameWindow : public QWidget
 
 private:
         Map *map;
+
+        //booleans for all the widget and box in the window
         bool talk; //if the main character speak
         bool menu; //if the main character open the menu
+        bool combat; //if there is a combat !!
+        bool dragon; //if open dragon menu
+
         int arrowMenu;
 
-        //UI
-        QTextBrowser* dialogBox;
-        QTextBrowser* menuBox;
+        //UI : worldmap
+        QTextBrowser* dialogBox; //box when MC talk to other
+        QTextBrowser* menuBox; //box for the menu
+        QTextBrowser* dragonBox; //box for Dragon infos
+
+        //UI : combat
+        QTextBrowser* dragonAttackBox; // box for dragon's attack in combat
+        QTextBrowser* ennemyDragonBox; // box for dragon's ennemy in cobat
 
 public:
     explicit GameWindow(QWidget *parent = 0);
@@ -65,7 +75,13 @@ public:
     void setTalk(bool t);
 
     /******* Set the menu attribute to m if the main character open menu*/
-    void openMenu(bool m);
+    void setMenuBox(bool m);
+
+    /******* Set the dragon box attribute to db if the main character open menu of his dragon*/
+    void setDragonBox(bool db);
+
+    /******* Set UI for combat */
+    void setCombatUI(bool c);
 
     /******* place an arrow for selection before the words */
     QString placeArrowInMenu(QString text);
@@ -82,9 +98,21 @@ public:
     /******* Set the position of the arrow in the menu*/
     void setArrowMenu(int arrow);
 
-    /******* Draw Orientation of Character
-     * this method draw a line which symbolise the orientation of a character*/
+    /******* open the right rubrik in the menu, according to the value of arrowMenu */
+    void openRubrikMenu();
+
+    /****** set the text of the Dragon box (main character's dragon) */
+    QString textDragonMC();
+
+    /******* Draw Orientation of Character ******
+     * this method draw a line which symbolise the orientation of a character
+     * x,y is the position of the tile in the window, pos is the position of the character*/
     void drawOrientation(int x, int y, vec2 pos, QPainter& painter);
+
+    /******* Draw ground ******
+     * this method color the tile by a color depends on the type of ground
+     * x,y is the position of the tile in the window, pos is the position of the tile*/
+    void drawGround(int x, int y, int posTileX, int posTileY, QPainter& painter);
 
     void paintEvent(QPaintEvent *event);
 };
@@ -92,8 +120,9 @@ public:
 #endif // GAMEWINDOW_HPP
 
 /* *********** FOOTER ************
-** Version : 1.01
-** Last update : 24 June 2016
+** Version : 1.02
+** Last update : 2 July 2016
 ** Changes : -Creation of the class, but I take the function PaintEvent from Mainwindow
 **           -add orientation move and talking to character
+**           -add method to draw the ground, but too processor killer (laaaag)
 ** ******************************/

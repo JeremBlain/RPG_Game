@@ -1,0 +1,10 @@
+Growling fly 5
+Fly fly 10
+Soar fly 25
+Claws fly 20
+Fireball fire 20
+Firebreath fire 15
+Seisme earth 30
+Thunder electrik 20
+Pyscho magic 15
+SonikBOOM metal 18

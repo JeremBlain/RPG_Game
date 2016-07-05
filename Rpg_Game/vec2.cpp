@@ -61,5 +61,5 @@ bool operator <(vec2 v1, vec2 v2)
     if(v1.getx() != v2.getx())
         return v1.getx() < v2.getx();
 
-    return v1.gety()<v2.gety();
+    return v1.gety() < v2.gety();
 }

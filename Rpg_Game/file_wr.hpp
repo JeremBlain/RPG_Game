@@ -18,7 +18,10 @@
 #include <QMap>
 #include <QTextStream>
 #include <iostream>
+#include <time.h>
 #include "entity.hpp"
+#include "ground.hpp"
+#include "dragon.hpp"
 
 
 enum typeFile{map_file, main_character_file, character_file, dialog_file};
@@ -29,33 +32,26 @@ void files_exist();
 
 /******* Create Map Entity FILE *******
  * create a file for entity in the map data*/
-bool create_mapEntityFile(QFile* file);
-
-/******* Create Map Ground FILE *******
- * create a file for ground in the map data*/
-bool create_mapGroundFile(QFile* file);
-
-/******* Create Main Character FILE *******
- * create a file for main character data*/
-bool create_mainCharacterFile(QFile* file);
-
-/******* Create Character FILE *******
- * create a file for main character data*/
-bool create_characterFile(QFile* file);
-
-/******* Create Dialog FILE *******
- * create a file for main character data*/
-bool create_dialogFile(QFile* file);
+bool create_File(QFile* file);
 
 /******* Get Entity in map file*******
  * get the type of entity + ID (in a vec2) in the position (kx,ky) if possible
- * if there is no entity set in the position (kx,ky) the function return by default 0, ie null_entity
+ * if there is no entity set in the position (kx,ky) the function return by default 0, ie ground
  * the entity are places on a map, with the position as the key*/
 QMap<vec2, vec2> get_entities_mapFile();
+
+/******* Get Ground in map file*******
+ * get the type of ground in the position (kx,ky) if possible
+ * the ground are places on a map, with the position as the key*/
+QMap<vec2, int> get_ground_mapFile();
 
 /******* Get the name of the main character *******
  * get the name of MC on the main character file*/
 QString get_name_mainCharacter();
+
+/******* Get the dragons of the main character *******
+ * get dragons of MC on the main character file*/
+void get_dragons_main_character(Dragon *dragonTab);
 
 /******* Get the name of the main character *******
  * get the name of MC on the main character file*/
@@ -71,9 +67,10 @@ void create_map_ground();
 #endif // FILE_WR_HPP
 
 /* *********** FOOTER ************
-** Version : 1.02
-** Last update : 23 June 2016
+** Version : 1.03
+** Last update : 1 July 2016
 ** Changes : -Creation of the file : createFile & create_mapFile functions
 **           -add functions get_entity_map
-**           -add mainCharacter related functions
+**           -add mainCharacter file related functions
+**           -add ground file related functions
 ** ******************************/

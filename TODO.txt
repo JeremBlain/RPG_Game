@@ -1,46 +1,148 @@
 
 #What to do in the future
 #this txt is a memo to me for remembering all the stuff I think (because I think a lot of things, then forgot it...)
-#this text will be writed in french cause of the difficulty of the things I think... probably...
+#this text will be written in french cause of the difficulty of the things I think... probably...
 
 
 
 
-pas de dialog + menu en même temps !!!!
+• pas de dialog + menu en même temps !!!! DONE
 
-Combat : faire une variable qui permette dans le painEvent de pouvoir savoir quand est ce qu'on est dans la map et quand on fait un combat. (ensuite peutêtre dissocier les deux affichages dans deux fonctions)
+• pour plus tard quand la map sera plus grande :
+save une partie de cette map dans une QMap, et relire les data dans le fichier que de temps en temps (pas à chaque déplacement,
+trop gourmand sinon).
 
-Map : faire déplacer la map et non le character.
+• Faire un autre progr pour créer la map.
 
-Fenetre : placer le perso au centre (peut importe la taille de l'imlage, que l'on peut redimensionner) 
+• Ajouter des variables "globales" pour éviter de faire des fonctions inutiles (par exemple appeler la fonction pour mettre la fleche du menu à chaque fois
+alors qu'on ne l'a pas bougé !)
+
+• voir si on peut pas desactivé et activé les widget (menu et dialog par exemple) pour éviter de les redimensionner !
+
+• Combat : faire une variable qui permette dans le paintEvent de pouvoir savoir quand est ce qu'on est dans la map et quand on fait un combat. 
+(ensuite peut être dissocier les deux affichages dans deux fonctions)
+
+• Map : faire déplacer la map et non le character. DONE
+
+• Fenetre : placer le perso au centre (peut importe la taille de l'image, que l'on peut redimensionner) DONE
 			Il faut donc récup' la taille de la fenetre.
-			mieux gérer l'espace dans la fenetre (là y a un marging autour du layout et le Menu est caché en partie part le layout
+			mieux gérer l'espace dans la fenetre (là y a un marging autour du layout et le Menu est caché en partie part le layout DONE
+			pouvoir changer la taille de la fenetre => utilisé une Qspin box, on peut mettre les valeurs min et l'intervale entre les valeurs.
 			
-Deplacement : essayer de faire une transition continue dans les déplacements,n aussi bien du personnage que de la map.
+• Deplacement : essayer de faire une transition continue dans les déplacements, n aussi bien du personnage que de la map.
 
-Stat : comment calculer les stats ? Faire une table ? ou faire des calculs avec des equations ?
+• Stat : comment calculer les stats ? Faire une table ? ou faire des calculs avec des equations ? si avec equations mieux avec des exponentielles
+attack, defense, special, vitesse...
 
-Data :
+• Data :
 Comment stocker les data (peut importe le type) ? dans un fichier txt ? à voir sur internet.
 Dans la suite des data, je considère pour le moment faire par fichier .txt
 
-Data map : Comment stocker la map ?
-pourquoi pas "coordx coordy type" ? Prob c'est que pour les batiments, comment gérer le fait que les bat seront diff ? mettre plusieurs nom de bat diff ?
+• Data map : Comment stocker la map ?
+pourquoi pas "coordx coordy type id" ? Prob c'est que pour les batiments, comment gérer le fait que les bat seront diff ? mettre plusieurs nom de bat diff ? DONE
 
-Data Charac :
+• Data Charac :
 "name 
-coordx coordy
+id
 monster1 nv name (?stat)
 monster2 nv name (?stat)
 ..."
 
-Data stat
+• Data stat
 "monster
 stat1 XX
 stat2 XX
 ..."
 
-Data Batiment
+• Data Batiment
 "name_batiment name_interior"
+
+IDEE (merci Arno)
+
+types de dragons (de base) :
+feu, eau, magie, air, terre, Electrik, metal (type temps pourquoi pas légendaire ou juste un type d'attaque (pourquoi pas attaque pour légendaire))
+
+Hybrid 2 : pourquoi pas faire comme naruto (nouveau type avec les types de bases)
+Type Tenebres = feu + magie
+Type Cendre = feu + air
+type Volcan = feu + terre
+type Plasma = feu + electrik
+Type Souffre = feu + metal
+type Glace = eau + magie
+Type Nuage = eau + air
+Type Bois = eau + terre
+Type Lantern = eau + electrik
+Type Rouille = eau + metal
+Type Gravité/Crystal = magie + terre
+Type Lumière = magie + electrik
+Type Sable = air + terre
+Type Son = air + metal
+Type Seisme = terre + electrik
+
+
+Hybrid 3 :
+Type Poison = feu + magie + eau
+Type Phoenix = feu + magie + air
+Type Os = feu + magie + terre
+Type Sun = feu + magie + Electrick
+Type Wyvern = feu + air + terre
+Type Apocalyspe = feu + terre + electrik
+Type Blizzard = eau + magie + air
+Type Leviathan = eau + magie + electrik
+Type Cataclysm = eau + air + electrik
+Type Robot = magie + metal + electrik
+Type Lune = terre + magie + air
+Type Meteor = terre + air + metal
+
+
+Classe spéciale : Attack spéciale:  Magnetik
+• Métaux
+	Cuivre : metal + electrik
+	Acier : metal + feu
+	Prisme : metal + magie 
+	Fer : metal + terre
+	Argent : metal + magie + eau
+	Or : metal + magie + electrik
+	Platine : metal + magie + air
+	Bronze : metal + terre + electrik (Cuivre + Fer)
+	
+
+• pierre précieuses 
+	Ruby : feu
+	Saphir : eau
+	Topaze : electrik
+	Opale : air
+	Ambre : terre
+	QuickSilver : magie
+	Emeraude : terre + eau (bois)
+	Jade : eau + magie
+	Grenat : feu + magie
+	Perle : eau + air
+	Amethyst : feu + eau 
+	Obsidienne : feu + terre (Volcan)
+	Diamant : terre + magie
+	
+
+• Temporel (peut être mettre dedans Sun et Moon)
+	Reve = temps + air
+	Cauchemar = temps + feu
+	Hydre = temps + terre
+	Aube = feu + magie + temps
+	Crepuscule = eau + magie + temps
+	Fantome = terre + air + temps
+	Gamma = feu + electrik + temps
+
+spécialité type :
+air : aucune
+terre = +defense -rapide
+feu = +attack - defense
+magie = +special - attack
+eau = +rapide -attack
+electrik = +rapide -defense
+metal = +special -rapide
+
+
+
+
 
 

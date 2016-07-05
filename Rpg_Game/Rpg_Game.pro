@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     window.cpp \
     file_wr.cpp \
     building.cpp \
-    tile.cpp
+    tile.cpp \
+    dragon.cpp
 
 HEADERS  += gamewindow.hpp \
     map.hpp \
@@ -35,6 +36,7 @@ HEADERS  += gamewindow.hpp \
     window.hpp \
     file_wr.hpp \
     building.hpp \
-    tile.hpp
+    tile.hpp \
+    dragon.hpp
 
 FORMS    += mainwindow.ui

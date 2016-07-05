@@ -24,3 +24,30 @@ Ground::Ground(int T)
 Ground::~Ground()
 {}
 
+int Ground::getType()
+{
+    return type;
+}
+
+
+//outside the ground class
+int convert_strToGround(QString gr)
+{
+    gr = gr.simplified(); //remove \n, \t etc...
+    if( QString::compare(gr, "Dirt", Qt::CaseInsensitive) == 0 )
+        return dirt;
+
+    if(QString::compare(gr, "Grass", Qt::CaseInsensitive) == 0)
+            return grass;
+
+    if(QString::compare(gr, "Path", Qt::CaseInsensitive) == 0)
+        return path;
+
+    if(QString::compare(gr, "River", Qt::CaseInsensitive) == 0)
+        return river;
+
+    if(QString::compare(gr, "Sea", Qt::CaseInsensitive) == 0)
+        return sea;
+
+    return dirt;
+}

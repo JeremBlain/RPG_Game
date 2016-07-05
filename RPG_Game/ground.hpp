@@ -8,11 +8,12 @@
 ** See below for what's the file version and what change. See the header to understand what this file is for.
 ** *****************************/
 
-
 #ifndef GROUND_H
 #define GROUND_H
 
-enum{dirt, grass, path, water, sea};
+#include <QString>
+
+enum{dirt, grass, path, river, sea};
 
 class Ground
 {
@@ -22,7 +23,16 @@ public:
     Ground();
     Ground(int T); //constructor with the position on the map
     ~Ground();
+
+    /****** Get Type *******
+     *Get the enum type of ground */
+    int getType();
 };
+
+/******* Convert QString to Ground Enum *******
+ * Convert the string sent to a ground enum*/
+int convert_strToGround(QString gr);
+
 
 #endif
 

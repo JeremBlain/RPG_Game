@@ -57,8 +57,7 @@ public:
     int getId();
 };
 
-/******* Convert QString to Entity Enum *******
- * Get the position in the map of the entity */
+/******* Convert QString to Entity Enum */
 int convert_strToEnt(QString ent);
 
 #endif // ENTITY_H

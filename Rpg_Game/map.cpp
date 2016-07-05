@@ -15,14 +15,23 @@ Map::Map()
     files_exist();
 
     QMap<vec2, vec2> entity_idMap = get_entities_mapFile();
+    QMap<vec2, int> groundMap = get_ground_mapFile();
 
     vec2 pos;
     int kx=0, ky=0;
+    Entity* E; Ground* G;
     for(kx=0; kx<NbTile; ++kx)
     {
         for(ky=0; ky<NbTile; ++ky)
         {
             pos.setPosition(kx, ky);
+
+            if(groundMap.contains(pos))
+            {
+                int gr = groundMap.value(pos);
+
+                G = new Ground(gr);
+            }
 
             if(entity_idMap.contains(pos))
             {
@@ -31,24 +40,27 @@ Map::Map()
                 if(ent == main_charac)
                 {
                     QString name = get_name_mainCharacter();
-                    main_character = new Character(pos.getx(), pos.gety(), name, id);
+                    Dragon dragonData[5];
+                    get_dragons_main_character(dragonData);
+                    main_character = new Character(pos.getx(), pos.gety(), name, id, dragonData);
                     main_character->setType(main_charac);
-                    map[kx][ky] = new Tile(main_character);
+                    E = main_character;
                 }
 
                 if(ent == charac)
                 {
-                    QString name = get_name_character(ent_id.gety());
-                    Character* character = new Character(pos.getx(), pos.gety(), name, id);
-                    map[kx][ky] = new Tile(character);
+                    QString name = get_name_character(id);
+                    E = new Character(pos.getx(), pos.gety(), name, id, nullptr);
                 }
 
                 if(ent == building)
-                    map[kx][ky] = new Tile(new Building(pos.getx(), pos.gety(), id));
+                    E = new Building(pos.getx(), pos.gety(), id);
             }
 
             else
-                map[kx][ky] = new Tile(nullptr);
+                E = nullptr;
+
+            map[kx][ky] = new Tile(E, G); //E = Entity class, G = Ground class
         }
     }
 }
@@ -76,6 +88,11 @@ int Map::getEntityType(int kx, int ky)
         return map[kx][ky]->getEntityType();
 
     return 0;
+}
+
+int Map::getGroundType(int kx, int ky)
+{
+    return map[kx][ky]->getGroundType();
 }
 
 void Map::setEntityPosition(int kx, int ky)
@@ -106,6 +123,26 @@ int Map::getMainCharacOrientation()
 QString Map::getMainCharacName()
 {
     return main_character->getName();
+}
+
+QString Map::getMainCharacterDragonName(int n)
+{
+    return main_character->getDragonName(n);
+}
+
+QString Map::getMainCharacterDragonSurname(int n)
+{
+    return main_character->getDragonSurname(n);
+}
+
+int Map::getMainCharacterDragonType(int n)
+{
+    return main_character->getDragonType(n);
+}
+
+int Map::getMainCharacterDragonLevel(int n)
+{
+    return main_character->getDragonLevel(n);
 }
 
 void Map::setCharacOrientation(int posx, int posy, int orien)
@@ -188,9 +225,14 @@ void Map::moveCharacter(int posx, int posy, int mv)
 
 bool Map::isType(int posx, int posy, int ent)
 {
-    //if Entity is null, there is no entity and the mv is valid
+    //if Entity is null, there is no entity and the mv is valid if ent == ground == 0
     if(map[posx][posy]->getEntity() == nullptr)
+    {
+        if(ent == ground)
             return true;
+
+        return false;
+    }
 
     if(map[posx][posy]->getEntityType() == ent)
         return true;

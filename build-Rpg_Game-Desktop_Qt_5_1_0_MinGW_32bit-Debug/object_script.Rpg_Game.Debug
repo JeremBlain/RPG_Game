@@ -10,6 +10,7 @@ INPUT(
 ./debug\file_wr.o
 ./debug\building.o
 ./debug\tile.o
+./debug\dragon.o
 ./debug\moc_gamewindow.o
 ./debug\moc_window.o
 );

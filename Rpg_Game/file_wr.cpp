@@ -13,105 +13,65 @@
 
 void files_exist()
 {
-    QFile tabFile[5];
+    QFile tabFile[7];
 
     //creation of the map file if it don't exist
     tabFile[0].setFileName("../data/map_entity_data.txt");
     if (!tabFile[0].exists("../data/map_entity_data.txt") )
     {
-        create_mapEntityFile(tabFile);
+        create_File(tabFile);
     }
 
     tabFile[1].setFileName("../data/main_character_data.txt");
     if (!tabFile[1].exists("../data/main_character_data.txt") )
     {
-        create_mainCharacterFile(tabFile+1);
+        create_File(tabFile+1);
     }
 
     tabFile[2].setFileName("../data/character_data.txt");
     if (!tabFile[2].exists("../data/character_data.txt") )
     {
-        create_characterFile(tabFile+2);
+        create_File(tabFile+2);
     }
 
     tabFile[3].setFileName("../data/dialog_data.txt");
     if (!tabFile[3].exists("../data/dialog_data.txt") )
     {
-        create_dialogFile(tabFile+3);
+        create_File(tabFile+3);
     }
 
     tabFile[4].setFileName("../data/map_ground_data.txt");
     if (!tabFile[4].exists("../data/map_ground_data.txt") )
     {
-        create_dialogFile(tabFile+4);
+        create_File(tabFile+4);
+    }
+
+    tabFile[5].setFileName("../data/dragon_data.txt");
+    if (!tabFile[5].exists("../data/dragon_data.txt") )
+    {
+        create_File(tabFile+5);
+    }
+
+    tabFile[6].setFileName("../data/attack_data.txt");
+    if (!tabFile[6].exists("../data/attack_data.txt") )
+    {
+        create_File(tabFile+6);
     }
 }
 
-
-bool create_mapEntityFile(QFile* file)
+bool create_File(QFile* file)
 {
     if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
     {
-        std::cout<<"Map Entity Data File created"<<std::endl;
+        std::cout<<"File created"<<std::endl;
         file->close();
         return true;
     }
 
-    std::cout<<"/!\\ Map Entity Data File not created /!\\"<<std::endl;
+    std::cout<<"/!\\File not created /!\\"<<std::endl;
     return false;
 }
 
-bool create_mapGroundFile(QFile *file)
-{
-    if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
-    {
-        std::cout<<"Map Ground Data File created"<<std::endl;
-        file->close();
-        return true;
-    }
-
-    std::cout<<"/!\\ Map Ground Data File not created /!\\"<<std::endl;
-    return false;
-}
-
-bool create_mainCharacterFile(QFile* file)
-{
-    if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
-    {
-        std::cout<<"Main Character File created"<<std::endl;
-        file->close();
-        return true;
-    }
-
-    std::cout<<"/!\\ Main Character Data File not created /!\\"<<std::endl;
-    return false;
-}
-
-bool create_characterFile(QFile *file)
-{
-    if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
-    {
-        std::cout<<"Character File created"<<std::endl;
-        file->close();
-        return true;
-    }
-
-    std::cout<<"/!\\ Character Data File not created /!\\"<<std::endl;
-    return false;
-}
-
-bool create_dialogFile(QFile *file)
-{
-    if( file->open(QIODevice::WriteOnly | QIODevice::Text) )
-    {
-        std::cout<<"Dialog File created"<<std::endl;
-        file->close();
-        return true;
-    }
-
-    std::cout<<"/!\\ Dialog Data File not created /!\\"<<std::endl;
-    return false;
-}
 
 QMap<vec2, vec2> get_entities_mapFile()
 {
@@ -145,6 +105,39 @@ QMap<vec2, vec2> get_entities_mapFile()
 }
 
 
+QMap<vec2, int> get_ground_mapFile()
+{
+    QMap<vec2, int> ground_Map;
+
+    QFile groundMapDataFile("../data/map_ground_data.txt");
+
+    if( groundMapDataFile.open(QIODevice::ReadOnly | QIODevice::Text) )
+    {
+        QString line; //get the entity and coord line by line
+        vec2 pos; int coordx = 0, coordy = 0;  //pos = position on the map
+        int gr=0; //the enum ground
+        std::cout<<"the file is open"<<std::endl;
+        while(!groundMapDataFile.atEnd())
+        {
+            line = groundMapDataFile.readLine();
+            coordx = line.section(' ', 0, 0).toInt();
+            coordy = line.section(' ', 1, 1).toInt();
+            pos.setPosition(coordx, coordy);
+
+            gr = convert_strToGround(line.section(' ', 2, 2));
+            ground_Map.insert(pos, gr);
+        }
+        groundMapDataFile.close();
+    }
+    else
+    {
+        std::cout<<"the file is NOT open"<<std::endl;
+    }
+
+    return ground_Map;
+}
+
+
 QString get_name_mainCharacter()
 {
     QFile mainCharacterFile("../data/main_character_data.txt");
@@ -152,7 +145,7 @@ QString get_name_mainCharacter()
     if( mainCharacterFile.open(QIODevice::ReadOnly | QIODevice::Text) )
     {
         QString name; //get the entity and coord line by line
-        name = mainCharacterFile.readLine();
+        name = mainCharacterFile.readLine().simplified();
         mainCharacterFile.close();
         return name;
     }
@@ -162,6 +155,46 @@ QString get_name_mainCharacter()
         return "";
     }
 }
+
+
+void get_dragons_main_character(Dragon* dragonTab)
+{
+    QFile mainCharacterFile("../data/main_character_data.txt");
+
+    if( mainCharacterFile.open(QIODevice::ReadOnly | QIODevice::Text) )
+    {
+        QString name, surname; int type, level, hp;
+        mainCharacterFile.readLine();
+        int statTab[4];
+
+        int i=0;
+        while(!mainCharacterFile.atEnd())
+        {
+            QString line = mainCharacterFile.readLine();
+
+            name = line.section(' ', 0, 0);
+            surname = line.section(' ', 1, 1);
+            type = convert_strToType(line.section(' ', 2, 2));
+            level = line.section(' ', 3, 3).toInt();
+            hp = line.section(' ', 4, 4).toInt();
+            statTab[0] = line.section(' ', 5, 5).toInt();
+            statTab[1] = line.section(' ', 6, 6).toInt();
+            statTab[2] = line.section(' ', 7, 7).toInt();
+            statTab[3] = line.section(' ', 8, 8).toInt();
+
+            dragonTab[i] = Dragon(name, surname, type, level, hp, statTab);
+
+            i++;
+        }
+
+        mainCharacterFile.close();
+    }
+    else
+    {
+        std::cout<<"the file is NOT open"<<std::endl;
+    }
+}
+
 
 QString get_name_character(int id)
 {
@@ -238,6 +271,8 @@ void create_map_ground()
 
     if(ground_map.open(QIODevice::WriteOnly | QIODevice::Text))
     {
+        srand(time(NULL));
+        int randomNB;
         QTextStream out(&ground_map);
 
         int x =0, y=0;
@@ -245,10 +280,22 @@ void create_map_ground()
         {
             for(y=0; y<64; y++)
             {
-                out<<x<<' '<<y<<" Dirt\n";
+                randomNB = rand()%4;
+                if(randomNB == 0)
+                    out<<x<<' '<<y<<" Dirt\n";
+                if(randomNB == 1)
+                    out<<x<<' '<<y<<" Grass\n";
+                if(randomNB == 2)
+                    out<<x<<' '<<y<<" Path\n";
+                if(randomNB == 3)
+                    out<<x<<' '<<y<<" River\n";
+                if(randomNB == 4)
+                    out<<x<<' '<<y<<" Sea\n";
             }
         }
     }
 }
+
+
 
 
