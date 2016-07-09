@@ -41,8 +41,8 @@ Map::Map()
                 {
                     QString name = get_name_mainCharacter();
                     Dragon dragonData[5];
-                    get_dragons_main_character(dragonData);
-                    main_character = new Character(pos.getx(), pos.gety(), name, id, dragonData);
+                    int nbrDrag = get_dragons_main_character(dragonData);
+                    main_character = new Character(pos.getx(), pos.gety(), name, id, nbrDrag, dragonData);
                     main_character->setType(main_charac);
                     E = main_character;
                 }
@@ -50,7 +50,7 @@ Map::Map()
                 if(ent == charac)
                 {
                     QString name = get_name_character(id);
-                    E = new Character(pos.getx(), pos.gety(), name, id, nullptr);
+                    E = new Character(pos.getx(), pos.gety(), name, id, 0, nullptr);
                 }
 
                 if(ent == building)
@@ -143,6 +143,21 @@ int Map::getMainCharacterDragonType(int n)
 int Map::getMainCharacterDragonLevel(int n)
 {
     return main_character->getDragonLevel(n);
+}
+
+int Map::getMainCharacterNBDragon()
+{
+    return main_character->getNBDragon();
+}
+
+Attack *Map::getMainCharacDragonAttack(int n)
+{
+    return main_character->getDragonAttack(n);
+}
+
+int Map::getMainCharacDragonAttackNB(int n)
+{
+    return main_character->getDragonAttackNB(n);
 }
 
 void Map::setCharacOrientation(int posx, int posy, int orien)

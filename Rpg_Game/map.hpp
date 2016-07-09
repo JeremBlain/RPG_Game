@@ -93,6 +93,18 @@ public:
      * get the level of the dragon, n is the number of the dragon in the table*/
     int getMainCharacterDragonLevel(int n);
 
+    /******* Get nbr of dragon *******
+     * get the nbr of the dragon, of the main character*/
+    int getMainCharacterNBDragon();
+
+    /******* Get attack of dragon *******
+     * get attacks of the dragon, of the main character*/
+    Attack *getMainCharacDragonAttack(int n);
+
+    /******* Get nb attack of dragon *******
+     * get number of attacks of the dragon, of the main character*/
+    int getMainCharacDragonAttackNB(int n);
+
     /****** Set character's orientation ******
     * get the orientation of the character */
     void setCharacOrientation(int posx, int posy, int orien);

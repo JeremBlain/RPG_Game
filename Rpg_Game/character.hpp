@@ -20,13 +20,14 @@ class Character : public Entity
 private:
     QString name;
     int orientation;
+    int nbrDragon;
     Dragon dragonTab[5];
 
 //public methods
 public:
     Character(); //constructor
     Character(int posx, int posy, int id); //constructor with the position on the map
-    Character(int posx, int posy, QString newName, int id, Dragon* dragonData); //constructor with the position on the map + the name of the character
+    Character(int posx, int posy, QString newName, int id, int nbrD, Dragon* dragonData); //constructor with the position on the map + the name of the character
     ~Character(); //destructor
 
     /******* movement method *******
@@ -53,6 +54,18 @@ public:
     /******* Get surname of dragon *******
      * get the surname of the dragon, n is the number of the dragon in the table*/
     QString getDragonSurname(int n);
+
+    /******* Get nbr of dragon *******
+     * get the number of the dragon of the character*/
+    int getNBDragon();
+
+    /******* Get attacks of dragon *******
+     * get attacks of the dragon of the character*/
+    Attack *getDragonAttack(int n);
+
+    /******* Get nb attacks of dragon *******
+     * get number of attacks of the dragon of the character*/
+    int getDragonAttackNB(int n);
 
     /******* Get type of dragon *******
      * get the type of the dragon, n is the number of the dragon in the table*/

@@ -11,12 +11,10 @@
 #ifndef DRAGON_HPP
 #define DRAGON_HPP
 
-//Dragons are flying beast who can (Whoooo !). Characters have Dragons for fighting !
+//Dragons are flying beast who can breathe fire (Whoooo !). Characters have Dragons for fighting !
 
 #include <QString>
-
-enum{fly, fire, water, earth, magic, dark, metal}; //enum type
-//Earth type = can't flying....
+#include "attack.hpp"
 
 class Dragon
 {
@@ -27,10 +25,12 @@ private:
     int lvl;
     int HP;
     int stat[4]; //4 stats which are : attack, defense, special and velocity
+    int nbrAttack;
+    Attack attackTab[4];
 
 public:
     Dragon();
-    Dragon(QString Name, QString SurName, int enum_type, int level, int life, int* statistique);
+    Dragon(QString Name, QString Surname, int enum_type, int level, int life, int* statistique, Attack *attackData);
 
     /******* Get name *******
      * get the name of the dragon */
@@ -47,10 +47,15 @@ public:
     /******* Get level *******
      * get the level of the dragon */
     int getLevel();
-};
 
-/******* Convert QString to Dragon type Enum */
-int convert_strToType(QString enum_type);
+    /******* Get attack Tab *******
+     * get the attack of the dragon */
+    Attack *getAttackTab();
+
+    /******* Get nb attack Tab *******
+     * get the number of attack of the dragon */
+    int getNBAttack();
+};
 
 
 #endif // DRAGON_HPP

@@ -29,7 +29,7 @@ alors qu'on ne l'a pas bougé !)
 			mieux gérer l'espace dans la fenetre (là y a un marging autour du layout et le Menu est caché en partie part le layout DONE
 			pouvoir changer la taille de la fenetre => utilisé une Qspin box, on peut mettre les valeurs min et l'intervale entre les valeurs.
 			
-• Deplacement : essayer de faire une transition continue dans les déplacements, n aussi bien du personnage que de la map.
+• Deplacement : essayer de faire une transition continue dans les déplacements, aussi bien du personnage que de la map.
 
 • Stat : comment calculer les stats ? Faire une table ? ou faire des calculs avec des equations ? si avec equations mieux avec des exponentielles
 attack, defense, special, vitesse...

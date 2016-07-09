@@ -9,7 +9,8 @@ V0.0 : First pre alpha release of demo....
 -add others characters (in green)
 -can't move on other entity (building and character)
 -add orientation for character (symbolised by a line)
--talk to other character. The character turn to the main character. Can'tt move when talking.
+-talk to other character. The character turn to the main character. Can't move when talking.
 -Dialog added !
 -can navigate on the menu 
 -Ground added, but not set yet cause of the performance...
+-Dragon class added. Main character can have 5 dragons.

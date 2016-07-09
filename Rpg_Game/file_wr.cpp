@@ -157,24 +157,24 @@ QString get_name_mainCharacter()
 }
 
 
-void get_dragons_main_character(Dragon* dragonTab)
+int get_dragons_main_character(Dragon* dragonTab)
 {
     QFile mainCharacterFile("../data/main_character_data.txt");
 
+    int i=0;
     if( mainCharacterFile.open(QIODevice::ReadOnly | QIODevice::Text) )
     {
         QString name, surname; int type, level, hp;
         mainCharacterFile.readLine();
         int statTab[4];
 
-        int i=0;
         while(!mainCharacterFile.atEnd())
         {
             QString line = mainCharacterFile.readLine();
 
             name = line.section(' ', 0, 0);
             surname = line.section(' ', 1, 1);
-            type = convert_strToType(line.section(' ', 2, 2));
+            type = convert_str2Type(line.section(' ', 2, 2));
             level = line.section(' ', 3, 3).toInt();
             hp = line.section(' ', 4, 4).toInt();
             statTab[0] = line.section(' ', 5, 5).toInt();
@@ -182,7 +182,14 @@ void get_dragons_main_character(Dragon* dragonTab)
             statTab[2] = line.section(' ', 7, 7).toInt();
             statTab[3] = line.section(' ', 8, 8).toInt();
 
-            dragonTab[i] = Dragon(name, surname, type, level, hp, statTab);
+            int k=0; Attack atk[4];
+            for(k=0; k<4; k++)
+            {
+                QString name_attack = line.section(' ', 9+k, 9+k).simplified();
+                atk[k] = get_info_attack(name_attack);
+            }
+
+            dragonTab[i] = Dragon(name, surname, type, level, hp, statTab, atk);
 
             i++;
         }
@@ -193,7 +200,37 @@ void get_dragons_main_character(Dragon* dragonTab)
     {
         std::cout<<"the file is NOT open"<<std::endl;
     }
+
+    return i;
 }
+
+Attack get_info_attack(QString name)
+{
+    QFile attackData("../data/attack_data.txt");
+
+    if(attackData.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        QString line="";
+        while(!attackData.atEnd())
+        {
+            line = attackData.readLine();
+            if(line.contains(name, Qt::CaseInsensitive))
+            {
+                QString enum_type = line.section(' ', 1, 1);
+                int type = convert_str2Type(enum_type);
+                int strength = line.section(' ', 2, 2).toInt();
+
+                Attack atk(name, type, strength);
+
+                return atk;
+            }
+        }
+    }
+    Attack atk;
+
+    return atk;
+}
+
 
 
 QString get_name_character(int id)
@@ -295,6 +332,7 @@ void create_map_ground()
         }
     }
 }
+
 
 
 

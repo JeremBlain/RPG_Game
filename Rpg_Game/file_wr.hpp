@@ -50,8 +50,13 @@ QMap<vec2, int> get_ground_mapFile();
 QString get_name_mainCharacter();
 
 /******* Get the dragons of the main character *******
- * get dragons of MC on the main character file*/
-void get_dragons_main_character(Dragon *dragonTab);
+ * get dragons of MC on the main character file
+ * return the number of dragon */
+int get_dragons_main_character(Dragon *dragonTab);
+
+/******* Get the info of dragons attacks *******
+ * get info of dragons attacks attack data file*/
+Attack get_info_attack(QString name);
 
 /******* Get the name of the main character *******
  * get the name of MC on the main character file*/

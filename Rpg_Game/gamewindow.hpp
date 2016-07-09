@@ -12,11 +12,8 @@
 #define GAMEWINDOW_HPP
 
 #include <QWidget>
-#include <QPushButton>
 #include <QTextBrowser>
-#include <QMenuBar>
 #include <QPainter>
-#include <QKeyEvent>
 #include <QLabel>
 #include <vector>
 #include "map.hpp"
@@ -41,11 +38,28 @@ private:
         bool dragon; //if open dragon menu
 
         int arrowMenu;
+        int arrowDragonInfo;
+        int arrowAttackCombat;
 
-        //UI : worldmap
+        /****** UI : worldmap *****/
+        //Dialog
         QTextBrowser* dialogBox; //box when MC talk to other
-        QTextBrowser* menuBox; //box for the menu
-        QTextBrowser* dragonBox; //box for Dragon infos
+
+        //Menu
+        QWidget* menuBox; //box for the menu
+        QTextBrowser* nameMenuBox; //box for the main character Name in the menu
+        QTextBrowser* dragonMenuBox; //box for dragon in the menu
+        QTextBrowser* statMenuBox; //box for statistique in the menu
+        QTextBrowser arrowMenuBox[2];
+
+        //DragonBox
+        QWidget* dragonBox; //box for Dragon name and lvl
+        QTextBrowser dragonTextTab[5];
+        QTextBrowser arrowDragBox[5];
+
+        //DragonInfoBox
+        QTextBrowser* dragonInfoBox; //box for dragon infos : stat, attack, etc
+
 
         //UI : combat
         QTextBrowser* dragonAttackBox; // box for dragon's attack in combat
@@ -54,6 +68,12 @@ private:
 public:
     explicit GameWindow(QWidget *parent = 0);
     ~GameWindow();
+
+    //create the menu box in the constructor
+    void createMenuBox();
+
+    //create the menu box in the constructor
+    void createDragonBox();
 
     /******* to move the main character */
     void movement(int mv);
@@ -84,25 +104,44 @@ public:
     void setCombatUI(bool c);
 
     /******* place an arrow for selection before the words */
-    QString placeArrowInMenu(QString text);
+    void placeArrowInMenu();
+
+    /******* place an arrow for selection before the words */
+    void placeArrowDragBox();
+
+    /******* place an arrow for selection before the words */
+    QString placeArrowCombatBox(QString text);
 
     /******* check if the move of the arrow is valid */
-    bool validMoveArrow(int mv);
+    bool validMoveArrow(int mv, int arrow);
 
     /******* Move the arrow in the menu up or down if possible */
     void moveArrow(int mv);
 
     /******* Get the position of the arrow in the menu*/
+    int getArrowDragonInfo();
+
+    /******* Get the position of the arrow in the menu*/
     int getArrowMenu();
 
     /******* Set the position of the arrow in the menu*/
-    void setArrowMenu(int arrow);
+    void setArrowMenu(int placeArrow);
+
+    /******* Set the position of the arrow in the menu*/
+    void setArrowDragInfo(int placeArrow);
 
     /******* open the right rubrik in the menu, according to the value of arrowMenu */
     void openRubrikMenu();
 
-    /****** set the text of the Dragon box (main character's dragon) */
-    QString textDragonMC();
+    /****** set the text of the Dragon box (main character's dragon)
+    * var 'i' is the i-th dragon*/
+    QString textDragonMC(int i);
+
+    /****** set the text of the Dragon info box (main character's dragon info) */
+    QString textDragonInfoMC();
+
+    /****** set the text of the main character dragon while in combat*/
+    QString textCombatMC();
 
     /******* Draw Orientation of Character ******
      * this method draw a line which symbolise the orientation of a character
@@ -120,9 +159,11 @@ public:
 #endif // GAMEWINDOW_HPP
 
 /* *********** FOOTER ************
-** Version : 1.02
-** Last update : 2 July 2016
+** Version : 1.04
+** Last update : 7 July 2016
 ** Changes : -Creation of the class, but I take the function PaintEvent from Mainwindow
 **           -add orientation move and talking to character
 **           -add method to draw the ground, but too processor killer (laaaag)
+**           -add combat UI + modify the way to show the widget for menu etc...
+**           -improve Dragon info box
 ** ******************************/

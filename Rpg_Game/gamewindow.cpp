@@ -8,57 +8,113 @@
 ** See in the head file for what's the file version and what change, and to understand what this file is for.
 ** *****************************/
 
-
 #include "gamewindow.hpp"
 #include <iostream>
 
-//Constructor Main Window
+//Constructor Game Window
 GameWindow::GameWindow(QWidget *parent) :
-    QWidget(parent), talk(false), menu(false), combat(false), dragon(false), arrowMenu(0)
+    QWidget(parent), talk(false), menu(false), combat(false), dragon(false),
+    arrowMenu(0), arrowDragonInfo(0), arrowAttackCombat(0)
 {
     //creation of the map
     map = new Map();
 
     //creation of the box which show the dialog between the main charac and other
     dialogBox = new QTextBrowser(this);
-    dialogBox->setGeometry(0, 0, 1, 1);
+    dialogBox->setGeometry(0, 555, 1300, 121);
+    dialogBox->hide();
     dialogBox->setFont(QFont("Aria", 16));
 
-    //creation of the box which show the menu
-    menuBox = new QTextBrowser(this);
-    menuBox->setFont(QFont("Aria", 21));
-    menuBox->setGeometry(0, 0, 1, 1);
-    QString textMenu = map->getMainCharacName();
-    textMenu.append(" :\n     Dragon\n     Stats"); //if add rubrik, don't forget to increase the number of
+    createMenuBox();
+    createDragonBox();
 
-    textMenu = this->placeArrowInMenu(textMenu);
-
-    menuBox->setText(textMenu);
-
-    //creation of the box which show the main character's dragons
-    dragonBox = new QTextBrowser(this);
-    dragonBox->setGeometry(0, 0, 1, 1);
-    dragonBox->setFont(QFont("Aria", 16));
+    //creation of the box which show the main character's dragons info
+    dragonInfoBox = new QTextBrowser(this);
+    dragonInfoBox->setGeometry(0, 1, 1301, 500);
+    dragonInfoBox->hide();
+    dragonInfoBox->setFont(QFont("Aria", 18));
 
     //creation of the box which show the main character's dragons attacks
     dragonAttackBox = new QTextBrowser(this);
-    dragonAttackBox->setGeometry(0, 0, 1, 1);
+    dragonAttackBox->setGeometry(500, 555, 800, 128);
+    dragonAttackBox->hide();
     dragonAttackBox->setFont(QFont("Aria", 16));
 
     //creation of the box which show the ennemy dragons info
     ennemyDragonBox = new QTextBrowser(this);
-    ennemyDragonBox->setGeometry(0, 0, 1, 1);
+    ennemyDragonBox->setGeometry(0, 0, 800, 128);
+    ennemyDragonBox->hide();
     ennemyDragonBox->setFont(QFont("Aria", 16));
-
 }
 
 //Destructor
 GameWindow::~GameWindow()
 {}
 
+void GameWindow::createMenuBox()
+{
+    //creation of the box which show the menu
+    menuBox = new QWidget(this);
+    menuBox->setFont(QFont("Aria", 20));
+    menuBox->setGeometry(1061, 0, 240, 666);
+    menuBox->setAutoFillBackground(true);
+    menuBox->setPalette(QColor(255, 255, 255));
+    menuBox->hide();
+
+    nameMenuBox = new QTextBrowser(menuBox); //box for the main character Name in the menu
+    nameMenuBox->setGeometry(0, 0, 240, 42);
+    nameMenuBox->setText( map->getMainCharacName());
+    nameMenuBox->setFrameShape(QFrame::NoFrame);
+
+    dragonMenuBox = new QTextBrowser(menuBox); //box for dragon in the menu
+    dragonMenuBox->setGeometry(32, 42, 208, 42);
+    dragonMenuBox->setText("Dragon");
+    dragonMenuBox->setFrameShape(QFrame::NoFrame);
+
+    statMenuBox = new QTextBrowser(menuBox); //box for statistique in the menu
+    statMenuBox->setGeometry(32, 84, 208, 42);
+    statMenuBox->setText("Stat");
+    statMenuBox->setFrameShape(QFrame::NoFrame);
+
+    arrowMenuBox[0].setGeometry(0, 42, 32, 42);
+    arrowMenuBox[0].setParent(menuBox);
+    arrowMenuBox[0].setFrameShape(QFrame::NoFrame);
+    arrowMenuBox[1].setGeometry(0, 84, 32, 42);
+    arrowMenuBox[1].setParent(menuBox);
+    arrowMenuBox[1].setFrameShape(QFrame::NoFrame);
+}
+
+void GameWindow::createDragonBox()
+{
+    //creation of the box which show the main character's dragons
+    dragonBox = new QWidget(this);
+    dragonBox->setAutoFillBackground(true);
+    dragonBox->setPalette(QColor(255, 255, 255));
+    dragonBox->setGeometry(0, 500, 1301, 171);
+    dragonBox->setFont(QFont("Aria", 15));
+    dragonBox->hide();
+
+    int i=0;
+    for(i=0; i<5; i++)
+    {
+        //box for the arrow
+        arrowDragBox[i].setParent(dragonBox);
+        placeArrowDragBox();
+        arrowDragBox[i].setGeometry(0, 32*i, 32, 32);
+        arrowDragBox[i].setFrameShape(QFrame::NoFrame);
+
+        //box for the dragon surname and level
+        dragonTextTab[i].setParent(dragonBox);
+        dragonTextTab[i].setGeometry(32, 32*i, 1000, 32);
+        QString text = textDragonMC(i);
+        dragonTextTab[i].setText(text);
+        dragonTextTab[i].setFrameShape(QFrame::NoFrame);
+    }
+}
+
 void GameWindow::movement(int mv)
 {
-    if(talk == true || menu == true)
+    if(talk == true || menu == true || combat == true || dragon == true)
         return;
 
     //get the position of the main character
@@ -174,7 +230,7 @@ void GameWindow::setTalk(bool t)
 
 void GameWindow::setMenuBox(bool m)
 {
-    if(talk == true) return; //can't open menu if talking
+    if(talk == true || dragon == true) return; //can't open menu if talking or if the dragon info is open
 
     menu = m;
     repaint();
@@ -192,51 +248,78 @@ void GameWindow::setCombatUI(bool c)
     repaint();
 }
 
-QString GameWindow::placeArrowInMenu(QString text)
+void GameWindow::placeArrowInMenu()
 {
-    int nbrReturn = text.count('\n');
-    std::vector<QString> tabText;
-    tabText.resize(nbrReturn);
+    //number of section is 2, maybe create a var to count the number of section and use it here
+    //(in case, in the future, if I increase the number of section...)
+    int i=0;
+    for(i=0; i < 2; i++)
+        arrowMenuBox[i].setText("");
 
-    int i = 0;
-    for(i=0; i < nbrReturn; i++)
-    {
-        tabText[i] = text.section('\n', i+1, i+1);
-        tabText[i].replace(2, 1, ' ');
-    }
-
-    tabText[arrowMenu].replace(2, 1, '>');
-
-    text = map->getMainCharacName() + " :\n";
-    for(i=0; i < nbrReturn; i++)
-    {
-        //don't want \n at the end, for the last line
-        if(i != nbrReturn-1)
-            text.append(tabText[i] + '\n');
-        else
-            text.append(tabText[i]);
-    }
-
-    return text;
+    arrowMenuBox[arrowMenu].setText(">");
 }
 
-bool GameWindow::validMoveArrow(int mv)
+void GameWindow::placeArrowDragBox()
 {
-    if(mv == up && arrowMenu > 0) return true;
+    int i=0;
+    for(i=0; i < 2; i++)
+        arrowDragBox[i].setText("");
 
-    if(mv == bottom && arrowMenu < 1) return true;
+    arrowDragBox[arrowDragonInfo].setText(">");
+}
+
+QString GameWindow::placeArrowCombatBox(QString text)
+{
+    int nbrAtk = map->getMainCharacDragonAttackNB(0);
+
+
+}
+
+bool GameWindow::validMoveArrow(int mv, int arrow)
+{
+    if(arrow == 0)
+    {
+        if(mv == up && arrowMenu > 0) return true;
+
+        if(mv == bottom && arrowMenu < 1) return true;
+    }
+
+    if(arrow == 1)
+    {
+        if(mv == up && arrowDragonInfo > 0) return true;
+
+        if(mv == bottom && arrowDragonInfo < map->getMainCharacterNBDragon() ) return true;
+    }
 
     return false;
 }
 
 void GameWindow::moveArrow(int mv)
 {
-    if( validMoveArrow(mv))
+    if(menu == true)
     {
-        if(mv == up) setArrowMenu(getArrowMenu()-1);
+        if( validMoveArrow(mv, 0))
+        {
+            if(mv == up) setArrowMenu(getArrowMenu()-1);
 
-        if(mv == bottom) setArrowMenu(getArrowMenu()+1);
+            if(mv == bottom) setArrowMenu(getArrowMenu()+1);
+        }
     }
+
+    if(dragon == true)
+    {
+        if( validMoveArrow(mv, 1))
+        {
+            if(mv == up) setArrowDragInfo(getArrowDragonInfo()-1);
+
+            if(mv == bottom) setArrowDragInfo(getArrowDragonInfo()+1);
+        }
+    }
+}
+
+int GameWindow::getArrowDragonInfo()
+{
+    return arrowDragonInfo;
 }
 
 int GameWindow::getArrowMenu()
@@ -244,9 +327,15 @@ int GameWindow::getArrowMenu()
     return arrowMenu;
 }
 
-void GameWindow::setArrowMenu(int arrow)
+void GameWindow::setArrowMenu(int placeArrow)
 {
-    arrowMenu = arrow;
+    arrowMenu = placeArrow;
+    repaint();
+}
+
+void GameWindow::setArrowDragInfo(int placeArrow)
+{
+    arrowDragonInfo = placeArrow;
     repaint();
 }
 
@@ -255,26 +344,79 @@ void GameWindow::openRubrikMenu()
     if(menu == 1)
     {
         if(arrowMenu == 0)
+        {
+            menu = 0;
             setDragonBox(true);
-
-        menu = 0;
+        }
     }
 }
 
-QString GameWindow::textDragonMC()
+QString GameWindow::textDragonMC(int i)
 {
     QString text="";
 
+    QString dragonSurname = map->getMainCharacterDragonSurname(i);
+    int dragonLvl = map->getMainCharacterDragonLevel(i);
+    QString STR_Lvl=""; STR_Lvl.setNum(dragonLvl);
+
+    text.append(dragonSurname + " lvl: " + STR_Lvl);
+
+    return text;
+}
+
+QString GameWindow::textDragonInfoMC()
+{
+    QString text = "";
+
+    QString dragonName = map->getMainCharacterDragonName(arrowDragonInfo);
+    QString dragonSurname = map->getMainCharacterDragonSurname(arrowDragonInfo);
+    int dragonLvl = map->getMainCharacterDragonLevel(arrowDragonInfo);
+    QString dragonLvlSTR =""; dragonLvlSTR.setNum(dragonLvl);
+    int dragonType = map->getMainCharacterDragonType(arrowDragonInfo);
+    QString dragonTypeSTR = convert_Type2Str(dragonType);
+
+    text.append(dragonName + '\n' +
+                dragonSurname + '\n' +
+                "Level : " + dragonLvlSTR + '\n' +
+                "Type : " + dragonTypeSTR + "\nAttack :\n");
+
+    Attack* atk = map->getMainCharacDragonAttack(arrowDragonInfo);
+    int nbAtk = map->getMainCharacDragonAttackNB(arrowDragonInfo);
+
     int i=0;
-
-    while(i < 5 && map->getMainCharacterDragonName(i) != "")
+    for(i=0; i < nbAtk; i++)
     {
-        QString dragonSurname = map->getMainCharacterDragonSurname(i);
-        int dragonLvl = map->getMainCharacterDragonLevel(i);
-        QString STR_Lvl=""; STR_Lvl.setNum(dragonLvl);
+        QString nameAtk = atk[i].getNameAttack();
+        QString typeAtk = convert_Type2Str(atk[i].getTypeAttack());
+        int sghAtk = atk[i].getStrengthAttack();
+        QString sghAtkSTR = ""; sghAtkSTR.setNum(sghAtk);
+        text.append("  " + nameAtk + "  " + typeAtk + "  " + sghAtkSTR +'\n');
+    }
 
-        text.append(dragonSurname + ' ' + STR_Lvl + '\n');
-        i++;
+    return text;
+}
+
+QString GameWindow::textCombatMC()
+{
+    QString text = "";
+
+    QString surnameDragon = map->getMainCharacterDragonSurname(0);
+    text.append(surnameDragon + " :\n");
+
+    Attack* atk = map->getMainCharacDragonAttack(0);
+    int nbAtk = map->getMainCharacDragonAttackNB(arrowDragonInfo);
+
+    int i = 0;
+    for(i=0; i < nbAtk; i++)
+    {
+        QString nameAtk = atk[i].getNameAttack();
+        QString typeAtk = convert_Type2Str(atk[i].getTypeAttack());
+        int sghAtk = atk[i].getStrengthAttack();
+        QString sghAtkSTR = ""; sghAtkSTR.setNum(sghAtk);
+        text.append("     " + nameAtk + "  " + typeAtk + "  " + sghAtkSTR + "\t\t");
+
+        if(i == 1)
+            text.append("\n");
     }
 
     return text;
@@ -398,41 +540,47 @@ void GameWindow::paintEvent(QPaintEvent*)
 
         //the widget for the dialog
         if(talk == false)
-            dialogBox->setGeometry(0, 0, 1, 1);
+            dialogBox->hide();
         else
-            dialogBox->setGeometry(0, 555, 1300, 121);
+            dialogBox->show();
 
         //the widget for the menu
         if(menu == false)
-            menuBox->setGeometry(0, 0, 1, 1);
+            menuBox->hide();
         else
         {
-            menuBox->setGeometry(1061, 0, 240, 666);
-            QString textMenu = menuBox->toPlainText();
-            textMenu = this->placeArrowInMenu(textMenu);
-            menuBox->setText(textMenu);
+            placeArrowInMenu();
+            menuBox->show();            
         }
 
         //the widget for the dragon menu
         if(dragon == false)
-            dragonBox->setGeometry(0, 0, 1, 1);
+        {
+            dragonBox->hide();
+            dragonInfoBox->hide();
+        }
         else
         {
-            dragonBox->setGeometry(0, 555, 1300, 121);
-            QString textMenu = textDragonMC();
-            dragonBox->setText(textMenu);
+            placeArrowDragBox();
+            dragonBox->show();
+
+            QString text = textDragonInfoMC();
+            dragonInfoBox->setText(text);
+            dragonInfoBox->show();
         }
 
-        dragonAttackBox->setGeometry(0, 0, 1, 1);
+        dragonAttackBox->hide();
 
-        ennemyDragonBox->setGeometry(0, 0, 1, 1);
+        ennemyDragonBox->hide();
     }
 
     else
     {
-        dragonAttackBox->setGeometry(300, 555, 1000, 128);
+        QString text = textCombatMC();
+        dragonAttackBox->setText(text);
+        dragonAttackBox->show();
 
-        ennemyDragonBox->setGeometry(0, 0, 1000, 128);
+        ennemyDragonBox->show();
     }
 }
 
