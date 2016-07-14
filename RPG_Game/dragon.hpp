@@ -23,8 +23,8 @@ private:
     QString surname;
     int type; //see the enum above
     int lvl;
-    int HP;
-    int stat[4]; //4 stats which are : attack, defense, special and velocity
+    int HP; //HP remaining (after combat for example)
+    int stat[5]; //4 stats which are : HP, attack, defense, special and velocity
     int nbrAttack;
     Attack attackTab[4];
 
@@ -55,6 +55,14 @@ public:
     /******* Get nb attack Tab *******
      * get the number of attack of the dragon */
     int getNBAttack();
+
+    /******* Get HP *******
+     * get the number of max HP of the dragon */
+    int getHP();
+
+    /******* Get current HP *******
+     * get the number of current HP of the dragon */
+    int getCurrentHP();
 };
 
 

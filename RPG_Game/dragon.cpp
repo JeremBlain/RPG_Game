@@ -66,5 +66,15 @@ int Dragon::getNBAttack()
     return nbrAttack;
 }
 
+int Dragon::getHP()
+{
+    return stat[0];
+}
+
+int Dragon::getCurrentHP()
+{
+    return HP;
+}
+
 
 

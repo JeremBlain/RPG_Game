@@ -69,20 +69,28 @@ void Window::keyPressEvent(QKeyEvent *event)
         gameWindow->openRubrikMenu();
         break;
 
-    case 'P':
-        gameWindow->moveArrow(up);
-        break;
-
-    case 'M':
-        gameWindow->moveArrow(bottom);
-        break;
-
     case 'L':
         create_map_ground();
         break;
 
     case 'C':
         gameWindow->setCombatUI(true);
+        break;
+
+    case Qt::Key_Up:
+        gameWindow->moveArrow(up);
+        break;
+
+    case Qt::Key_Down:
+        gameWindow->moveArrow(bottom);
+        break;
+
+    case Qt::Key_Left:
+        gameWindow->moveArrow(mv_left);
+        break;
+
+    case Qt::Key_Right:
+        gameWindow->moveArrow(mv_right);
         break;
 
     default:

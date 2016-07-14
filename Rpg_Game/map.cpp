@@ -125,27 +125,27 @@ QString Map::getMainCharacName()
     return main_character->getName();
 }
 
-QString Map::getMainCharacterDragonName(int n)
+QString Map::getMainCharacDragonName(int n)
 {
     return main_character->getDragonName(n);
 }
 
-QString Map::getMainCharacterDragonSurname(int n)
+QString Map::getMainCharacDragonSurname(int n)
 {
     return main_character->getDragonSurname(n);
 }
 
-int Map::getMainCharacterDragonType(int n)
+int Map::getMainCharacDragonType(int n)
 {
     return main_character->getDragonType(n);
 }
 
-int Map::getMainCharacterDragonLevel(int n)
+int Map::getMainCharacDragonLevel(int n)
 {
     return main_character->getDragonLevel(n);
 }
 
-int Map::getMainCharacterNBDragon()
+int Map::getMainCharacNBDragon()
 {
     return main_character->getNBDragon();
 }
@@ -158,6 +158,11 @@ Attack *Map::getMainCharacDragonAttack(int n)
 int Map::getMainCharacDragonAttackNB(int n)
 {
     return main_character->getDragonAttackNB(n);
+}
+
+vec2 Map::getMainCharacDragonHP(int n)
+{
+    return main_character->getDragonHP(n);
 }
 
 void Map::setCharacOrientation(int posx, int posy, int orien)

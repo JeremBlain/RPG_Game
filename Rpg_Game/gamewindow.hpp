@@ -13,6 +13,7 @@
 
 #include <QWidget>
 #include <QTextBrowser>
+#include <QProgressBar>
 #include <QPainter>
 #include <QLabel>
 #include <vector>
@@ -54,16 +55,33 @@ private:
 
         //DragonBox
         QWidget* dragonBox; //box for Dragon name and lvl
-        QTextBrowser dragonTextTab[5];
-        QTextBrowser arrowDragBox[5];
+        QTextBrowser dragonTextTab[5]; //box for the surname of the dragon
+        QTextBrowser arrowDragBox[5]; //box for the arrow to show which dragon info you are viewing
 
         //DragonInfoBox
-        QTextBrowser* dragonInfoBox; //box for dragon infos : stat, attack, etc
-
+        QWidget* dragonInfoBox; //box for dragon infos : stat, attack, etc
+        QTextBrowser* dragonNameBox; //box for the name of the dragon
+        QTextBrowser* dragonSurnameBox; //box for the surname of the dragon
+        QTextBrowser* dragonTypeBox; //box for the type of the dragon
+        QTextBrowser* dragonLvlBox; //box for the level of the dragon
+        QTextBrowser* dragonAttackTextBox; //a box just for show a text with "attack :"
+        QWidget* dragonAttackInfoBox; //Box for attacks of the dragon
+        QTextBrowser dragonAttackNameInfoBox[4]; //Box for attacks name of the dragon
+        QTextBrowser dragonAttackTypeInfoBox[4]; //Box for attacks type of the dragon
+        QTextBrowser dragonAttackStrengthInfoBox[4]; //Box for attacks strength of the dragon
 
         //UI : combat
-        QTextBrowser* dragonAttackBox; // box for dragon's attack in combat
-        QTextBrowser* ennemyDragonBox; // box for dragon's ennemy in cobat
+        QWidget* dragonMCBox; // box for dragon's attack in combat
+        QLabel* dragonMCSurnameBox; //box for the dragon surname of MC
+        QProgressBar* dragonMCLifeBar; //a progress bar for showing the life of the dragon
+        QLabel* dragonMCLifeBox; //text for showing the amount of life of the dragon
+        QLabel dragonMCActionBox[4]; //box for change dragon or attack
+        QLabel dragonMCArrowBox[4]; //box for change dragon or attack
+
+        QWidget* ennemyDragonBox; // box for dragon's ennemy in combat
+        QLabel* ennemyDragonNameBox; //box for the name of the ennemy dragon
+        QLabel* ennemyDragonLvlBox; //box for the level of the ennemy dragon
+        QProgressBar* ennemydragonHPBar; //bar for the life of the ennemy dragon
 
 public:
     explicit GameWindow(QWidget *parent = 0);
@@ -72,8 +90,17 @@ public:
     //create the menu box in the constructor
     void createMenuBox();
 
-    //create the menu box in the constructor
+    //create the dragon box in the constructor
     void createDragonBox();
+
+    //create the Dragon infos box in the constructor
+    void createDragonInfoBox();
+
+    //create the MC Dragon box while in a combat in the constructor
+    void createDragonMCCombatBox();
+
+    //create the enemy box while in a combat in the constructor
+    void createEnemyCombatBox();
 
     /******* to move the main character */
     void movement(int mv);
@@ -110,13 +137,16 @@ public:
     void placeArrowDragBox();
 
     /******* place an arrow for selection before the words */
-    QString placeArrowCombatBox(QString text);
+    void placeArrowCombatBox();
 
     /******* check if the move of the arrow is valid */
     bool validMoveArrow(int mv, int arrow);
 
     /******* Move the arrow in the menu up or down if possible */
     void moveArrow(int mv);
+
+    /******* Move the arrow in the menu in combat if possible */
+    void moveArrowCombat(int mv);
 
     /******* Get the position of the arrow in the menu*/
     int getArrowDragonInfo();
@@ -138,10 +168,10 @@ public:
     QString textDragonMC(int i);
 
     /****** set the text of the Dragon info box (main character's dragon info) */
-    QString textDragonInfoMC();
+    void textDragonInfoMC();
 
     /****** set the text of the main character dragon while in combat*/
-    QString textCombatMC();
+    void textCombatMC();
 
     /******* Draw Orientation of Character ******
      * this method draw a line which symbolise the orientation of a character

@@ -166,7 +166,7 @@ int get_dragons_main_character(Dragon* dragonTab)
     {
         QString name, surname; int type, level, hp;
         mainCharacterFile.readLine();
-        int statTab[4];
+        int statTab[5];
 
         while(!mainCharacterFile.atEnd())
         {
@@ -177,15 +177,16 @@ int get_dragons_main_character(Dragon* dragonTab)
             type = convert_str2Type(line.section(' ', 2, 2));
             level = line.section(' ', 3, 3).toInt();
             hp = line.section(' ', 4, 4).toInt();
-            statTab[0] = line.section(' ', 5, 5).toInt();
-            statTab[1] = line.section(' ', 6, 6).toInt();
-            statTab[2] = line.section(' ', 7, 7).toInt();
-            statTab[3] = line.section(' ', 8, 8).toInt();
+            statTab[0] = line.section(' ', 5, 5).toInt(); //hp
+            statTab[1] = line.section(' ', 6, 6).toInt(); //attack
+            statTab[2] = line.section(' ', 7, 7).toInt(); //defense
+            statTab[3] = line.section(' ', 8, 8).toInt(); //special
+            statTab[4] = line.section(' ', 9, 9).toInt(); //velocity
 
             int k=0; Attack atk[4];
             for(k=0; k<4; k++)
             {
-                QString name_attack = line.section(' ', 9+k, 9+k).simplified();
+                QString name_attack = line.section(' ', 10+k, 10+k).simplified(); //simplified remove the \n in the last attack
                 atk[k] = get_info_attack(name_attack);
             }
 

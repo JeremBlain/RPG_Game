@@ -79,23 +79,23 @@ public:
 
     /******* Get name of dragon *******
      * get the name of the dragon, n is the number of the dragon in the table*/
-    QString getMainCharacterDragonName(int n);
+    QString getMainCharacDragonName(int n);
 
     /******* Get surname of dragon *******
      * get the surname of the dragon, n is the number of the dragon in the table*/
-    QString getMainCharacterDragonSurname(int n);
+    QString getMainCharacDragonSurname(int n);
 
     /******* Get type of dragon *******
      * get the type of the dragon, n is the number of the dragon in the table*/
-    int getMainCharacterDragonType(int n);
+    int getMainCharacDragonType(int n);
 
     /******* Get level of dragon *******
      * get the level of the dragon, n is the number of the dragon in the table*/
-    int getMainCharacterDragonLevel(int n);
+    int getMainCharacDragonLevel(int n);
 
     /******* Get nbr of dragon *******
      * get the nbr of the dragon, of the main character*/
-    int getMainCharacterNBDragon();
+    int getMainCharacNBDragon();
 
     /******* Get attack of dragon *******
      * get attacks of the dragon, of the main character*/
@@ -104,6 +104,10 @@ public:
     /******* Get nb attack of dragon *******
      * get number of attacks of the dragon, of the main character*/
     int getMainCharacDragonAttackNB(int n);
+
+    /******* Get HP of dragon *******
+     * get current HP and max HP in a vec2 of the dragon, of the main character*/
+    vec2 getMainCharacDragonHP(int n);
 
     /****** Set character's orientation ******
     * get the orientation of the character */

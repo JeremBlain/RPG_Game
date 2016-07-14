@@ -97,4 +97,9 @@ int Character::getDragonLevel(int n)
     return dragonTab[n].getLevel();
 }
 
+vec2 Character::getDragonHP(int n)
+{
+    return vec2(dragonTab[n].getCurrentHP(), dragonTab[n].getHP());
+}
+
 

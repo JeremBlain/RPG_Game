@@ -74,6 +74,10 @@ public:
     /******* Get level of dragon *******
      * get the level of the dragon, n is the number of the dragon in the table*/
     int getDragonLevel(int n);
+
+    /******* Get HP of dragon *******
+     * get current and max HP of the dragon (save in a vec2, in this order), n is the number of the dragon in the table*/
+    vec2 getDragonHP(int n);
 };
 
 #endif // CHARACTER_H
