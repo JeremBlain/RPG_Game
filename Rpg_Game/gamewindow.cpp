@@ -13,8 +13,8 @@
 
 //Constructor Game Window
 GameWindow::GameWindow(QWidget *parent) :
-    QWidget(parent), talk(false), menu(false), combat(false), dragon(false),
-    arrowMenu(0), arrowDragonInfo(0), arrowAttackCombat(0)
+    QWidget(parent), talk(false), dragon(false), menu(false), combat(false), combatAttack(false), combatDragon(false),
+    arrowMenu(0), arrowDragonInfo(0), arrowAttackCombat(0), nDragon(0)
 {
     //creation of the map
     map = new Map();
@@ -155,22 +155,22 @@ void GameWindow::createDragonMCCombatBox()
 {
     //creation of the box which show the main character's dragons attacks
     dragonMCBox= new QWidget(this);
-    dragonMCBox->setGeometry(536, 555, 764, 128);
+    dragonMCBox->setGeometry(436, 555, 864, 128);
     dragonMCBox->hide();
-    dragonMCBox->setFont(QFont("Aria", 21));
+    dragonMCBox->setFont(QFont("Aria", 20));
     dragonMCBox->setPalette(Qt::white);
     dragonMCBox->setAutoFillBackground(true);
 
     dragonMCLifeBar = new QProgressBar(dragonMCBox);
-    dragonMCLifeBar->setGeometry(364, 0, 400, 64);
+    dragonMCLifeBar->setGeometry(464, 0, 400, 64);
 
     dragonMCSurnameBox = new QLabel(dragonMCBox);
-    dragonMCSurnameBox->setGeometry(364, 64, 200, 64);
+    dragonMCSurnameBox->setGeometry(464, 64, 200, 64);
     dragonMCSurnameBox->setAlignment(Qt::AlignCenter);
     dragonMCSurnameBox->setAutoFillBackground(true);
 
     dragonMCLifeBox = new QLabel(dragonMCBox);
-    dragonMCLifeBox->setGeometry(564, 64, 200, 64);
+    dragonMCLifeBox->setGeometry(664, 64, 200, 64);
     dragonMCLifeBox->setAlignment(Qt::AlignCenter);
     dragonMCLifeBox->setAutoFillBackground(true);
 
@@ -178,12 +178,12 @@ void GameWindow::createDragonMCCombatBox()
     for(i=0; i<4; i++)
     {
         dragonMCArrowBox[i].setParent(dragonMCBox);
-        dragonMCArrowBox[i].setGeometry( (i%2)*182, (i/2)*64, 32, 64);
+        dragonMCArrowBox[i].setGeometry( (i%2)*232, (i/2)*64, 32, 64);
         dragonMCArrowBox[i].setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         dragonMCArrowBox[i].setAutoFillBackground(true);
 
         dragonMCActionBox[i].setParent(dragonMCBox);
-        dragonMCActionBox[i].setGeometry( 32+(i%2)*182, (i/2)*64, 150, 64);
+        dragonMCActionBox[i].setGeometry( 32+(i%2)*232, (i/2)*64, 200, 64);
         dragonMCActionBox[i].setAlignment(Qt::AlignCenter);
         dragonMCActionBox[i].setAutoFillBackground(true);
     }
@@ -353,6 +353,14 @@ void GameWindow::setCombatUI(bool c)
     if(talk == true || menu == true || dragon == true) return; //can't open combat when talking or open the menun... Should never happend !
 
     combat = c;
+    repaint();
+}
+
+void GameWindow::setCombatUIAttack(bool cA)
+{
+    if(combat == true)
+        combatAttack = cA;
+
     repaint();
 }
 
@@ -543,32 +551,70 @@ void GameWindow::textDragonInfoMC()
 
 void GameWindow::textCombatMC()
 {
-    dragonMCSurnameBox->setText(map->getMainCharacDragonSurname(0));
-    int crHP = map->getMainCharacDragonHP(0).getx(), maxHP =  map->getMainCharacDragonHP(0).gety();
+    dragonMCSurnameBox->setText(map->getMainCharacDragonSurname(nDragon));
+    int crHP = map->getMainCharacDragonHP(nDragon).getx(), maxHP =  map->getMainCharacDragonHP(nDragon).gety();
     QString crHP_str = "", maxHP_str ="";
     crHP_str.setNum(crHP); maxHP_str.setNum(maxHP);
     dragonMCLifeBox->setText("HP : " + crHP_str +'/' +maxHP_str);
     dragonMCLifeBar->setValue((crHP*100)/maxHP);
 
-    dragonMCActionBox[0].setText("Attack");
-    dragonMCActionBox[1].setText("Dragon");
+    if(combatAttack == false)
+    {
+        dragonMCActionBox[0].setText("Attack");
+        dragonMCActionBox[1].setText("Dragon");
+    }
+    else
+        textCombatMCAttack();
+}
 
-    /*
+void GameWindow::textCombatMCAttack()
+{
     Attack* atk = map->getMainCharacDragonAttack(0);
     int nbAtk = map->getMainCharacDragonAttackNB(arrowDragonInfo);
 
     int i = 0;
     for(i=0; i < nbAtk; i++)
     {
+        QString text ="";
         QString nameAtk = atk[i].getNameAttack();
         QString typeAtk = convert_Type2Str(atk[i].getTypeAttack());
         int sghAtk = atk[i].getStrengthAttack();
         QString sghAtkSTR = ""; sghAtkSTR.setNum(sghAtk);
-        text.append("     " + nameAtk + "  " + typeAtk + "  " + sghAtkSTR + "\t\t");
+        text.append(nameAtk + "  " + typeAtk + "  " + sghAtkSTR);
 
-        if(i == 1)
-            text.append("\n");
-    }*/
+        dragonMCActionBox[i].setText(text);
+    }
+}
+
+void GameWindow::textCombatMCDragon()
+{
+    int nbDrag = map->getMainCharacNBDragon(); //number of MC dragons
+
+    int i=0, numBox=0; //i for the dragon, numbox for the num of box (5 drag but 4 box !!)
+    for(i=0; i < nbDrag; i++)
+    {
+        if(nDragon != i)
+        {
+            QString surnameDrag = map->getMainCharacDragonSurname(i);
+            dragonMCActionBox[numBox].setText(surnameDrag);
+            numBox++;
+        }
+    }
+}
+
+void GameWindow::keySpaceAction()
+{
+    //Menu open and open dragon info
+    if(talk == false && dragon == false && menu == true && combat == false)
+    {
+        setDragonBox(true);
+    }
+
+    //In combat, want to open attack action
+    if(talk == false && dragon == false && menu == false && combat == true && combatAttack == false)
+    {
+        setCombatUIAttack(true);
+    }
 }
 
 void GameWindow::drawOrientation(int x, int y, vec2 pos, QPainter& painter)

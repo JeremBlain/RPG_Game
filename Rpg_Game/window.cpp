@@ -77,6 +77,10 @@ void Window::keyPressEvent(QKeyEvent *event)
         gameWindow->setCombatUI(true);
         break;
 
+    case 'V':
+        gameWindow->setCombatUIAttack(true);
+        break;
+
     case Qt::Key_Up:
         gameWindow->moveArrow(up);
         break;

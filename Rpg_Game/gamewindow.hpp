@@ -34,13 +34,16 @@ private:
 
         //booleans for all the widget and box in the window
         bool talk; //if the main character speak
+        bool dragon; //if open dragon menu
         bool menu; //if the main character open the menu
         bool combat; //if there is a combat !!
-        bool dragon; //if open dragon menu
+        bool combatAttack; //while in combat, open attack section
+        bool combatDragon; //while in combat, open dragon section
 
         int arrowMenu;
         int arrowDragonInfo;
         int arrowAttackCombat;
+        int nDragon; //number of the dragon send to combat
 
         /****** UI : worldmap *****/
         //Dialog
@@ -130,6 +133,9 @@ public:
     /******* Set UI for combat */
     void setCombatUI(bool c);
 
+    /******* Set UI for combat Attack */
+    void setCombatUIAttack(bool cA);
+
     /******* place an arrow for selection before the words */
     void placeArrowInMenu();
 
@@ -170,8 +176,17 @@ public:
     /****** set the text of the Dragon info box (main character's dragon info) */
     void textDragonInfoMC();
 
-    /****** set the text of the main character dragon while in combat*/
+    /****** set the text of the main character Action while in combat*/
     void textCombatMC();
+
+    /****** set the text of the main character dragon attack, while in combat*/
+    void textCombatMCAttack();
+
+    /****** set the text of the main character dragon, while in combat*/
+    void textCombatMCDragon();
+
+    /****** when key return is pressed, there are some action possible */
+    void keySpaceAction();
 
     /******* Draw Orientation of Character ******
      * this method draw a line which symbolise the orientation of a character
