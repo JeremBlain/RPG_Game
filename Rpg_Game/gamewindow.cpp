@@ -13,7 +13,7 @@
 
 //Constructor Game Window
 GameWindow::GameWindow(QWidget *parent) :
-    QWidget(parent), talk(false), dragon(false), menu(false), combat(false), combatAttack(false), combatDragon(false),
+    QWidget(parent), w(1302), h(798), talk(false), dragon(false), menu(false), combat(false), combatAttack(false), combatDragon(false),
     arrowMenu(0), arrowDragonInfo(0), arrowAttackCombat(0), nDragon(0)
 {
     //creation of the map
@@ -21,7 +21,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
     //creation of the box which show the dialog between the main charac and other
     dialogBox = new QTextBrowser(this);
-    dialogBox->setGeometry(0, 555, 1300, 121);
+    dialogBox->setGeometry(0, h-121, w, 121);
     dialogBox->hide();
     dialogBox->setFont(QFont("Aria", 16));
 
@@ -36,12 +36,17 @@ GameWindow::GameWindow(QWidget *parent) :
 GameWindow::~GameWindow()
 {}
 
+void GameWindow::setSizeGameWindow(int width, int height)
+{
+    w = width; h = height;
+}
+
 void GameWindow::createMenuBox()
 {
     //creation of the box which show the menu
     menuBox = new QWidget(this);
     menuBox->setFont(QFont("Aria", 20));
-    menuBox->setGeometry(1061, 0, 240, 666);
+    menuBox->setGeometry(w-240, 0, 240, 666);
     menuBox->setAutoFillBackground(true);
     menuBox->setPalette(QColor(255, 255, 255));
     menuBox->hide();
@@ -75,7 +80,7 @@ void GameWindow::createDragonBox()
     dragonBox = new QWidget(this);
     dragonBox->setAutoFillBackground(true);
     dragonBox->setPalette(QColor(255, 255, 255));
-    dragonBox->setGeometry(0, 500, 1301, 171);
+    dragonBox->setGeometry(0, h-171, w, 171);
     dragonBox->setFont(QFont("Aria", 15));
     dragonBox->hide();
 
@@ -101,7 +106,7 @@ void GameWindow::createDragonInfoBox()
 {
     //creation of the box which show the main character's dragons info
     dragonInfoBox = new QWidget(this);
-    dragonInfoBox->setGeometry(0, 0, 1300, 444);
+    dragonInfoBox->setGeometry(0, 0, w, 444);
     dragonInfoBox->setFont(QFont("Aria", 21));
     dragonInfoBox->setAutoFillBackground(true);
     dragonInfoBox->setPalette(Qt::white);
@@ -155,7 +160,7 @@ void GameWindow::createDragonMCCombatBox()
 {
     //creation of the box which show the main character's dragons attacks
     dragonMCBox= new QWidget(this);
-    dragonMCBox->setGeometry(436, 555, 864, 128);
+    dragonMCBox->setGeometry(w-864, h-128, 864, 128);
     dragonMCBox->hide();
     dragonMCBox->setFont(QFont("Aria", 20));
     dragonMCBox->setPalette(Qt::white);
@@ -214,6 +219,23 @@ void GameWindow::createEnemyCombatBox()
     ennemydragonHPBar = new QProgressBar(ennemyDragonBox);
     ennemydragonHPBar->setGeometry(364, 64, 400, 64);
     ennemydragonHPBar->setValue(67);
+}
+
+void GameWindow::majBox()
+{
+    dialogBox->setGeometry(0, h-121, w, 121);
+
+    menuBox->setGeometry(w-240, 0, 240, 666);
+
+    dragonBox->setGeometry(0, h-171, w, 171);
+
+    dragonInfoBox->setGeometry(0, 0, w, 444);
+
+    dragonAttackInfoBox->setGeometry(0, 210, 750, 168);
+
+    dragonMCBox->setGeometry(w-864, h-128, 864, 128);
+
+    ennemyDragonBox->setGeometry(0, 0, 764, 128);
 }
 
 void GameWindow::movement(int mv)
@@ -689,14 +711,15 @@ void GameWindow::paintEvent(QPaintEvent*)
         QPoint bottomR;
         QRect rect;
         int posTileX = 0, posTileY = 0;
+        int nbTileX = w/sizeTile, nbTileY = h/sizeTile;
 
         int y=0, x=0, posx=pos.getx(), posy=pos.gety();
-        for(y = 0; y <= 19; ++y) //19 is the number of Tile you can get with the actual window's size
+        for(y = 0; y < nbTileY; ++y) //19 is the number of Tile you can get with the actual window's size
         {
-            posTileY = posy+y-9;
-            for(x = 0; x <= 30; ++x) //30 is the number of Tile you can get with the actual window's size
+            posTileY = posy+y-(nbTileY-1)/2;
+            for(x = 0; x < nbTileX; ++x) //30 is the number of Tile you can get with the actual window's size
             {
-                posTileX = posx+x-15;
+                posTileX = posx+x-(nbTileX-1)/2;
                 //drawGround(x*sizeTile, y*sizeTile, posTileX, posTileY, painter);
                 painter.setBrush(QColor(3*posTileX, 0, 3*posTileY));
 

@@ -20,6 +20,11 @@ Window::Window(QWidget *parent) :
     ui = new Ui::MainWindow;
     ui->setupUi(this);
     ui->layoutGame->addWidget(gameWindow);
+
+    createResizeWindow();
+
+    //connect event
+    connect(ui->actionSize, SIGNAL(triggered()), this, SLOT(openResizeWindow()));
 }
 
 //Destructor
@@ -28,11 +33,43 @@ Window::~Window()
     delete ui;
 }
 
+void Window::createResizeWindow()
+{
+    resizeWindow = new QMainWindow();
+    resizeWindow->hide();
+    resizeWindow->setFixedSize(400, 123);
+    resizeWindow->setFont(QFont("Aria", 21));
 
-// Key press event
+    QLabel *heightText = new QLabel(resizeWindow);
+    QLabel *widthText = new QLabel(resizeWindow);
+
+    heightText->setGeometry(0, 0, 200, 36);
+    widthText->setGeometry(200, 0, 200, 36);
+    heightText->setText("Height");
+    widthText->setText("Width");
+    heightText->setAlignment(Qt::AlignCenter);
+    widthText->setAlignment(Qt::AlignCenter);
+
+    QSpinBox *heightSpinBox = new QSpinBox(resizeWindow);
+    QSpinBox *widthSpinBox = new QSpinBox(resizeWindow);
+
+    heightSpinBox->setGeometry(0, 36, 200, 36);
+    widthSpinBox->setGeometry(200, 36, 200, 36);
+
+    heightSpinBox->setSingleStep(84);
+    widthSpinBox->setSingleStep(84);
+
+    heightSpinBox->setRange(462, 1470);
+    widthSpinBox->setRange(462, 1470);
+
+    QPushButton *ButtonOK = new QPushButton("OK", resizeWindow);
+    ButtonOK->setGeometry(275, 76, 100, 42);
+
+    connect(ButtonOK, SIGNAL(clicked()), this, SLOT(okPressed()));
+}
+
 void Window::keyPressEvent(QKeyEvent *event)
 {
-    //move the main character
     switch(event->key())    {
     case 'Z':
         gameWindow->movement(up);
@@ -100,5 +137,25 @@ void Window::keyPressEvent(QKeyEvent *event)
     default:
         break;
     }
+}
+
+void Window::openResizeWindow()
+{
+    resizeWindow->show();
+}
+
+void Window::okPressed()
+{
+    QWidget *WSB = resizeWindow->childAt(200, 37), *HSB = resizeWindow->childAt(0, 37);
+    QSpinBox *wSB = dynamic_cast<QSpinBox*>(WSB);
+    QSpinBox *hSB = dynamic_cast<QSpinBox*>(HSB);
+
+    int w = wSB->value(), h = hSB->value();
+    gameWindow->setSizeGameWindow(w, h);
+    setFixedSize(w, h+21);
+
+    resizeWindow->hide();
+
+    gameWindow->majBox();
 }
 

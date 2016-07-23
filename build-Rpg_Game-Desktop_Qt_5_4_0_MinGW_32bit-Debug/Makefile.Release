@@ -48,20 +48,28 @@ SOURCES       = ..\Rpg_Game\main.cpp \
 		..\Rpg_Game\map.cpp \
 		..\Rpg_Game\character.cpp \
 		..\Rpg_Game\entity.cpp \
-		..\Rpg_Game\null_entity.cpp \
+		..\Rpg_Game\ground.cpp \
 		..\Rpg_Game\vec2.cpp \
 		..\Rpg_Game\window.cpp \
-		..\Rpg_Game\file_wr.cpp release\moc_gamewindow.cpp \
+		..\Rpg_Game\file_wr.cpp \
+		..\Rpg_Game\building.cpp \
+		..\Rpg_Game\tile.cpp \
+		..\Rpg_Game\dragon.cpp \
+		..\Rpg_Game\attack.cpp release\moc_gamewindow.cpp \
 		release\moc_window.cpp
 OBJECTS       = release/main.o \
 		release/gamewindow.o \
 		release/map.o \
 		release/character.o \
 		release/entity.o \
-		release/null_entity.o \
+		release/ground.o \
 		release/vec2.o \
 		release/window.o \
 		release/file_wr.o \
+		release/building.o \
+		release/tile.o \
+		release/dragon.o \
+		release/attack.o \
 		release/moc_gamewindow.o \
 		release/moc_window.o
 
@@ -69,18 +77,26 @@ DIST          =  ..\Rpg_Game\gamewindow.hpp \
 		..\Rpg_Game\map.hpp \
 		..\Rpg_Game\character.hpp \
 		..\Rpg_Game\entity.hpp \
-		..\Rpg_Game\null_entity.hpp \
+		..\Rpg_Game\ground.hpp \
 		..\Rpg_Game\vec2.hpp \
 		..\Rpg_Game\window.hpp \
-		..\Rpg_Game\file_wr.hpp ..\Rpg_Game\main.cpp \
+		..\Rpg_Game\file_wr.hpp \
+		..\Rpg_Game\building.hpp \
+		..\Rpg_Game\tile.hpp \
+		..\Rpg_Game\dragon.hpp \
+		..\Rpg_Game\attack.hpp ..\Rpg_Game\main.cpp \
 		..\Rpg_Game\gamewindow.cpp \
 		..\Rpg_Game\map.cpp \
 		..\Rpg_Game\character.cpp \
 		..\Rpg_Game\entity.cpp \
-		..\Rpg_Game\null_entity.cpp \
+		..\Rpg_Game\ground.cpp \
 		..\Rpg_Game\vec2.cpp \
 		..\Rpg_Game\window.cpp \
-		..\Rpg_Game\file_wr.cpp
+		..\Rpg_Game\file_wr.cpp \
+		..\Rpg_Game\building.cpp \
+		..\Rpg_Game\tile.cpp \
+		..\Rpg_Game\dragon.cpp \
+		..\Rpg_Game\attack.cpp
 QMAKE_TARGET  = Rpg_Game
 DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = Rpg_Game.exe
@@ -119,7 +135,7 @@ dist:
 	$(ZIP) Rpg_Game.zip $(SOURCES) $(DIST) ..\Rpg_Game\Rpg_Game.pro ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\spec_pre.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\qdevice.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\device_config.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\common\shell-win32.conf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\qconfig.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_clucene_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_core.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_declarative.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_declarative_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_enginio.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_enginio_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_help.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_location.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_network.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_platformsupport_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_script.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_script_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_scripttools.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webkit.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webkit_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webkitwidgets.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webview.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_webview_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\qt_functions.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\qt_config.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\win32\qt_config.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\win32-g++\qmake.conf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\spec_post.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\exclusive_builds.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\default_pre.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\win32\default_pre.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\resolve_config.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\exclusive_builds_post.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\default_post.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\build_pass.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\c++11.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\win32\rtti.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\precompile_header.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\warn_on.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\qt.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\resources.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\moc.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\win32\opengl.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\uic.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\win32\windows.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\testcase_targets.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\exceptions.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\yacc.prf ..\..\..\Software\Qt\5.4\mingw491_32\mkspecs\features\lex.prf ..\Rpg_Game\Rpg_Game.pro E:/Software/Qt/5.4/mingw491_32/lib/qtmain.prl E:/Software/Qt/5.4/mingw491_32/lib/Qt5Core.prl E:/Software/Qt/5.4/mingw491_32/lib/Qt5Widgets.prl E:/Software/Qt/5.4/mingw491_32/lib/Qt5Gui.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\main.o release\gamewindow.o release\map.o release\character.o release\entity.o release\null_entity.o release\vec2.o release\window.o release\file_wr.o release\moc_gamewindow.o release\moc_window.o
+	-$(DEL_FILE) release\main.o release\gamewindow.o release\map.o release\character.o release\entity.o release\ground.o release\vec2.o release\window.o release\file_wr.o release\building.o release\tile.o release\dragon.o release\attack.o release\moc_gamewindow.o release\moc_window.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -240,33 +256,37 @@ release/moc_gamewindow.cpp: ../../../Software/Qt/5.4/mingw491_32/include/QtWidge
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QPushButton \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QTextBrowser \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextbrowser.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QProgressBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qprogressbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QPainter \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpainter.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QKeyEvent \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QLabel \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlabel.h \
 		../Rpg_Game/map.hpp \
-		../Rpg_Game/tile.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/character.hpp \
 		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
-		../Rpg_Game/null_entity.hpp \
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/gamewindow.hpp
 	E:\Software\Qt\5.4\mingw491_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IE:/Software/Qt/5.4/mingw491_32/mkspecs/win32-g++ -IE:/GitHub/Rpg_Game/Rpg_Game -IE:/Software/Qt/5.4/mingw491_32/include -IE:/Software/Qt/5.4/mingw491_32/include/QtWidgets -IE:/Software/Qt/5.4/mingw491_32/include/QtGui -IE:/Software/Qt/5.4/mingw491_32/include/QtCore -I. ..\Rpg_Game\gamewindow.hpp -o release\moc_gamewindow.cpp
 
@@ -377,35 +397,43 @@ release/moc_window.cpp: ../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/Q
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QKeyEvent \
 		../Rpg_Game/map.hpp \
-		../Rpg_Game/tile.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/character.hpp \
 		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
-		../Rpg_Game/null_entity.hpp \
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/gamewindow.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QPushButton \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QTextBrowser \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextbrowser.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QProgressBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qprogressbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QPainter \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpainter.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QLabel \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlabel.h \
 		ui_mainwindow.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QVariant \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QAction \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QApplication \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qapplication.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
@@ -418,8 +446,6 @@ release/moc_window.cpp: ../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/Q
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHeaderView \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qabstractitemmodel.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qitemselectionmodel.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractitemdelegate.h \
@@ -433,7 +459,14 @@ release/moc_window.cpp: ../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/Q
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenu \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QVBoxLayout \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
 		../Rpg_Game/window.hpp
 	E:\Software\Qt\5.4\mingw491_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IE:/Software/Qt/5.4/mingw491_32/mkspecs/win32-g++ -IE:/GitHub/Rpg_Game/Rpg_Game -IE:/Software/Qt/5.4/mingw491_32/include -IE:/Software/Qt/5.4/mingw491_32/include/QtWidgets -IE:/Software/Qt/5.4/mingw491_32/include/QtGui -IE:/Software/Qt/5.4/mingw491_32/include/QtCore -I. ..\Rpg_Game\window.hpp -o release\moc_window.cpp
 
@@ -565,35 +598,43 @@ release/main.o: ../Rpg_Game/main.cpp ../Rpg_Game/window.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QKeyEvent \
 		../Rpg_Game/map.hpp \
-		../Rpg_Game/tile.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/character.hpp \
 		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
-		../Rpg_Game/null_entity.hpp \
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/gamewindow.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QPushButton \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QTextBrowser \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextbrowser.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QProgressBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qprogressbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QPainter \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpainter.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QLabel \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlabel.h \
 		ui_mainwindow.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QVariant \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QAction \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QApplication \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qapplication.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
@@ -606,8 +647,6 @@ release/main.o: ../Rpg_Game/main.cpp ../Rpg_Game/window.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHeaderView \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qabstractitemmodel.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qitemselectionmodel.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractitemdelegate.h \
@@ -621,7 +660,14 @@ release/main.o: ../Rpg_Game/main.cpp ../Rpg_Game/window.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenu \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QVBoxLayout
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QVBoxLayout \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Rpg_Game\main.cpp
 
 release/gamewindow.o: ../Rpg_Game/gamewindow.cpp ../Rpg_Game/gamewindow.hpp \
@@ -727,41 +773,45 @@ release/gamewindow.o: ../Rpg_Game/gamewindow.cpp ../Rpg_Game/gamewindow.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QPushButton \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QTextBrowser \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextbrowser.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QProgressBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qprogressbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QPainter \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpainter.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QKeyEvent \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QLabel \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlabel.h \
 		../Rpg_Game/map.hpp \
-		../Rpg_Game/tile.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/character.hpp \
 		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
-		../Rpg_Game/null_entity.hpp
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\gamewindow.o ..\Rpg_Game\gamewindow.cpp
 
 release/map.o: ../Rpg_Game/map.cpp ../Rpg_Game/map.hpp \
-		../Rpg_Game/tile.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrect.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmargins.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../Rpg_Game/character.hpp \
+		../Rpg_Game/entity.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
@@ -790,24 +840,144 @@ release/map.o: ../Rpg_Game/map.cpp ../Rpg_Game/map.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsize.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qpoint.h \
-		../Rpg_Game/character.hpp \
-		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
-		../Rpg_Game/null_entity.hpp
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfile.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qiodevice.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobject.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobjectdefs.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobjectdefs_impl.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlist.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qalgorithms.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qiterator.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearraylist.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcoreevent.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qscopedpointer.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmetatype.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qvarlengtharray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcontainerfwd.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qisenum.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobject_impl.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qpair.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qdebug.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qhash.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtextstream.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlocale.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qvariant.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringlist.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qdatastream.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qregexp.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qshareddata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qvector.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qpoint.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qset.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrect.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmargins.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsize.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\map.o ..\Rpg_Game\map.cpp
 
 release/character.o: ../Rpg_Game/character.cpp ../Rpg_Game/character.hpp \
 		../Rpg_Game/entity.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
 		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\character.o ..\Rpg_Game\character.cpp
+
+release/entity.o: ../Rpg_Game/entity.cpp ../Rpg_Game/entity.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
+		../Rpg_Game/vec2.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\entity.o ..\Rpg_Game\entity.cpp
+
+release/ground.o: ../Rpg_Game/ground.cpp ../Rpg_Game/ground.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
@@ -844,16 +1014,7 @@ release/character.o: ../Rpg_Game/character.cpp ../Rpg_Game/character.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\character.o ..\Rpg_Game\character.cpp
-
-release/entity.o: ../Rpg_Game/entity.cpp ../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\entity.o ..\Rpg_Game\entity.cpp
-
-release/null_entity.o: ../Rpg_Game/null_entity.cpp ../Rpg_Game/null_entity.hpp \
-		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\null_entity.o ..\Rpg_Game\null_entity.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ground.o ..\Rpg_Game\ground.cpp
 
 release/vec2.o: ../Rpg_Game/vec2.cpp ../Rpg_Game/vec2.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\vec2.o ..\Rpg_Game\vec2.cpp
@@ -966,35 +1127,43 @@ release/window.o: ../Rpg_Game/window.cpp ../Rpg_Game/window.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QKeyEvent \
 		../Rpg_Game/map.hpp \
-		../Rpg_Game/tile.hpp \
-		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/character.hpp \
 		../Rpg_Game/entity.hpp \
-		../Rpg_Game/vec2.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
-		../Rpg_Game/null_entity.hpp \
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
 		../Rpg_Game/gamewindow.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QPushButton \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QTextBrowser \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextbrowser.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QProgressBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qprogressbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/QPainter \
 		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpainter.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qtextoption.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtGui/qpen.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QLabel \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlabel.h \
 		ui_mainwindow.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QVariant \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QAction \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QApplication \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qapplication.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
@@ -1007,8 +1176,6 @@ release/window.o: ../Rpg_Game/window.cpp ../Rpg_Game/window.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QHeaderView \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qframe.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qabstractitemmodel.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qitemselectionmodel.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qabstractitemdelegate.h \
@@ -1022,11 +1189,266 @@ release/window.o: ../Rpg_Game/window.cpp ../Rpg_Game/window.hpp \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
 		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenu \
-		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QVBoxLayout
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/QVBoxLayout \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qboxlayout.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayout.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtWidgets/qgridlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\window.o ..\Rpg_Game\window.cpp
 
-release/file_wr.o: ../Rpg_Game/file_wr.cpp ../Rpg_Game/file_wr.hpp
+release/file_wr.o: ../Rpg_Game/file_wr.cpp ../Rpg_Game/file_wr.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QFile \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfile.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qiodevice.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobject.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobjectdefs.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobjectdefs_impl.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlist.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qalgorithms.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qiterator.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearraylist.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcoreevent.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qscopedpointer.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmetatype.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qvarlengtharray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcontainerfwd.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qisenum.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qobject_impl.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QMap \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qpair.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qdebug.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qhash.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtextstream.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlocale.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qvariant.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringlist.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qdatastream.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qregexp.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qshareddata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qvector.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qpoint.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qset.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QTextStream \
+		../Rpg_Game/entity.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/ground.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\file_wr.o ..\Rpg_Game\file_wr.cpp
+
+release/building.o: ../Rpg_Game/building.cpp ../Rpg_Game/building.hpp \
+		../Rpg_Game/entity.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
+		../Rpg_Game/vec2.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\building.o ..\Rpg_Game\building.cpp
+
+release/tile.o: ../Rpg_Game/tile.cpp ../Rpg_Game/tile.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QRect \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrect.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmargins.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsize.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qpoint.h \
+		../Rpg_Game/character.hpp \
+		../Rpg_Game/entity.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
+		../Rpg_Game/vec2.hpp \
+		../Rpg_Game/dragon.hpp \
+		../Rpg_Game/attack.hpp \
+		../Rpg_Game/building.hpp \
+		../Rpg_Game/ground.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\tile.o ..\Rpg_Game\tile.cpp
+
+release/dragon.o: ../Rpg_Game/dragon.cpp ../Rpg_Game/dragon.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
+		../Rpg_Game/attack.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dragon.o ..\Rpg_Game\dragon.cpp
+
+release/attack.o: ../Rpg_Game/attack.cpp ../Rpg_Game/attack.hpp \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/QString \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstring.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qchar.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qconfig.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qfeatures.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsystemdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qprocessordetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qcompilerdetection.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypeinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qtypetraits.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qsysinfo.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qlogging.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qflags.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbasicatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qgenericatomic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_msvc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv7.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv6.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_armv5.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_ia64.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_mips.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_x86.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_cxx11.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_gcc.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qatomic_unix.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qmutex.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qrefcount.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qnamespace.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qarraydata.h \
+		../../../Software/Qt/5.4/mingw491_32/include/QtCore/qstringbuilder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\attack.o ..\Rpg_Game\attack.cpp
 
 release/moc_gamewindow.o: release/moc_gamewindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_gamewindow.o release\moc_gamewindow.cpp

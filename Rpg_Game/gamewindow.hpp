@@ -30,6 +30,8 @@ class GameWindow : public QWidget
     Q_OBJECT
 
 private:
+        int w, h; //width, height
+
         Map *map;
 
         //booleans for all the widget and box in the window
@@ -90,6 +92,9 @@ public:
     explicit GameWindow(QWidget *parent = 0);
     ~GameWindow();
 
+    //set width and height of the window
+    void setSizeGameWindow(int width, int height);
+
     //create the menu box in the constructor
     void createMenuBox();
 
@@ -104,6 +109,9 @@ public:
 
     //create the enemy box while in a combat in the constructor
     void createEnemyCombatBox();
+
+    //update boxes when window size is changed
+    void majBox();
 
     /******* to move the main character */
     void movement(int mv);

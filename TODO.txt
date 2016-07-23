@@ -17,7 +17,7 @@ trop gourmand sinon).
 • Ajouter des variables "globales" pour éviter de faire des fonctions inutiles (par exemple appeler la fonction pour mettre la fleche du menu à chaque fois
 alors qu'on ne l'a pas bougé !)
 
-• voir si on peut pas desactivé et activé les widget (menu et dialog par exemple) pour éviter de les redimensionner !
+• voir si on peut pas desactivé et activé les widget (menu et dialog par exemple) pour éviter de les redimensionner ! DONE
 
 • Combat : faire une variable qui permette dans le paintEvent de pouvoir savoir quand est ce qu'on est dans la map et quand on fait un combat. 
 (ensuite peut être dissocier les deux affichages dans deux fonctions)

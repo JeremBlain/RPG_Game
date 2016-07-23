@@ -64,8 +64,9 @@
    </property>
    <widget class="QMenu" name="menuBouton">
     <property name="title">
-     <string>Bouton</string>
+     <string>Config</string>
     </property>
+    <addaction name="actionSize"/>
    </widget>
    <widget class="QMenu" name="menuBouton2">
     <property name="title">
@@ -75,6 +76,11 @@
    <addaction name="menuBouton"/>
    <addaction name="menuBouton2"/>
   </widget>
+  <action name="actionSize">
+   <property name="text">
+    <string>Size</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

@@ -13,6 +13,8 @@
 
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QSpinBox>
+#include <QPushButton>
 #include "map.hpp"
 #include "gamewindow.hpp"
 #include "ui_mainwindow.h"
@@ -30,8 +32,16 @@ class Window : public QMainWindow
 private:
         Ui::MainWindow *ui;
         GameWindow *gameWindow;
+        QMainWindow *resizeWindow;
 
+        void createResizeWindow();
+
+        void actionEvent(QAction *event);
         void keyPressEvent(QKeyEvent *event);
+
+private slots:
+        void openResizeWindow();
+        void okPressed();
 
 public:
         Window(QWidget *parent = nullptr);

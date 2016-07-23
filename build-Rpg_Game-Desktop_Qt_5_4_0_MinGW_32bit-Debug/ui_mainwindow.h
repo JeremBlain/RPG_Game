@@ -25,6 +25,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionSize;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *layoutGame;
@@ -41,6 +42,8 @@ public:
         MainWindow->setMinimumSize(QSize(1260, 819));
         MainWindow->setMaximumSize(QSize(1302, 819));
         MainWindow->setCursor(QCursor(Qt::CrossCursor));
+        actionSize = new QAction(MainWindow);
+        actionSize->setObjectName(QStringLiteral("actionSize"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setEnabled(true);
@@ -67,6 +70,7 @@ public:
 
         menuBar->addAction(menuBouton->menuAction());
         menuBar->addAction(menuBouton2->menuAction());
+        menuBouton->addAction(actionSize);
 
         retranslateUi(MainWindow);
 
@@ -76,7 +80,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Game", 0));
-        menuBouton->setTitle(QApplication::translate("MainWindow", "Bouton", 0));
+        actionSize->setText(QApplication::translate("MainWindow", "Size", 0));
+        menuBouton->setTitle(QApplication::translate("MainWindow", "Config", 0));
         menuBouton2->setTitle(QApplication::translate("MainWindow", "Bouton2", 0));
     } // retranslateUi
 
