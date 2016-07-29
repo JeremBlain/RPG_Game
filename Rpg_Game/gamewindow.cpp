@@ -21,7 +21,6 @@ GameWindow::GameWindow(QWidget *parent) :
 
     //creation of the box which show the dialog between the main charac and other
     dialogBox = new QTextBrowser(this);
-    dialogBox->setGeometry(0, h-121, w, 121);
     dialogBox->hide();
     dialogBox->setFont(QFont("Aria", 16));
 
@@ -30,6 +29,8 @@ GameWindow::GameWindow(QWidget *parent) :
     createDragonInfoBox();
     createDragonMCCombatBox();
     createEnemyCombatBox();
+
+    majBox();
 }
 
 //Destructor
@@ -46,14 +47,13 @@ void GameWindow::createMenuBox()
     //creation of the box which show the menu
     menuBox = new QWidget(this);
     menuBox->setFont(QFont("Aria", 20));
-    menuBox->setGeometry(w-240, 0, 240, 666);
     menuBox->setAutoFillBackground(true);
     menuBox->setPalette(QColor(255, 255, 255));
     menuBox->hide();
 
     nameMenuBox = new QTextBrowser(menuBox); //box for the main character Name in the menu
-    nameMenuBox->setGeometry(0, 0, 240, 42);
     nameMenuBox->setText( map->getMainCharacName());
+    nameMenuBox->setGeometry(0, 0, 240, 42);
     nameMenuBox->setFrameShape(QFrame::NoFrame);
 
     dragonMenuBox = new QTextBrowser(menuBox); //box for dragon in the menu
@@ -80,8 +80,6 @@ void GameWindow::createDragonBox()
     dragonBox = new QWidget(this);
     dragonBox->setAutoFillBackground(true);
     dragonBox->setPalette(QColor(255, 255, 255));
-    dragonBox->setGeometry(0, h-171, w, 171);
-    dragonBox->setFont(QFont("Aria", 15));
     dragonBox->hide();
 
     int i=0, nbDrag = map->getMainCharacNBDragon();
@@ -106,36 +104,28 @@ void GameWindow::createDragonInfoBox()
 {
     //creation of the box which show the main character's dragons info
     dragonInfoBox = new QWidget(this);
-    dragonInfoBox->setGeometry(0, 0, w, 444);
-    dragonInfoBox->setFont(QFont("Aria", 21));
     dragonInfoBox->setAutoFillBackground(true);
     dragonInfoBox->setPalette(Qt::white);
     dragonInfoBox->hide();
 
     dragonNameBox = new QTextBrowser(dragonInfoBox);
-    dragonNameBox->setGeometry(0, 0, 300, 42);
     dragonNameBox->setFrameShape(QFrame::NoFrame);
 
     dragonSurnameBox = new QTextBrowser(dragonInfoBox);
-    dragonSurnameBox->setGeometry(0, 42, 300, 42);
     dragonSurnameBox->setFrameShape(QFrame::NoFrame);
 
     dragonTypeBox = new QTextBrowser(dragonInfoBox);
-    dragonTypeBox->setGeometry(0, 84, 300, 42);
     dragonTypeBox->setFrameShape(QFrame::NoFrame);
 
     dragonLvlBox = new QTextBrowser(dragonInfoBox);
-    dragonLvlBox->setGeometry(0, 126, 300, 42);
     QString lvl =""; lvl.setNum(map->getMainCharacDragonLevel(arrowDragonInfo));
     dragonLvlBox->setFrameShape(QFrame::NoFrame);
 
     dragonAttackTextBox = new QTextBrowser(dragonInfoBox);
-    dragonAttackTextBox->setGeometry(0, 168, 300, 42);
     dragonAttackTextBox->setText("Attack :");
     dragonAttackTextBox->setFrameShape(QFrame::NoFrame);
 
     dragonAttackInfoBox = new QWidget(dragonInfoBox);
-    dragonAttackInfoBox->setGeometry(0, 210, 750, 168);
 
     int i = 0;
     for(i=0; i<4; i++)
@@ -160,22 +150,18 @@ void GameWindow::createDragonMCCombatBox()
 {
     //creation of the box which show the main character's dragons attacks
     dragonMCBox= new QWidget(this);
-    dragonMCBox->setGeometry(w-864, h-128, 864, 128);
     dragonMCBox->hide();
     dragonMCBox->setFont(QFont("Aria", 20));
     dragonMCBox->setPalette(Qt::white);
     dragonMCBox->setAutoFillBackground(true);
 
     dragonMCLifeBar = new QProgressBar(dragonMCBox);
-    dragonMCLifeBar->setGeometry(464, 0, 400, 64);
 
     dragonMCSurnameBox = new QLabel(dragonMCBox);
-    dragonMCSurnameBox->setGeometry(464, 64, 200, 64);
     dragonMCSurnameBox->setAlignment(Qt::AlignCenter);
     dragonMCSurnameBox->setAutoFillBackground(true);
 
     dragonMCLifeBox = new QLabel(dragonMCBox);
-    dragonMCLifeBox->setGeometry(664, 64, 200, 64);
     dragonMCLifeBox->setAlignment(Qt::AlignCenter);
     dragonMCLifeBox->setAutoFillBackground(true);
 
@@ -198,44 +184,113 @@ void GameWindow::createEnemyCombatBox()
 {
     //creation of the box which show the ennemy dragons info
     ennemyDragonBox = new QWidget(this);
-    ennemyDragonBox->setGeometry(0, 0, 764, 128);
     ennemyDragonBox->hide();
-    ennemyDragonBox->setFont(QFont("Aria", 21));
     ennemyDragonBox->setPalette(Qt::white);
     ennemyDragonBox->setAutoFillBackground(true);
 
     ennemyDragonNameBox = new QLabel(ennemyDragonBox);
-    ennemyDragonNameBox->setGeometry(0, 0, 150, 64);
     ennemyDragonNameBox->setAlignment(Qt::AlignCenter);
     ennemyDragonNameBox->setAutoFillBackground(true);
     ennemyDragonNameBox->setText("Drako");
 
     ennemyDragonLvlBox = new QLabel(ennemyDragonBox);
-    ennemyDragonLvlBox->setGeometry(150, 0, 100, 64);
     ennemyDragonLvlBox->setAlignment(Qt::AlignCenter);
     ennemyDragonLvlBox->setAutoFillBackground(true);
     ennemyDragonLvlBox->setText("Lvl : 2 !");
 
     ennemydragonHPBar = new QProgressBar(ennemyDragonBox);
-    ennemydragonHPBar->setGeometry(364, 64, 400, 64);
     ennemydragonHPBar->setValue(67);
 }
 
 void GameWindow::majBox()
 {
+    int i = 0; // usefull later
     dialogBox->setGeometry(0, h-121, w, 121);
 
-    menuBox->setGeometry(w-240, 0, 240, 666);
+    //update for the menu when window size change
+    if(h > 630)
+        menuBox->setGeometry(w-240, 0, 240, 666);
+    else
+        menuBox->setGeometry(w-240, 0, 240, h);
 
-    dragonBox->setGeometry(0, h-171, w, 171);
+    //update for both dragon boxes informations
+    if(h > 546)
+    {
+        dragonBox->setGeometry(0, h-171, w, 171);
+        dragonBox->setFont(QFont("Aria", 15));
 
-    dragonInfoBox->setGeometry(0, 0, w, 444);
+        int nbDrag = map->getMainCharacNBDragon();
+        for(i=0; i<nbDrag; i++)
+        {
+            arrowDragBox[i].setGeometry(0, 32*i, 32, 32);
+            dragonTextTab[i].setGeometry(32, 32*i, 1000, 32);
+        }
 
-    dragonAttackInfoBox->setGeometry(0, 210, 750, 168);
+        dragonInfoBox->setGeometry(0, 0, w, 444);
+        dragonInfoBox->setFont(QFont("Aria", 21));
+        dragonNameBox->setGeometry(0, 0, 300, 42);
+        dragonSurnameBox->setGeometry(0, 42, 300, 42);
+        dragonTypeBox->setGeometry(0, 84, 300, 42);
+        dragonLvlBox->setGeometry(0, 126, 300, 42);
+        dragonAttackTextBox->setGeometry(0, 168, 300, 42);
+        dragonAttackInfoBox->setGeometry(0, 210, 750, 168);
 
-    dragonMCBox->setGeometry(w-864, h-128, 864, 128);
+        for(i=0; i<4; i++)
+        {
+            dragonAttackNameInfoBox[i].setGeometry(0, i*42, 220, 42);
+            dragonAttackTypeInfoBox[i].setGeometry(220, i*42, 200, 42);
+            dragonAttackStrengthInfoBox[i].setGeometry(420, i*42, 200, 42);
+        }
+    }
+    else
+    {
+        dragonBox->setGeometry(0, h*0.69, w, h*0.31);
+        dragonBox->setFont(QFont("Aria", 15));
 
-    ennemyDragonBox->setGeometry(0, 0, 764, 128);
+        int nbDrag = map->getMainCharacNBDragon();
+        for(i=0; i<nbDrag; i++)
+        {
+            arrowDragBox[i].setGeometry(0, i*36, 32, 36);
+            dragonTextTab[i].setGeometry(36, i*36, w, 36);
+        }
+
+        dragonInfoBox->setGeometry(0, 0, w, h*0.69);
+        dragonInfoBox->setFont(QFont("Aria", 15));
+        dragonNameBox->setGeometry(0, 0, 300, 36);
+        dragonSurnameBox->setGeometry(0, 36, 300, 36);
+        dragonTypeBox->setGeometry(0, 72, 300, 36);
+        dragonLvlBox->setGeometry(0, 108, 300, 36);
+        dragonAttackTextBox->setGeometry(0, 144, 300, 36);
+        dragonAttackInfoBox->setGeometry(0, 180, w, 144);
+
+        for(i=0; i<4; i++)
+        {
+            dragonAttackNameInfoBox[i].setGeometry(0, i*36, 175, 36);
+            dragonAttackTypeInfoBox[i].setGeometry(175, i*36, 150, 36);
+            dragonAttackStrengthInfoBox[i].setGeometry(325, i*36, 125, 36);
+        }
+    }
+
+    //update boxes in combat
+    //Main character boxes
+    dragonMCBox->setFont(QFont("Aria", w*0.018));
+    dragonMCBox->setGeometry(w*0.34, h*0.86, w*0.66, h*0.14);
+    dragonMCLifeBar->setGeometry(w*0.35, 0, w*0.3, h*0.08);
+    dragonMCSurnameBox->setGeometry(w*0.35, h*0.08, w*0.15,  h*0.08);
+    dragonMCLifeBox->setGeometry(w*0.5, h*0.08, w*0.15, h*0.08);
+
+    for(i=0; i<4; i++)
+    {
+        dragonMCArrowBox[i].setGeometry( (i%2)*w*0.18, (i/2)*h*0.08, w*0.025, h*0.08);
+        dragonMCActionBox[i].setGeometry( w*0.025+(i%2)*w*0.18, (i/2)*h*0.08, w*0.15, h*0.08);
+    }
+
+    //ennemy boxes
+    ennemyDragonBox->setGeometry(0, 0, w*0.66, h*0.14);
+    ennemyDragonBox->setFont(QFont("Aria", w*0.018));
+    ennemyDragonNameBox->setGeometry(0, 0, w*0.12, h*0.08);
+    ennemyDragonLvlBox->setGeometry(w*0.12, 0, w*0.1, h*0.08);
+    ennemydragonHPBar->setGeometry(w*0.35, h*0.08, w*0.3, h*0.08);
 }
 
 void GameWindow::movement(int mv)
